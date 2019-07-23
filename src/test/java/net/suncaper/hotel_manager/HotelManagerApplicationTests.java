@@ -1,4 +1,4 @@
-package com.suncaper.hotel_manager;
+package net.suncaper.hotel_manager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
