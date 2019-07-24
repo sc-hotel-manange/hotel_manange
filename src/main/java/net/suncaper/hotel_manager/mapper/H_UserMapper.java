@@ -97,7 +97,10 @@ public interface H_UserMapper {
     //*************************************自定义************************************//
 
     @Select("select * from h_user where u_account = #{u_account} and u_password = #{u_password}")
-    H_User selectByAccount (String u_account,String u_password);
+    H_User selectByAccountAndPwd (String u_account,String u_password);
+
+    @Select("select * from h_user where u_account = #{u_account}")
+    H_User selectByAccount (String u_account);
 
 
 }
