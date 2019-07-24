@@ -4,6 +4,7 @@ import java.util.List;
 import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.domain.H_UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface H_UserMapper {
     /**
@@ -93,4 +94,10 @@ public interface H_UserMapper {
      * @mbg.generated Wed Jul 24 11:31:09 CST 2019
      */
     int updateByPrimaryKey(H_User record);
+    //*************************************自定义************************************//
+
+    @Select("select * from h_user where u_account = #{u_account} and u_password = #{u_password}")
+    H_User selectByAccount (String u_account,String u_password);
+
+
 }
