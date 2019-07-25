@@ -43,5 +43,21 @@
             <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
         </table>
 
+        <table schema="hotel" tableName="h_room" domainObjectName="H_Room">
+            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+
+        <table schema="hotel" tableName="h_roomtype" domainObjectName="H_Roomtype">
+            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+
+        <table schema="hotel" tableName="h_order" domainObjectName="H_Order">
+            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+
+        <table schema="hotel" tableName="h_manager" domainObjectName="H_Manger">
+            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+        </table>
+
     </context>
 </generatorConfiguration>
