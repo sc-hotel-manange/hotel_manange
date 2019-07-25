@@ -275,27 +275,23 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label>用户名</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                  <input type="text" class="form-control" th:placeholder="${userInfo.uNickname}"  disabled>
                 </div>
                 <div class="form-group">
                   <label>姓名</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                  <input type="text" class="form-control" th:placeholder="${userInfo.uName}" disabled>
                 </div>
                 <div class="form-group">
-                    <label>邮箱</label>
-                    <input type="text" class="form-control" placeholder="Enter ..." disabled>
-                  </div>
-                <div class="form-group">
                     <label>电话</label>
-                    <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                    <input type="text" class="form-control" th:placeholder="${userInfo.uTel}" disabled>
                   </div>
                 <div class="form-group">
                     <label>密码</label>
-                    <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                    <input type="text" class="form-control" th:placeholder="${userInfo.uPassword}" disabled>
                   </div>
                 <div class="form-group">
                     <label>身份证号</label>
-                    <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                    <input type="text" class="form-control" th:placeholder="${userInfo.uIdnumber}" disabled>
                   </div>
                 <!-- textarea -->
                 <div class="form-group">
