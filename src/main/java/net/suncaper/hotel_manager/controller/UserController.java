@@ -1,10 +1,13 @@
 package net.suncaper.hotel_manager.controller;
 
+
 import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,16 +18,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+
+    @RequestMapping("/")   //登陆
     public String home() {
         return "login";
     }
-
-    @RequestMapping("/login")
+    @RequestMapping("/userinfo")  //用户信息
+    public String userinfo() {
+        return "userinfo";
+    }
+    @RequestMapping("/starter")   //首页
+    public String starter() {
+        return "starter";
+    }
+    @RequestMapping("/alterinfo")   //修改个人信息界面
+    public String alterinfo() {
+        return "alterinfo";
+    }
+    @RequestMapping("/term")   //条款
+    public String term() {
+        return "term";
+    }
+    @RequestMapping("/login")  //
     public String login(@PathParam(value = "u_account") String u_account,
-                        @PathParam(value = "u_password") String u_password){
+                        @PathParam(value = "u_password") String u_password,
+                        Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
         System.out.print(u_account+u_password);
+
+        model.addAttribute("id", u_id);
         return u_id!=-1 ? "starter" : "login";
     }
 
@@ -68,3 +90,4 @@ public class UserController {
     }
 
 }
+
