@@ -125,4 +125,5 @@ public interface H_HotelMapper {
     @Select("SELECT hotel_translated_name, addressline, star_rating, url, numberrooms, numberfloor, yearopened," +
             "photo1, photo2, photo3, overview, rating_average FROM h_hotel WHERE hotel_id = #{hotel_id}")
     H_Hotel selectHotelInfo(@Param("hotel_id") int hotel_id);
+
 }

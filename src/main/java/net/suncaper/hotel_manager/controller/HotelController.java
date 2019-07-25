@@ -27,4 +27,5 @@ public class HotelController {
         model.addAttribute("hotel", hotelService.selectInfo(hotel_id));
         return "hotelInfo";
     }
+
 }
