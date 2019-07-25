@@ -21,4 +21,5 @@ public class HotelService {
         H_Hotel h_hotel = h_hotelMapper.selectHotelInfo(hotel_id);
         return h_hotel;
     }
+
 }
