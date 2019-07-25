@@ -8,15 +8,15 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
+  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../static/bower_components/Ionicons/css/ionicons.min.css" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">
+  <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../static/dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}">
+  <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="../static/plugins/iCheck/square/blue.css" th:href="@{/plugins/iCheck/square/blue.css}">
+  <link rel="stylesheet" href="/plugins/iCheck/square/blue.css">
 
 </head>
 <body class="hold-transition login-page">
@@ -27,7 +27,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg"><b>酒店辅助管理系统使用协议</b></p>
-    <p style="text-indent: 2em">酒店辅助管理系统制作由黄鹏橙、汤家铭、姜人凯、代勉完成。使用此系统需要支付一定金额。未取得版权情况下使用属于侵权行为。
+    <p style="text-indent: 2em">酒店辅助管理系统制作由黄鹏程、汤家铭、姜人凯、代勉完成。使用此系统需要支付一定金额。未取得版权情况下使用属于侵权行为。
         本产品中提供的软件之著作权归软件作者所有。用户可以自由选择是否使用本产品提供的软件。如果用户下载、安装、使用本产品中所提供的软件，即表明用户信任该软件作者
     </p>
     <p style="text-indent: 2em">
@@ -51,7 +51,7 @@
     <!-- /.social-auth-links -->
 
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-    <a href="./register.html" th:href="@{/user/registerPage}" class="text-center">返回注册</a>
+    <a href="register.html" class="text-center">返回注册</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -59,11 +59,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="../static/plugins/iCheck/icheck.min.js" th:src="@{/plugins/iCheck/icheck.min.js}"></script>
+<script src="/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {
     $('input').iCheck({
