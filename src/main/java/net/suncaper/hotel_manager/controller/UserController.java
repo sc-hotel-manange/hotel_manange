@@ -6,11 +6,11 @@ import net.suncaper.hotel_manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 @Controller
 @RequestMapping("/user")
@@ -24,7 +24,18 @@ public class UserController {
         return "login";
     }
     @RequestMapping("/userinfo")  //用户信息
-    public String userinfo() {
+    public String userinfo(HttpServletRequest request,Model model) {
+        Cookie[] cookies =  request.getCookies();
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
+//                    return cookie.getValue();
+//                    System.out.println(cookie.getValue());
+                    int u_id = Integer.parseInt(cookie.getValue());
+                    model.addAttribute("userInfo",userService.getUserInfo(u_id));
+                }
+            }
+        }
         return "userinfo";
     }
     @RequestMapping("/starter")   //首页
@@ -42,12 +53,19 @@ public class UserController {
     @RequestMapping("/login")  //
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
+                        HttpServletResponse response,
                         Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
-        System.out.print(u_account+u_password);
-
-        model.addAttribute("id", u_id);
-        return u_id!=-1 ? "starter" : "login";
+//        System.out.print(u_account+u_password);
+        if(u_id == -1){
+            return "login";
+        }
+        else {
+            Cookie cookie = new Cookie("u_id", String.valueOf(u_id));         //这里设置cookie
+            response.addCookie(cookie);
+//            model.addAttribute("id", u_id);
+            return  "starter";
+        }
     }
 
     @RequestMapping("/registerPage")
