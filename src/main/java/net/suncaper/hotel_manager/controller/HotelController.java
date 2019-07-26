@@ -10,21 +10,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/hotel")
-public class HotelController {
+@RequestMapping("/user")
+public class
+HotelController {
     @Autowired
     HotelService hotelService;
 
-    @RequestMapping("/")
+    @RequestMapping("/hotelList")
     public String listHotel(Model model) {
-        model.addAttribute("hotels", hotelService.selectIdAndName());
-        return "listHotel";
+        model.addAttribute("hotels", hotelService.selectHotelList());
+        return "hotelList";
     }
 
     @RequestMapping("/hotelInfo")
     @ResponseBody
     public String hotelInfo(@RequestParam("hotel_id") int hotel_id, Model model) {
-        model.addAttribute("hotel", hotelService.selectInfo(hotel_id));
+        model.addAttribute("hotel", hotelService.selectHotelInfo(hotel_id));
         return "hotelInfo";
     }
 
