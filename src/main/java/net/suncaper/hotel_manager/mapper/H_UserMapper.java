@@ -5,6 +5,7 @@ import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.domain.H_UserExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface H_UserMapper {
     /**
@@ -96,9 +97,10 @@ public interface H_UserMapper {
     int updateByPrimaryKey(H_User record);
 
     //**************************DIY***********************//
-    @Select("select u_id from h_user where u_account = #{u_account} and u_password = #{u_password}")
+    @Select("select * from h_user where u_account = #{u_account} and u_password = #{u_password}")
      H_User selectByAccountAndPwd(String u_account,String u_password);
 
-    @Select("select u_id from h_user where u_account = #{u_account}")
+    @Select("select * from h_user where u_account = #{u_account}")
     H_User selectByAccount(String u_account);
+
 }

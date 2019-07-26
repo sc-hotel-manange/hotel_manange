@@ -23,40 +23,57 @@ public class UserController {
     public String home() {
         return "login";
     }
+
     @RequestMapping("/userinfo")  //用户信息
     public String userinfo(HttpServletRequest request,Model model) {
-        Cookie[] cookies =  request.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
-//                    return cookie.getValue();
-//                    System.out.println(cookie.getValue());
-                    int u_id = Integer.parseInt(cookie.getValue());
-                    model.addAttribute("userInfo",userService.getUserInfo(u_id));
-                }
-            }
-        }
+        int u_id = userService.getUserIdByCookie(request);
+        model.addAttribute("userInfo",userService.getUserInfo(u_id));
         return "userinfo";
     }
+
+    @GetMapping("/alterinfo")  //用户信息
+    public String getAlterInfo(HttpServletRequest request,Model model) {
+        int u_id = userService.getUserIdByCookie(request);
+        model.addAttribute("userInfo",userService.getUserInfo(u_id));
+        return "alterinfo";
+    }
+    @RequestMapping("/InsertAlterinfo")
+    public String postAlterInfo(@PathParam(value = "u_nickName") String u_nickName,
+                                @PathParam(value = "u_account") String u_account,
+                                @PathParam(value = "u_name")String u_name,
+                                @PathParam(value = "u_tel") String u_tel,
+                                @PathParam(value = "u_password") String u_password,
+                                @PathParam(value = "u_idNumber") String u_idNumber,
+                                HttpServletRequest request){
+        int u_id = userService.getUserIdByCookie(request);
+        System.out.println(u_account);
+        H_User h_user = new H_User();
+        h_user.setuId(u_id);
+        h_user.setuAccount(u_account);
+        h_user.setuName(u_name);
+        h_user.setuTel(u_tel);
+        h_user.setuNickname(u_nickName);
+        h_user.setuPassword(u_password);
+        h_user.setuIdnumber(u_idNumber);
+        userService.updateInfo(h_user);
+        return "redirect:userinfo";
+    }
+
     @RequestMapping("/starter")   //首页
     public String starter() {
         return "starter";
     }
-    @RequestMapping("/alterinfo")   //修改个人信息界面
-    public String alterinfo() {
-        return "alterinfo";
-    }
+
     @RequestMapping("/term")   //条款
     public String term() {
         return "term";
     }
-    @RequestMapping("/login")  //
+    @RequestMapping("/login")
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
                         HttpServletResponse response,
                         Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
-//        System.out.print(u_account+u_password);
         if(u_id == -1){
             return "login";
         }
@@ -81,7 +98,6 @@ public class UserController {
                            @PathParam(value = "u_password") String u_password,
                            @PathParam(value = "u_idNumber") String u_idNumber) {
         int u_id = userService.getIdByAccount(u_account);
-        System.out.print(u_account);
         if(u_id == -1) {
             H_User h_user = new H_User();
             h_user.setuName(u_name);
@@ -93,18 +109,9 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
-            System.out.println("账号已存在");
             return "register";
         }
-
         return "login";
-    }
-
-    @RequestMapping("info")
-    @ResponseBody
-    public H_User getUserInfo(int u_id){
-        H_User h_user = userService.getUserInfo(u_id);
-        return h_user;
     }
 
 }
