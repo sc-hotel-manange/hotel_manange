@@ -26,7 +26,7 @@ public class UserController {
     @RequestMapping("/hotelinfo")   //酒店信息界面
     public String hotelinfo() {
         
-        return "hotelinfo";
+        return "hotelList";
     }
     @RequestMapping("/userinfo")  //用户信息
     public String userinfo(HttpServletRequest request,Model model) {
@@ -41,7 +41,7 @@ public class UserController {
                 }
             }
         }
-        return "userinfo";
+        return "userInfo";
     }
     @RequestMapping("/starter")   //首页
     public String starter() {
@@ -49,7 +49,7 @@ public class UserController {
     }
     @RequestMapping("/alterinfo")   //修改个人信息界面
     public String alterinfo() {
-        return "alterinfo";
+        return "alterInfo";
     }
     @RequestMapping("/term")   //条款
     public String term() {
