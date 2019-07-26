@@ -120,7 +120,7 @@ public interface H_HotelMapper {
     int updateByPrimaryKey(H_Hotel record);
 
     @Select("SELECT hotel_id, hotel_translated_name, addressline FROM h_hotel LIMIT (0, 10)")
-    List<H_Hotel> selectIdAndName();
+    List<H_Hotel> selectHotelList();
 
     @Select("SELECT hotel_translated_name, addressline, star_rating, url, numberrooms, numberfloor, yearopened," +
             "photo1, photo2, photo3, overview, rating_average FROM h_hotel WHERE hotel_id = #{hotel_id}")
