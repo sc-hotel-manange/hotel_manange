@@ -236,7 +236,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#">酒店地址</a></li>
-            <li><a href="./hotelinfo" th:href="@{/user/hotelinfo}">酒店信息</a></li>
+            <li><a href="./hotelList.html" th:href="@{/user/hotelList}">酒店信息</a></li>
           </ul>
         </li>
       </ul>
@@ -286,15 +286,20 @@
                 </thead>
 
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
+                <tr th:each="hotelinfo : ${hotels}">
+                  <td th:text="${hotelinfo.hotelId}">
                   </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-
+                  <td th:text="${hotelinfo.hotelTranslatedName}">
+                  </td>
+                  <td th:text="${hotelinfo.addressline}">
+                  </td>
+                    <td>
+                        <a th:href="@{'/user/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
+                        <button type="button" class="btn btn-block btn-info hotel-info-btn">详情</button>
+                        </a>
+                    </td>
                 </tr>
+
                 </tbody>
 
                 
@@ -422,3 +427,10 @@
      user experience. -->
 </body>
 </html>
+
+<style>
+    .hotel-info-btn{
+
+
+    }
+</style>
