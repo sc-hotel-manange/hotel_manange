@@ -29,7 +29,7 @@
     <!-- Logo -->
     <a href="starter.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>D</b>m</span>     
+      <span class="logo-mini"><b>D</b>m</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>F</b>aded</span>
     </a>
@@ -196,7 +196,7 @@
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-   
+
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
@@ -265,6 +265,7 @@
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+<<<<<<< HEAD
          <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -313,11 +314,61 @@
 <!--                </tr>-->
 <!--                </tfoot>-->
               </table>
+=======
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="box">
+              <!--            <div class="box-header">-->
+              <!--              <h3 class="box-title">Hover Data Table</h3>-->
+              <!--            </div>-->
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>              <!--列表标题-->
+                    <th>酒店ID</th>
+                    <th>酒店名称</th>
+                    <th>酒店地址</th>
+                    <th>详情</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr th:each="hotelinfo : ${hotels}">
+                    <td th:text="${hotelinfo.hotelId}">
+                    </td>
+                    <td th:text="${hotelinfo.hotelTranslatedName}">
+                    </td>
+                    <td th:text="${hotelinfo.addressline}">
+                    </td>
+                    <td>
+                      <a th:href="@{'/user/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
+                        <button type="button" class="btn btn-block btn-info hotel-info-btn">详情</button>
+                      </a>
+                    </td>
+                  </tr>
+
+                  </tbody>
+
+
+
+                  <!--                <tfoot>-->
+                  <!--                <tr>-->
+                  <!--                  <th>Rendering engine</th>-->
+                  <!--                  <th>Browser</th>-->
+                  <!--                  <th>Platform(s)</th>-->
+                  <!--                  <th>Engine version</th>-->
+                  <!--                </tr>-->
+                  <!--                </tfoot>-->
+                </table>
+              </div>
+              <!-- /.box-body -->
+>>>>>>> 5ff088eeed83405db8d1497f0ad66f738d5c1f93
             </div>
-            <!-- /.box-body -->
           </div>
         </div>
-      </div>
       </section>
     </section>
     <!-- /.content -->
@@ -429,8 +480,15 @@
 </html>
 
 <style>
+<<<<<<< HEAD
     .hotel-info-btn{
 
 
     }
+=======
+  .hotel-info-btn{
+
+
+  }
+>>>>>>> 5ff088eeed83405db8d1497f0ad66f738d5c1f93
 </style>

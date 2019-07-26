@@ -23,7 +23,10 @@ HotelController {
     }
 
     @RequestMapping("/hotelInfo")
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5ff088eeed83405db8d1497f0ad66f738d5c1f93
     public String hotelInfo(@RequestParam("hotel_id") int hotel_id, Model model) {
         model.addAttribute("hotel", hotelService.selectHotelInfo(hotel_id));
         return "hotelInfo";
