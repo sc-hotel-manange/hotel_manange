@@ -11,7 +11,7 @@ spring:
     url: jdbc:mysql://localhost:3306/hotel?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
     username: root
     driver-class-name: com.mysql.jdbc.Driver
-    password: 123456
+    password: password
 
 logging:
   level:
