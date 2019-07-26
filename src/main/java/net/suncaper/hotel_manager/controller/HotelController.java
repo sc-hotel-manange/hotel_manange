@@ -23,7 +23,7 @@ HotelController {
     }
 
     @RequestMapping("/hotelInfo")
-    @ResponseBody
+
     public String hotelInfo(@RequestParam("hotel_id") int hotel_id, Model model) {
         model.addAttribute("hotel", hotelService.selectHotelInfo(hotel_id));
         return "hotelInfo";

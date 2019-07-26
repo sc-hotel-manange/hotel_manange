@@ -30,17 +30,23 @@ public class UserController {
     }
     @RequestMapping("/userinfo")  //用户信息
     public String userinfo(HttpServletRequest request,Model model) {
-        Cookie[] cookies =  request.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
-//                    return cookie.getValue();
-//                    System.out.println(cookie.getValue());
-                    int u_id = Integer.parseInt(cookie.getValue());
-                    model.addAttribute("userInfo",userService.getUserInfo(u_id));
-                }
-            }
-        }
+//        Cookie[] cookies =  request.getCookies();
+//        if(cookies != null){
+//            for(Cookie cookie : cookies){
+//                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
+////                    return cookie.getValue();
+////                    System.out.println(cookie.getValue());
+//                    int u_id = Integer.parseInt(cookie.getValue());
+//                    model.addAttribute("userInfo",userService.getUserInfo(u_id));
+//                }
+//            }
+//        }
+
+//        request.getSession().setAttribute("name", "session");
+        Object name = request.getSession().getAttribute("u_id");
+        System.out.println(name);
+        model.addAttribute("userInfo",userService.getUserInfo((int)name));
+
         return "userInfo";
     }
     @RequestMapping("/starter")   //首页
@@ -59,6 +65,7 @@ public class UserController {
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
                         HttpServletResponse response,
+                        HttpServletRequest request,
                         Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 //        System.out.print(u_account+u_password);
@@ -66,9 +73,12 @@ public class UserController {
             return "login";
         }
         else {
-            Cookie cookie = new Cookie("u_id", String.valueOf(u_id));         //这里设置cookie
-            response.addCookie(cookie);
+//            Cookie cookie = new Cookie("u_id", String.valueOf(u_id));         //这里设置cookie
+//            response.addCookie(cookie);
 //            model.addAttribute("id", u_id);
+
+            request.getSession().setAttribute("u_id",String.valueOf(u_id) );
+            model.addAttribute("id", u_id);
             return  "starter";
         }
     }
