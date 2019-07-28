@@ -6,8 +6,6 @@ import net.suncaper.hotel_manager.mapper.H_UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -51,18 +49,18 @@ public class UserService {
         return h_userMapper.selectByPrimaryKey(u_id);
     }
 
-    public  int getUserIdByCookie(HttpServletRequest request){
-        Cookie[] cookies =  request.getCookies();
-        if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
-                    int u_id = Integer.parseInt(cookie.getValue());
-                    return u_id;
-                }
-            }
-        }
-        return -1;
-    }
+//    public  int getUserIdByCookie(HttpServletRequest request){
+//        Cookie[] cookies =  request.getCookies();
+//        if(cookies != null){
+//            for(Cookie cookie : cookies){
+//                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
+//                    int u_id = Integer.parseInt(cookie.getValue());
+//                    return u_id;
+//                }
+//            }
+//        }
+//        return -1;
+//    }
 
     public int updateInfo(H_User h_user){
         h_userMapper.updateByPrimaryKey(h_user);
