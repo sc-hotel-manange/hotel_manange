@@ -191,7 +191,7 @@
       rating_average, overview)
     values (#{hotelId,jdbcType=INTEGER}, #{chainId,jdbcType=INTEGER}, #{chainName,jdbcType=VARCHAR}, 
       #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, #{hotelName,jdbcType=VARCHAR}, 
-      #{hotelTranslatedNamelatedName,jdbcType=VARCHAR}, #{addressline,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{hotelTranslatedName,jdbcType=VARCHAR}, #{addressline,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{state,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{starRating,jdbcType=VARCHAR}, 
       #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{numberrooms,jdbcType=INTEGER}, #{numberfloor,jdbcType=INTEGER}, #{yearopened,jdbcType=VARCHAR}, 
