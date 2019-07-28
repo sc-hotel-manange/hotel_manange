@@ -111,8 +111,10 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
+            System.out.println("账号已存在");
             return "register";
         }
+        System.out.println("注册成功");
         return "login";
     }
 

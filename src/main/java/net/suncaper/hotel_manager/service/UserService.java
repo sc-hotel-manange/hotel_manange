@@ -1,12 +1,14 @@
 package net.suncaper.hotel_manager.service;
 
 import net.suncaper.hotel_manager.domain.H_User;
+import net.suncaper.hotel_manager.domain.H_UserExample;
 import net.suncaper.hotel_manager.mapper.H_UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -14,13 +16,30 @@ public class UserService {
     private H_UserMapper h_userMapper;
 
     public int getIdByAccountAndPwd(String u_account,String u_password){
-        H_User h_user = h_userMapper.selectByAccountAndPwd(u_account,u_password);
-        return h_user!=null ? h_user.getuId() : -1;
+        H_UserExample example = new H_UserExample();
+        example.createCriteria().andUAccountEqualTo(u_account).andUPasswordEqualTo(u_password);
+
+        List<H_User> h_users = h_userMapper.selectByExample(example);
+        for(H_User h_user : h_users) {
+            return h_user.getuId();
+        }
+        return -1;
+
+//        H_User h_user = h_userMapper.selectByAccountAndPwd(u_account,u_password);
+//        return h_user!=null ? h_user.getuId() : -1;
     }
 
     public int getIdByAccount(String u_account){
-        H_User h_user = h_userMapper.selectByAccount(u_account);
-        return h_user!=null ? h_user.getuId() : -1;
+        H_UserExample example = new H_UserExample();
+        example.createCriteria().andUAccountEqualTo(u_account);
+
+        List<H_User> h_users = h_userMapper.selectByExample(example);
+        for(H_User h_user : h_users) {
+            return h_user.getuId();
+        }
+//        H_User h_user = h_userMapper.selectByAccount(u_account);
+//        return h_user!=null ? h_user.getuId() : -1;
+        return -1;
     }
 
     public void insertUser(H_User h_user) {
