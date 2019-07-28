@@ -2,6 +2,7 @@ package net.suncaper.hotel_manager.controller;
 
 
 import net.suncaper.hotel_manager.domain.H_User;
+import net.suncaper.hotel_manager.domain.UserSession;
 import net.suncaper.hotel_manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,14 +27,15 @@ public class UserController {
 
     @RequestMapping("/userinfo")  //用户信息
     public String userinfo(HttpServletRequest request, Model model) {
-        user User = (user)request.getSession().getAttribute("u_id");     //这里使用session
+        UserSession User = (UserSession)request.getSession().getAttribute("u_id");     //这里使用session
         model.addAttribute("userInfo",userService.getUserInfo(User.getId()));
         return "userInfo";
     }
 
     @GetMapping("/alterinfo")  //用户信息
     public String getAlterInfo(HttpServletRequest request,Model model) {
-        user User = (user)request.getSession().getAttribute("u_id");      //这里现在是使用session
+
+        UserSession User = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
         int u_id = User.getId();
         model.addAttribute("userInfo",userService.getUserInfo(u_id));
         return "alterinfo";
@@ -47,7 +49,7 @@ public class UserController {
                                 @PathParam(value = "u_password") String u_password,
                                 @PathParam(value = "u_idNumber") String u_idNumber,
                                 HttpServletRequest request){
-        user User = (user)request.getSession().getAttribute("u_id");      //这里现在是使用session
+        UserSession User = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
         int u_id = User.getId();
         H_User h_user = new H_User();
         h_user.setuId(u_id);
@@ -82,8 +84,10 @@ public class UserController {
             return "login";
         }
         else {
-            user u = new user(u_id);
-            request.getSession().setAttribute("u_id",new user(u_id));
+
+            UserSession u = new UserSession(u_id);
+            request.getSession().setAttribute("u_id",new UserSession(u_id));
+
             return  "starter";
         }
     }
@@ -112,10 +116,10 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
-            System.out.println("账号已存在");
+//            System.out.println("账号已存在");
             return "register";
         }
-        System.out.println("注册成功");
+//        System.out.println("注册成功");
         return "login";
     }
 
