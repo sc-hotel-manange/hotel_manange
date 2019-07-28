@@ -23,9 +23,13 @@ public class HotelService {
     }
 
     //某酒店详细信息
+    //H_HotelMapper.xml中没有生成selectByPrimaryKey...
     public H_Hotel selectHotelInfo(int hotel_id) {
-        H_Hotel h_hotel = h_hotelMapper.selectByPrimaryKey(hotel_id);
-        return h_hotel;
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andHotelIdEqualTo(hotel_id);
+
+        List<H_Hotel> h_hotels = h_hotelMapper.selectByExample(example);
+        return h_hotels.get(0);
 //        H_Hotel h_hotel = h_hotelMapper.selectHotelInfo(hotel_id);
 //        return h_hotel;
     }
