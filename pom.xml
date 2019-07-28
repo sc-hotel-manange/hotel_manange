@@ -36,22 +36,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- servlet依赖. -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-
-        <!-- tomcat的支持.-->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-        </dependency>
-
         <!-- springboot热部署支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -37,6 +38,7 @@ public class UserController {
         model.addAttribute("userInfo",userService.getUserInfo(u_id));
         return "alterinfo";
     }
+
     @RequestMapping("/InsertAlterinfo")
     public String postAlterInfo(@PathParam(value = "u_nickName") String u_nickName,
                                 @PathParam(value = "u_account") String u_account,
@@ -110,8 +112,10 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
+            System.out.println("账号已存在");
             return "register";
         }
+        System.out.println("注册成功");
         return "login";
     }
 
