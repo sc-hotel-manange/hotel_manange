@@ -97,10 +97,11 @@ public interface H_UserMapper {
     int updateByPrimaryKey(H_User record);
 
     //**************************DIY***********************//
+    /* 已经由Example类的功能代替
     @Select("select * from h_user where u_account = #{u_account} and u_password = #{u_password}")
      H_User selectByAccountAndPwd(String u_account,String u_password);
 
     @Select("select * from h_user where u_account = #{u_account}")
     H_User selectByAccount(String u_account);
-
+    */
 }
