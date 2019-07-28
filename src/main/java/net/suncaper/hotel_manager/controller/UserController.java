@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
@@ -25,35 +24,16 @@ public class UserController {
     }
 
     @RequestMapping("/userinfo")  //用户信息
-    public String userinfo(HttpServletRequest request,Model model) {
-<<<<<<< HEAD
-//        Cookie[] cookies =  request.getCookies();
-//        if(cookies != null){
-//            for(Cookie cookie : cookies){
-//                if(cookie.getName().equals("u_id")){        //检测cookie名称是否等于u_id
-////                    return cookie.getValue();
-////                    System.out.println(cookie.getValue());
-//                    int u_id = Integer.parseInt(cookie.getValue());
-//                    model.addAttribute("userInfo",userService.getUserInfo(u_id));
-//                }
-//            }
-//        }
-
-//        request.getSession().setAttribute("name", "session");
-        Object name = request.getSession().getAttribute("u_id");
-        System.out.println(name);
-        model.addAttribute("userInfo",userService.getUserInfo((int)name));
-
+    public String userinfo(HttpServletRequest request, Model model) {
+        user User = (user)request.getSession().getAttribute("u_id");     //这里使用session
+        model.addAttribute("userInfo",userService.getUserInfo(User.getId()));
         return "userInfo";
-=======
-        int u_id = userService.getUserIdByCookie(request);
-        model.addAttribute("userInfo",userService.getUserInfo(u_id));
-        return "userinfo";
     }
 
     @GetMapping("/alterinfo")  //用户信息
     public String getAlterInfo(HttpServletRequest request,Model model) {
-        int u_id = userService.getUserIdByCookie(request);
+        user User = (user)request.getSession().getAttribute("u_id");      //这里现在是使用session
+        int u_id = User.getId();
         model.addAttribute("userInfo",userService.getUserInfo(u_id));
         return "alterinfo";
     }
@@ -65,8 +45,8 @@ public class UserController {
                                 @PathParam(value = "u_password") String u_password,
                                 @PathParam(value = "u_idNumber") String u_idNumber,
                                 HttpServletRequest request){
-        int u_id = userService.getUserIdByCookie(request);
-        System.out.println(u_account);
+        user User = (user)request.getSession().getAttribute("u_id");      //这里现在是使用session
+        int u_id = User.getId();
         H_User h_user = new H_User();
         h_user.setuId(u_id);
         h_user.setuAccount(u_account);
@@ -76,8 +56,7 @@ public class UserController {
         h_user.setuPassword(u_password);
         h_user.setuIdnumber(u_idNumber);
         userService.updateInfo(h_user);
-        return "redirect:userinfo";
->>>>>>> 5ff088eeed83405db8d1497f0ad66f738d5c1f93
+        return "redirect:userinfo";        //修改完信息后重新跳转到个人信息界面
     }
 
     @RequestMapping("/starter")   //首页
@@ -96,16 +75,13 @@ public class UserController {
                         HttpServletRequest request,
                         Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
+
         if(u_id == -1){
             return "login";
         }
         else {
-//            Cookie cookie = new Cookie("u_id", String.valueOf(u_id));         //这里设置cookie
-//            response.addCookie(cookie);
-//            model.addAttribute("id", u_id);
-
-            request.getSession().setAttribute("u_id",String.valueOf(u_id) );
-            model.addAttribute("id", u_id);
+            user u = new user(u_id);
+            request.getSession().setAttribute("u_id",new user(u_id));
             return  "starter";
         }
     }
@@ -138,6 +114,7 @@ public class UserController {
         }
         return "login";
     }
+
 
 }
 
