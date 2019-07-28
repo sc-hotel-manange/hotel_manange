@@ -10,12 +10,9 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/hotel?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
     username: root
-<<<<<<< HEAD
     password:
-=======
->>>>>>> 5ff088eeed83405db8d1497f0ad66f738d5c1f93
     driver-class-name: com.mysql.jdbc.Driver
-    password: password
+
 
 logging:
   level:
