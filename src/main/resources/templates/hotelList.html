@@ -18,7 +18,7 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
-
+  <link rel="stylesheet" href="../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -144,13 +144,15 @@
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The UserSession image in the navbar-->
+              <!-- The user image in the navbar-->
               <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Faded</span>
             </a>
             <ul class="dropdown-menu">
-              <!-- The UserSession image in the menu -->
+
+              <!-- The user image in the menu -->
+
               <li class="user-header">
                 <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
 
@@ -195,8 +197,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
-      <!-- Sidebar UserSession panel (optional) -->
-
+      <!-- Sidebar user panel (optional) -->
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
@@ -300,14 +301,14 @@
                     </td>
                 </tr>
                 </tbody>
-<!--                <tfoot>-->
-<!--                <tr>-->
-<!--                  <th>Rendering engine</th>-->
-<!--                  <th>Browser</th>-->
-<!--                  <th>Platform(s)</th>-->
-<!--                  <th>Engine version</th>-->
-<!--                </tr>-->
-<!--                </tfoot>-->
+                <tfoot>
+                <tr>
+                  <th>酒店ID</th>
+                  <th>酒店名称</th>
+                  <th>酒店地址</th>
+                  <th>详情</th>
+                </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -416,10 +417,17 @@
 <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
+<script src="../static/bower_components/datatables.net/js/jquery.dataTables.min.js" th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script src="../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js" th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script src="../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js" th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script src="../static/bower_components/fastclick/lib/fastclick.js" th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
-     UserSession experience. -->
+     user experience. -->
+
 </body>
 </html>
 
@@ -428,5 +436,18 @@
 
 
     }
-
 </style>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+

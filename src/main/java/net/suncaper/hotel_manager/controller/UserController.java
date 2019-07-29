@@ -34,6 +34,7 @@ public class UserController {
 
     @GetMapping("/alterinfo")  //用户信息
     public String getAlterInfo(HttpServletRequest request,Model model) {
+
         UserSession User = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
         int u_id = User.getId();
         model.addAttribute("userInfo",userService.getUserInfo(u_id));
@@ -71,6 +72,7 @@ public class UserController {
     public String term() {
         return "term";
     }
+
     @RequestMapping("/login")
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
@@ -83,8 +85,10 @@ public class UserController {
             return "login";
         }
         else {
+
             UserSession u = new UserSession(u_id);
             request.getSession().setAttribute("u_id",new UserSession(u_id));
+
             return  "starter";
         }
     }
@@ -113,10 +117,10 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
-            System.out.println("账号已存在");
+//            System.out.println("账号已存在");
             return "register";
         }
-        System.out.println("注册成功");
+//        System.out.println("注册成功");
         return "login";
     }
 
