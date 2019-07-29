@@ -4,13 +4,11 @@ import net.suncaper.hotel_manager.domain.H_Order;
 import net.suncaper.hotel_manager.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -41,5 +39,22 @@ public class OrderController {
         mav.addObject("h_order", h_order);
 
         return mav;
+    }
+
+    //展示用户订单列表
+    @GetMapping("/order")
+    public ModelAndView listOrder(@RequestParam(value = "r_id") int r_id) {
+        ModelAndView mav = new ModelAndView("listOrder");
+        List<H_Order> h_orders = orderService.listOrder(r_id);
+
+        mav.addObject("h_orders", h_orders);
+        return mav;
+    }
+
+    //修改订单状态
+    @PutMapping("/order")
+    public String updateOrder(@RequestParam(value = "o_id") H_Order h_order) {
+        orderService.updateOrder(h_order);
+        return "orderInfo";
     }
 }
