@@ -19,9 +19,9 @@ public class RoomService {
     H_RoomMapper h_roomMapper;
 
     //根据房型给用户分配一个房间
-    public H_Room findRoom(int rt_id) {
+    public H_Room findRoom(String rt_type, int hotel_id) {
         H_RoomExample example = new H_RoomExample();
-        example.createCriteria().andRtIdEqualTo(rt_id).andRStatusEqualTo("0");
+        example.createCriteria().andRtTypeEqualTo(rt_type).andHotelIdEqualTo(hotel_id).andRStatusEqualTo("0");
 
         List<H_Room> h_rooms = h_roomMapper.selectByExample(example);
         return h_rooms.get(0);

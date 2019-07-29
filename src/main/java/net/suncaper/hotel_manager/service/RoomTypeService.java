@@ -1,5 +1,6 @@
 package net.suncaper.hotel_manager.service;
 
+import net.suncaper.hotel_manager.domain.H_RoomExample;
 import net.suncaper.hotel_manager.domain.H_Roomtype;
 import net.suncaper.hotel_manager.domain.H_RoomtypeExample;
 import net.suncaper.hotel_manager.mapper.H_RoomtypeMapper;
@@ -22,8 +23,10 @@ public class RoomTypeService {
     H_RoomtypeMapper h_roomtypeMapper;
 
     //查找房型
-    public H_Roomtype findRoomTypeByPk(int rt_id) {
-        return h_roomtypeMapper.selectByPrimaryKey(rt_id);
+    public H_Roomtype findRoomTypeByRtAndHid(String rt_type, int hotel_id) {
+        H_RoomtypeExample example = new H_RoomtypeExample();
+        example.createCriteria().andRtTypeEqualTo(rt_type).andHotelIdEqualTo(hotel_id);
+        return h_roomtypeMapper.selectByExample(example).get(0);
     }
 
     //查找该酒店有哪些房型
