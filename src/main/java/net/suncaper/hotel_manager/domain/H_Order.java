@@ -63,6 +63,12 @@ public class H_Order {
      * This field corresponds to the database column h_order.o_status
      *
      * @mbg.generated Thu Jul 25 14:17:35 GMT+08:00 2019
+     *
+     * 状态说明：
+     * 0 - 未入住
+     * 1 - 已入住
+     * 2 - 已退房
+     *
      */
     private String oStatus;
 
