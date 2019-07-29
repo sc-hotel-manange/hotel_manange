@@ -73,10 +73,11 @@ public class OrderController {
     }
 
     //展示用户订单列表
-    @GetMapping("/order")
-    public ModelAndView listOrder(@RequestParam(value = "u_id") int u_id) {
-        ModelAndView mav = new ModelAndView("listOrder");
-        List<H_Order> h_orders = orderService.listOrder(u_id);
+    @GetMapping("/orderList")
+    public ModelAndView listOrder(HttpServletRequest request) {
+        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");
+        ModelAndView mav = new ModelAndView("orderList");
+        List<H_Order> h_orders = orderService.listOrder(userSession.getId());
 
         mav.addObject("h_orders", h_orders);
         return mav;
