@@ -18,7 +18,12 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
-
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-daterangepicker/daterangepicker.css" th:href="@{/bower_components/bootstrap-daterangepicker/daterangepicker.css}" >
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -261,177 +266,202 @@
             <!--------------------------
               | Your Page Content Here |
               -------------------------->
-            <!-- Main content -->
-            <div id="myCarousel" class="carousel slide">
-                <!-- 轮播（Carousel）指标 -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- 轮播（Carousel）项目 -->
-                <div class="carousel-inner">
-                    <div class="item active">
-<!--                        <img border="0" th:src="${hotel.photo1}"  alt="picture" width="160" height="100">-->
-                        <img th:src="${hotel.photo1}" alt="First slide">
-                    </div>
-                    <div class="item">
-                        <img th:src="${hotel.photo2}" alt="Second slide">
-                    </div>
-                    <div class="item">
-                        <img th:src="${hotel.photo3}" alt="Third slide">
-                    </div>
+            <div class="row margin-bottom">
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo1}" alt="Photo">
                 </div>
-                <!-- 轮播（Carousel）导航 -->
-                <a class="carousel-control left" href="#myCarousel"
-                   data-slide="prev"> <span _ngcontent-c3="" aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
-                <a class="carousel-control right" href="#myCarousel"
-                   data-slide="next">&rsaquo;</a>
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo2}" alt="Photo">
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo3}" alt="Photo">
+                </div>
             </div>
 
-
-            <!-- About Me Box -->
+            <!-- About Me Box                  下面是表格用于填写详细信息的-->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">About Me</h3>
+                    <h3 class="box-title">详情</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                    <div th:if="${hotel.chainName}!='No chain'">
+                    <strong><i class="fa fa-book margin-r-5" ></i> 酒店连锁</strong>
+                    <p class="text-muted" th:text="${hotel.chainName}">
+                    </p>
+                     <hr>
+                    </div>
 
-                    <p class="text-muted">
-                        B.S. in Computer Science from the University of Tennessee at Knoxville
+
+                    <strong><i class="fa fa-book margin-r-5"></i> 酒店名称</strong>
+                    <p class="text-muted" th:text="${hotel.hotelTranslatedName}">
                     </p>
 
                     <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 位置</strong>
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                    <p class="text-muted">Malibu, California</p>
-
+                    <p class="text-muted" th:text="${hotel.country}+','+${hotel.city}+','+${hotel.addressline}"></p>
                     <hr>
 
-                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                    <strong><i class="fa fa-pencil margin-r-5"></i> 评价</strong>
 
                     <p>
-                        <span class="label label-danger">UI Design</span>
-                        <span class="label label-success">Coding</span>
-                        <span class="label label-info">Javascript</span>
-                        <span class="label label-warning">PHP</span>
-                        <span class="label label-primary">Node.js</span>
+                        <span class="label label-danger">卫生好</span>
+                        <span class="label label-success">服务好</span>
+                        <span class="label label-info">环境好</span>
+                        <span class="label label-warning">食物好</span>
+                        <span class="label label-primary">价格便宜</span>
                     </p>
                     <hr>
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                    <strong><i class=" margin-r-5 glyphicon glyphicon-star" ></i> 酒店星级</strong>
+                    <div th:switch="${hotel.starRating}">
+                    <p th:case="'1'">
+                    <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                    </p>
+                     <p th:case="'2'">
+                      <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                         <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                      </p>
+                     <p th:case="'3'">
+                       <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                         <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                     </p>
+                        <p th:case="'3.5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'4'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'4.5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                    </div>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 评分</strong>
+
+                    <p class="text-muted" th:text="${hotel.ratingAverage}"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 酒店描述</strong>
+                    <p class="text-muted" th:text="${hotel.overview}"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 酒店开设时间</strong>
+                    <p class="text-muted" th:text="${hotel.yearopened}"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 房间数量</strong>
+                    <p class="text-muted" th:text="${hotel.numberrooms}"></p>
                 </div>
                 <!-- /.box-body -->
             </div>
-
-
-            <p th:text="${hotel.hotelTranslatedName}"></p>
-            <p th:text="${hotel.addressline}"></p>
-            <p th:text="${hotel.country}"></p>
-            <p th:text="${hotel.city}"></p>
-            <p th:text="${hotel.starRating}"></p>
-            <p th:text="${hotel.numberfloor}"></p>
-            <img border="0" th:src="${hotel.photo1}"  alt="picture" width="160" height="100">
-
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-primary">
+                Launch Warning Modal
+            </button>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
+<!--    下面是模态框         !!!!!!!!!!!!!!!!!!!!!!-->
+    <div class="modal modal-primary fade" id="modal-primary">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">预定</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Date 输入框！！！！！！！！！！-->
+                    <form action="">
+                    <div class="form-group">
+                        <label>入住时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                           <input type="text" class="form-control pull-right" id="datepicker">  <!-- 预定日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+
+                    <!-- Date 输入框  二！！！！！！！！！！-->
+                    <div class="form-group">
+                        <label>退房时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker2">  <!-- 截止日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                 <!--      date输入框结束       !!!!!!!!!!!!!!!!!-->
+                    <!--                手机号  ！！！！！！！！！！！                 -->
+                    <div class="form-group">
+                        <label>手机号</label>
+                        <input type="text" class="form-control" >   <!-- 手机号码-->
+                    </div>
+
+                    <!-- select   选择框，用来选择房间类型 -->
+                    <div class="form-group">
+                        <label>房型选择</label>
+                        <select class="form-control">
+                            <option>大床房</option>
+                            <option>标准间</option>
+                            <option>三人间</option>
+                            <option>大套房</option>
+                            <option>总统套房</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline" type="submit">提交订单</button>
+                </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+<!--    模态框结束位置                  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
     <!-- Main Footer -->
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+
         </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+
     </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript:;">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-            </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Report panel usage
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Some information about this general settings option
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-                </form>
-            </div>
-            <!-- /.tab-pane -->
-        </div>
-    </aside>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-    immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+
 
 <!-- jQuery 3 -->
 <script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
@@ -439,7 +469,10 @@
 <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
-
+<script src="../static/bower_components/bootstrap-daterangepicker/daterangepicker.js"  th:src="@{/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- bootstrap datepicker -->
+<script src="../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<script src="../static/bower_components/moment/min/moment.min.js" th:src="@{/bower_components/moment/min/moment.min.js}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
@@ -448,8 +481,45 @@
 </html>
 
 <style>
-    .hotel-info-btn{
-
-
+    .float-img{
+        float: left;
     }
 </style>
+<script>
+    $(function () {
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                    'Today'       : [moment(), moment()],
+                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+        $('#datepicker2').datepicker({
+            autoclose: true
+        })
+        //Timepicker
+        $('.timepicker').timepicker({
+            showInputs: false
+        })
+    })
+</script>
