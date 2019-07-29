@@ -18,7 +18,12 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
-
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-daterangepicker/daterangepicker.css" th:href="@{/bower_components/bootstrap-daterangepicker/daterangepicker.css}" >
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -367,11 +372,81 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-primary">
+                Launch Warning Modal
+            </button>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+<!--    下面是模态框         !!!!!!!!!!!!!!!!!!!!!!-->
+    <div class="modal modal-primary fade" id="modal-primary">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">预定</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Date 输入框！！！！！！！！！！-->
+                    <form action="">
+                    <div class="form-group">
+                        <label>入住时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                           <input type="text" class="form-control pull-right" id="datepicker">  <!-- 预定日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+
+                    <!-- Date 输入框  二！！！！！！！！！！-->
+                    <div class="form-group">
+                        <label>退房时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker2">  <!-- 截止日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                 <!--      date输入框结束       !!!!!!!!!!!!!!!!!-->
+                    <!--                手机号  ！！！！！！！！！！！                 -->
+                    <div class="form-group">
+                        <label>手机号</label>
+                        <input type="text" class="form-control" >   <!-- 手机号码-->
+                    </div>
+
+                    <!-- select   选择框，用来选择房间类型 -->
+                    <div class="form-group">
+                        <label>房型选择</label>
+                        <select class="form-control">
+                            <option>大床房</option>
+                            <option>标准间</option>
+                            <option>三人间</option>
+                            <option>大套房</option>
+                            <option>总统套房</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline" type="submit">提交订单</button>
+                </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+<!--    模态框结束位置                  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
     <!-- Main Footer -->
     <footer class="main-footer">
@@ -387,13 +462,17 @@
 
 <!-- REQUIRED JS SCRIPTS -->
 
+
 <!-- jQuery 3 -->
 <script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
-
+<script src="../static/bower_components/bootstrap-daterangepicker/daterangepicker.js"  th:src="@{/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- bootstrap datepicker -->
+<script src="../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<script src="../static/bower_components/moment/min/moment.min.js" th:src="@{/bower_components/moment/min/moment.min.js}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
@@ -406,3 +485,41 @@
         float: left;
     }
 </style>
+<script>
+    $(function () {
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges   : {
+                    'Today'       : [moment(), moment()],
+                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate  : moment()
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+            }
+        )
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+        $('#datepicker2').datepicker({
+            autoclose: true
+        })
+        //Timepicker
+        $('.timepicker').timepicker({
+            showInputs: false
+        })
+    })
+</script>
