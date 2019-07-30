@@ -374,9 +374,9 @@
             </div>
 
             <div id="allmap" style="height: 600px"></div>
-            <input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotel.longitude}"/>
-            <input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotel.latitude}"/>
-
+            <input id="longitude" type="hidden"  th:value="${hotel.longitude}"/>
+            <input id="latitude" type="hidden"   th:value="${hotel.latitude}"/>
+            <input id="hotelTranslatedName"type="hidden"  th:value="${hotel.hotelTranslatedName}">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-primary">
                 下订单
             </button>
@@ -522,9 +522,48 @@
     var map = new BMap.Map("allmap");
     var longitude = $("#longitude").val();
     var latitude = $("#latitude").val();
+    var hotelTranslatedName = $("#hotelTranslatedName").val();
     var point = new BMap.Point(longitude,latitude);  // 中心位置
     map.centerAndZoom(point,15);
     var marker = new BMap.Marker(point);//创建标注
     map.enableScrollWheelZoom(true);
     map.addOverlay(marker);              // 将标注添加到地图中
+    marker.addEventListener('click', function (e) {
+        // 通过点击的坐标创建一个点对象，添加标签
+        var point = new BMap.Point(e.point.lng, e.point.lat);
+        var opts = {
+            title: hotelTranslatedName,
+            enableMessage: false,
+        };
+        var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+        map.openInfoWindow(infowindow, point);
+    });
+
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            mk.addEventListener('click', function (e) {
+                // 通过点击的坐标创建一个点对象，添加标签
+                var point = new BMap.Point(e.point.lng, e.point.lat);
+                var opts = {
+                    title: "您 的 位 置 在 这 里",
+                    enableMessage: false,
+                }
+                var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+                map.openInfoWindow(infowindow, point);
+            });
+            // alert('您的位置：'+r.point.lng+','+r.point.lat);
+            var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+            driving.search(r.point,point);
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true})
+
+
+
 </script>
