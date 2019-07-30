@@ -285,19 +285,24 @@
 
                     <strong><i class="glyphicon glyphicon-phone-alt margin-r-5"></i> 电话</strong>
                     <p th:text="${order.oTel}"></p>
+                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
+                    <strong><i class="fa  fa-bookmark margin-r-5"></i> 房间ID</strong>
                     <p th:text="${order.rNumber}"></p>
-
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
-                    <p th:text="${order.rNumber}"></p>
+                     <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>
                     <p th:text="${order.oOrdertime}"></p>
+                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 价格s</strong>
+                    <strong><i class="fa  fa-balance-scale margin-r-5"></i> 价格s</strong>
                     <p th:text="${order.oPrice}"></p>
+                     <hr>
 
+                     <form action="/user/cancelOrder" method="get">
+                     <input type="text" th:value="${order.oId}" style="display: none" name="o_id">
+                     <button   type="submit" class="btn btn-block btn-primary button submit_btn">取消订单</button>
+                     </form>
                  </div>
                 </div>
                 <!-- /.box-body -->
