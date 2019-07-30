@@ -269,32 +269,36 @@
                     <h3 class="box-title">订单列表</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+              <div th:each="order : ${h_orders}">           <!--  这里开始循环订单列表-->
+                 <div class="box-body">
                     <strong><i class="fa fa-book margin-r-5"></i> 入房时间</strong>
 
-                    <p class="text-muted" th:text="${h_order.oCheckin}">
+                    <p class="text-muted" th:text="${order.oCheckin}">
 
                     </p>
                     <hr>
 
                     <strong><i class="fa fa-map-marker margin-r-5"></i> 退房时间</strong>
 
-                    <p class="text-muted" th:text="${h_order.oCheckout}"></p>
+                    <p class="text-muted" th:text="${order.oCheckout}"></p>
                     <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 电话</strong>
-
-                    <p th:text="${h_order.oTel}"></p>
+                    <p th:text="${order.oTel}"></p>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
-                    <p th:text="${h_order.rId}"></p>
+                    <p th:text="${order.rNumber}"></p>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
+                    <p th:text="${order.rNumber}"></p>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>
-                    <p th:text="${h_order.oOrdertime}"></p>
+                    <p th:text="${order.oOrdertime}"></p>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 价格s</strong>
-                    <p th:text="${h_order.oPrice}"></p>
+                    <p th:text="${order.oPrice}"></p>
 
+                 </div>
                 </div>
                 <!-- /.box-body -->
             </div>

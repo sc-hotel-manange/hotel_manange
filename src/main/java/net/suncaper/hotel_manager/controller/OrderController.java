@@ -29,7 +29,7 @@ public class OrderController {
 
     //下订单
     @PostMapping("/order")
-    public ModelAndView placeOrder(@RequestParam(value = "rt_type") String rt_type,
+    public String placeOrder(@RequestParam(value = "rt_type") String rt_type,
                                    @RequestParam(value = "hotel_id") int hotel_id,
                                    @RequestParam(value = "o_checkin") Date o_checkin,
                                    @RequestParam(value = "o_checkout") Date o_checkout,
@@ -66,15 +66,18 @@ public class OrderController {
         h_order.setoTel(o_tel);
         orderService.placeOrder(h_order);
 
-        ModelAndView mav = new ModelAndView("orderList");
-        mav.addObject("h_order", h_order);
-
-        return mav;
+//        ModelAndView mav = new ModelAndView("orderList");
+//        mav.addObject("h_order", h_order);
+//
+//        return mav;
+        return "redirect:/user/orderList";
     }
 
-    //展示用户订单列表
-    @GetMapping("/order")
-    public ModelAndView listOrder(@RequestParam(value = "u_id") int u_id) {
+    //展示用户订单列表   返回订单List
+    @GetMapping("/orderList")
+    public ModelAndView listOrder(HttpServletRequest request) {
+        UserSession User = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
+        int u_id = User.getId();
         ModelAndView mav = new ModelAndView("orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
