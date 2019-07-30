@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,10 +38,9 @@ public class OrderController {
                                    HttpServletRequest request) {
 
         UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");     //这里使用session
+
         System.out.println("这是u_id: " + userSession.getId());
-
         System.out.println("这是hotelid: " + hotel_id);
-
         System.out.println("这是rt_type: " + rt_type);
         System.out.println("这是o_checkin: " + o_checkin);
         System.out.println("这是o_checkout: " + o_checkout);
@@ -55,10 +55,17 @@ public class OrderController {
         //减少该房型库存
         roomTypeService.reduceStock(h_roomtype.getRtId());
 
+        //计算用户住的天数
+        Calendar fromTime = Calendar.getInstance();
+        Calendar toTime = Calendar.getInstance();
+        fromTime.setTime(o_checkin);
+        toTime.setTime(o_checkout);
+        int stay = toTime.get(Calendar.DAY_OF_WEEK) - fromTime.get(Calendar.DAY_OF_WEEK);
+
         H_Order h_order = new H_Order();
         h_order.setrNumber(h_room.getrNumber());
         h_order.setuId(userSession.getId());
-        h_order.setoPrice(h_roomtype.getRtPrice());
+        h_order.setoPrice(h_roomtype.getRtPrice() * stay); //总价 = 单价 * 天数
         h_order.setoOrdertime(new Date());
         h_order.setoCheckin(o_checkin);
         h_order.setoCheckout(o_checkout);
@@ -70,6 +77,7 @@ public class OrderController {
 //        mav.addObject("h_order", h_order);
 //
 //        return mav;
+
         return "redirect:/user/orderList";
     }
 

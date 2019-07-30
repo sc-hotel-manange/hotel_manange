@@ -24,6 +24,8 @@
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
 <body class="hold-transition skin-blue sidebar-mini">
+        <!--百度API-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 
 <div class="wrapper">
 
@@ -509,5 +511,22 @@
         $('.timepicker').timepicker({
             showInputs: false
         })
-    })
+    });
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var longitude = $("#longitude").val();
+    var latitude = $("#latitude").val();
+    var point = new BMap.Point(longitude,latitude);  // 中心位置
+    map.centerAndZoom(point,15);
+    var marker = new BMap.Marker(point);//创建标注
+    map.enableScrollWheelZoom(true);
+    map.addOverlay(marker);              // 将标注添加到地图中
+    // // 用经纬度设置地图中心点
+    // function theLocation(){
+    //   if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+    //     map.clearOverlays();
+    //     var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+    //
+    //   }
+    // }
 </script>
