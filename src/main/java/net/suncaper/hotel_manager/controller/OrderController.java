@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -39,32 +41,22 @@ public class OrderController {
 
         UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");     //这里使用session
 
-        System.out.println("这是u_id: " + userSession.getId());
-        System.out.println("这是hotelid: " + hotel_id);
-        System.out.println("这是rt_type: " + rt_type);
-        System.out.println("这是o_checkin: " + o_checkin);
-        System.out.println("这是o_checkout: " + o_checkout);
-        System.out.println("这是o_tel: " + o_tel);
-
         //根据房型分配一个房间
         H_Room h_room = roomService.findRoom(rt_type, hotel_id);
         //查找该房型
-        H_Roomtype h_roomtype = roomTypeService.findRoomTypeByRtAndHid(rt_type, hotel_id);
+        H_Roomtype h_roomtype = roomTypeService.findRoomType(rt_type, hotel_id);
         //更新该房间状态
-        roomService.updateRoom(h_room.getrId());
+        roomService.updateRoom(h_room.getrNumber(), hotel_id);
         //减少该房型库存
         roomTypeService.reduceStock(h_roomtype.getRtId());
 
         //计算用户住的天数
-        Calendar fromTime = Calendar.getInstance();
-        Calendar toTime = Calendar.getInstance();
-        fromTime.setTime(o_checkin);
-        toTime.setTime(o_checkout);
-        int stay = toTime.get(Calendar.DAY_OF_WEEK) - fromTime.get(Calendar.DAY_OF_WEEK);
+        int stay = (int)(o_checkout.getTime()-o_checkin.getTime()) / (1000*3600*24);
 
         H_Order h_order = new H_Order();
         h_order.setrNumber(h_room.getrNumber());
         h_order.setuId(userSession.getId());
+        h_order.setHotelId(hotel_id);
         h_order.setoPrice(h_roomtype.getRtPrice() * stay); //总价 = 单价 * 天数
         h_order.setoOrdertime(new Date());
         h_order.setoCheckin(o_checkin);
@@ -78,14 +70,14 @@ public class OrderController {
 //
 //        return mav;
 
-        return "redirect:/user/orderList";
+        return "redirect:orderList";
     }
 
     //展示用户订单列表   返回订单List
     @GetMapping("/orderList")
     public ModelAndView listOrder(HttpServletRequest request) {
-        UserSession User = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
-        int u_id = User.getId();
+        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
+        int u_id = userSession.getId();
         ModelAndView mav = new ModelAndView("orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
@@ -93,10 +85,31 @@ public class OrderController {
         return mav;
     }
 
-    //(管理员)修改订单状态
+    //用户取消订单
+    @GetMapping("/cancelOrder")
+    public String cancelOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
+        //通过session获取用户id
+        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");
+        int u_id = userSession.getId();
+
+        H_Order h_order = orderService.findOrder(o_id, u_id);
+        H_Room h_room = roomService.findRoom(h_order.getHotelId(), h_order.getrNumber());
+        H_Roomtype h_roomtype = roomTypeService.findRoomType(h_room.getRtType(), h_room.getHotelId());
+
+        //取消订单，置订单状态为3
+        orderService.cancelOrder(o_id, u_id);
+        //更新房间状态
+        roomService.updateRoom(h_order.getrNumber(), h_order.getHotelId());
+        //增加该房型库存
+        roomTypeService.addStock(h_roomtype.getRtId());
+
+        return "redirect:orderList";
+    }
+
+    //管理员处理退房
     @PutMapping("/order")
     public String updateOrder(@RequestParam(value = "o_id") H_Order h_order) {
-        orderService.updateOrder(h_order);
+        orderService.finishOrder(h_order);
         return "orderInfo";
     }
 }
