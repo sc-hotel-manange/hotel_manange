@@ -264,12 +264,12 @@
               | Your Page Content Here |
               -------------------------->
             <!-- About Me Box                   开始！！！！！！！！！！！！！！ -->
+            <div th:each="order : ${h_orders}">           <!--  这里开始循环订单列表-->
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">订单列表</h3>
                 </div>
                 <!-- /.box-header -->
-              <div th:each="order : ${h_orders}">           <!--  这里开始循环订单列表-->
                  <div class="box-body">
                     <strong><i class="fa fa-book margin-r-5"></i> 入房时间</strong>
 
@@ -283,21 +283,26 @@
                     <p class="text-muted" th:text="${order.oCheckout}"></p>
                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 电话</strong>
+                    <strong><i class="glyphicon glyphicon-phone-alt margin-r-5"></i> 电话</strong>
                     <p th:text="${order.oTel}"></p>
+                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
+                    <strong><i class="fa  fa-bookmark margin-r-5"></i> 房间ID</strong>
                     <p th:text="${order.rNumber}"></p>
-
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
-                    <p th:text="${order.rNumber}"></p>
+                     <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>
                     <p th:text="${order.oOrdertime}"></p>
+                     <hr>
 
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 价格s</strong>
+                    <strong><i class="fa  fa-balance-scale margin-r-5"></i> 价格s</strong>
                     <p th:text="${order.oPrice}"></p>
+                     <hr>
 
+                     <form action="/user/cancelOrder" method="get">
+                     <input type="text" th:value="${order.oId}" style="display: none" name="o_id">
+                     <button   type="submit" class="btn btn-block btn-primary button submit_btn">取消订单</button>
+                     </form>
                  </div>
                 </div>
                 <!-- /.box-body -->

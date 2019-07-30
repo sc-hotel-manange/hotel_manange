@@ -18,8 +18,9 @@
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
   <link rel="stylesheet" href="../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+  <style>#a{}</style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" >
 
 <div class="wrapper">
 
@@ -200,15 +201,7 @@
       <!-- Sidebar user panel (optional) -->
 
       <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
+      
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
@@ -267,7 +260,28 @@
         | Your Page Content Here |
         -------------------------->
          <!-- Main content -->
-    <section class="content">
+      <!--<section class="content">-->
+        <!--<form th:action="@{/user/hotelSearch}" class="form-inline">-->
+          <!--<div id="type">-->
+          <!--<div>按名称搜索</div>-->
+          <!--<div>按地址搜索</div>-->
+          <!--</div>-->
+          <!--<input id="content" style="form-search">-->
+        <!--</form>-->
+      <!--</section>-->
+
+<!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
+      <form th:action="@{/user/hotelSearch}" method="get" class="sidebar-form whitebkg">
+        <div class="input-group">
+          <input name="type" th:value="按名称搜索" style="display: none">
+          <input type="text" name="content" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+              <button type="submit" name="search"  onclick="localRefresh" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+        </div>
+      </form>
+    <section class="content" >
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -276,7 +290,7 @@
 <!--            </div>-->
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="example2" class="table table-bordered table-hover" >
                 <thead>
                 <tr>              <!--列表标题-->
                   <th>酒店ID</th>
@@ -285,21 +299,22 @@
                   <th>详情</th>
                 </tr>
                 </thead>
-
                 <tbody>
-                <tr th:each="hotelinfo : ${hotels}">
-                  <td th:text="${hotelinfo.hotelId}">
-                  </td>
-                  <td th:text="${hotelinfo.hotelTranslatedName}">
-                  </td>
-                  <td th:text="${hotelinfo.addressline}">
-                  </td>
-                    <td>
-                        <a th:href="@{'/user/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
-                        <button type="button" class="btn btn-block btn-info hotel-info-btn">详情</button>
-                        </a>
+                  <tr th:each="hotelinfo : ${hotels}">
+                    <td th:text="${hotelinfo.hotelId}">
                     </td>
-                </tr>
+                    <td th:text="${hotelinfo.hotelTranslatedName}">
+                    </td>
+                    <td th:text="${hotelinfo.addressline}">
+                    </td>
+                    <td>
+                      <a th:href="@{'/user/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
+                        <button type="button" class="btn btn-block btn-info hotel-info-btn">详情</button>
+                      </a>
+                    </td>
+                  </tr>
+
+
                 </tbody>
                 <tfoot>
                 <tr>
@@ -353,10 +368,16 @@
 </html>
 
 <style>
-    .hotel-info-btn{
+  .skin-blue .sidebar-form input[type="text"], .skin-blue .sidebar-form .btn{
+    background: white !important;
+  }
 
-
-    }
+  .form-control{
+    background: white !important;
+  }
+.whitebkg{
+   background: white !important;
+ }
 </style>
 <script>
   $(function () {
@@ -370,5 +391,6 @@
       'autoWidth'   : false
     })
   })
+
 </script>
 

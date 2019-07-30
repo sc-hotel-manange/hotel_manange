@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 <body class="hold-transition skin-blue sidebar-mini">
+        <!--百度API-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 
 <div class="wrapper">
 
@@ -227,7 +230,7 @@
                     </ul>
                 </li>
 
-                <li><a href="#"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+                <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
                 <li class="treeview active" >
                     <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
                         <span class="pull-right-container">
@@ -285,7 +288,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div th:if="${hotel.chainName}!='No chain'">
-                    <strong><i class="fa fa-book margin-r-5" ></i> 酒店连锁</strong>
+                    <strong><i class="fa  fa-bank margin-r-5" ></i> 酒店连锁</strong>
                     <p class="text-muted" th:text="${hotel.chainName}">
                     </p>
                      <hr>
@@ -353,25 +356,32 @@
                     </div>
 
                     <hr>
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> 评分</strong>
+                    <strong><i class="fa fa-user margin-r-5"></i> 评分</strong>
 
-                    <p class="text-muted" th:text="${hotel.ratingAverage}"></p>
-
-                    <hr>
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> 酒店描述</strong>
-                    <p class="text-muted" th:text="${hotel.overview}"></p>
+                    <p class="text-muted" th:text="${hotel.ratingAverage}" style="text-indent:20px"></p>
 
                     <hr>
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> 酒店开设时间</strong>
-                    <p class="text-muted" th:text="${hotel.yearopened}"></p>
+                    <strong><i class="fa fa-bookmark-o margin-r-5"></i> 酒店描述</strong>
+                    <p class="text-muted" th:text="${hotel.overview}" style="text-indent:20px"></p>
 
                     <hr>
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> 房间数量</strong>
-                    <p class="text-muted" th:text="${hotel.numberrooms}"></p>
+                    <strong><i class="fa fa-calendar-check-o margin-r-5"></i> 酒店开设时间</strong>
+                    <p class="text-muted" th:text="${hotel.yearopened}" style="text-indent:15px"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-bar-chart margin-r-5"></i> 房间数量</strong>
+                    <p class="text-muted" th:text="${hotel.numberrooms}" style="text-indent:20px"></p>
                 </div>
                 <!-- /.box-body -->
             </div>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-primary">
+
+            <div id="allmap" style="height: 600px"></div>
+
+            <input id="longitude" type="hidden"  th:value="${hotel.longitude}"/>
+            <input id="latitude" type="hidden"   th:value="${hotel.latitude}"/>
+            <input id="hotelTranslatedName"type="hidden"  th:value="${hotel.hotelTranslatedName}">
+
+            <button type="button" class="btn btn-warning button submit_btn btn-block" data-toggle="modal" data-target="#modal-primary">
                 下订单
             </button>
         </section>
@@ -391,7 +401,7 @@
 
                 <div class="modal-body">
                     <!-- Date 输入框！！！！！！！！！！-->
-                    <form action="/user/order" method="post">
+                    <form action="/user/order" method="post" autocomplete="off">
                     <div class="form-group">
                         <label>入住时间:</label>
 
@@ -464,7 +474,7 @@
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-
+</div>
 </body>
 </html>
 
@@ -480,23 +490,7 @@
         //Date range picker with time picker
         $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
         //Date range as a button
-        $('#daterange-btn').daterangepicker(
-            {
-                ranges   : {
-                    'Today'       : [moment(), moment()],
-                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate  : moment()
-            },
-            function (start, end) {
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
+
 
         //Date picker
         $('#datepicker').datepicker({
@@ -510,4 +504,54 @@
             showInputs: false
         })
     })
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var longitude = $("#longitude").val();
+    var latitude = $("#latitude").val();
+    var hotelTranslatedName = $("#hotelTranslatedName").val();
+    var point = new BMap.Point(longitude,latitude);  // 中心位置
+    map.centerAndZoom(point,15);
+    var marker = new BMap.Marker(point);//创建标注
+    map.enableScrollWheelZoom(true);
+    map.addOverlay(marker);              // 将标注添加到地图中
+
+    marker.addEventListener('click', function (e) {
+        // 通过点击的坐标创建一个点对象，添加标签
+        var point = new BMap.Point(e.point.lng, e.point.lat);
+        var opts = {
+            title: hotelTranslatedName,
+            enableMessage: false,
+        };
+        var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+        map.openInfoWindow(infowindow, point);
+    });
+
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            mk.addEventListener('click', function (e) {
+                // 通过点击的坐标创建一个点对象，添加标签
+                var point = new BMap.Point(e.point.lng, e.point.lat);
+                var opts = {
+                    title: "您 的 位 置 在 这 里",
+                    enableMessage: false,
+                }
+                var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+                map.openInfoWindow(infowindow, point);
+            });
+            // alert('您的位置：'+r.point.lng+','+r.point.lat);
+            var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+            driving.search(r.point,point);
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true})
+
+
+
 </script>
+
