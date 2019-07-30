@@ -34,6 +34,18 @@ public class HotelService {
 //        return h_hotel;
     }
 
+    public List<H_Hotel> selectByTransName(String content){
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andHotelTranslatedNameLike("%"+content+"%");
+        return h_hotelMapper.selectByExample(example);
+    }
+
+    public List<H_Hotel> selectByAddress(String content){
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andCityLike("%"+content+"%");
+        return h_hotelMapper.selectByExample(example);
+    }
+
 
 }
 
