@@ -27,9 +27,20 @@ public class RoomService {
         return h_rooms.get(0);
     }
 
+    //根据订单信息找到房间
+    public H_Room findRoom(int hotel_id, String r_number) {
+        H_RoomExample example = new H_RoomExample();
+        example.createCriteria().andHotelIdEqualTo(hotel_id).andRNumberEqualTo(r_number);
+
+        return h_roomMapper.selectByExample(example).get(0);
+    }
+
     //更新房间状态
-    public void updateRoom(int r_id) {
-        H_Room h_room = h_roomMapper.selectByPrimaryKey(r_id);
+    public void updateRoom(String r_number, int hotel_id) {
+        H_RoomExample example = new H_RoomExample();
+        example.createCriteria().andRNumberEqualTo(r_number).andHotelIdEqualTo(hotel_id);
+        H_Room h_room = h_roomMapper.selectByExample(example).get(0);
+
         String status = h_room.getrStatus();
         //更新房间状态
         if("0".equals(status))
