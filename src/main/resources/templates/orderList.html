@@ -272,19 +272,29 @@
                 <div class="box-body">
                     <strong><i class="fa fa-book margin-r-5"></i> 入房时间</strong>
 
-                    <p class="text-muted">
-                    19-7-29
+                    <p class="text-muted" th:text="${h_order.oCheckin}">
+
                     </p>
                     <hr>
 
                     <strong><i class="fa fa-map-marker margin-r-5"></i> 退房时间</strong>
 
-                    <p class="text-muted">19-7-30</p>
+                    <p class="text-muted" th:text="${h_order.oCheckout}"></p>
                     <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 电话</strong>
 
-                    <p>13831212345</p>
+                    <p th:text="${h_order.oTel}"></p>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 房间ID</strong>
+                    <p th:text="${h_order.rId}"></p>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>
+                    <p th:text="${h_order.oOrdertime}"></p>
+
+                    <strong><i class="fa fa-file-text-o margin-r-5"></i> 价格s</strong>
+                    <p th:text="${h_order.oPrice}"></p>
+
                 </div>
                 <!-- /.box-body -->
             </div>
