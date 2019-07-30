@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -371,6 +372,11 @@
                 </div>
                 <!-- /.box-body -->
             </div>
+
+            <div id="allmap" style="height: 600px"></div>
+            <input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotel.longitude}"/>
+            <input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotel.latitude}"/>
+
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-primary">
                 下订单
             </button>
@@ -464,7 +470,7 @@
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-
+</div>
 </body>
 </html>
 
@@ -510,4 +516,15 @@
             showInputs: false
         })
     })
+</script>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var longitude = $("#longitude").val();
+    var latitude = $("#latitude").val();
+    var point = new BMap.Point(longitude,latitude);  // 中心位置
+    map.centerAndZoom(point,15);
+    var marker = new BMap.Marker(point);//创建标注
+    map.enableScrollWheelZoom(true);
+    map.addOverlay(marker);              // 将标注添加到地图中
 </script>
