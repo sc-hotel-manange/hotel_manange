@@ -1,6 +1,7 @@
 package net.suncaper.hotel_manager.controller;
 
 import net.suncaper.hotel_manager.domain.H_Hotel;
+import net.suncaper.hotel_manager.domain.H_HotelExample;
 import net.suncaper.hotel_manager.service.HotelService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import javax.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -27,6 +30,7 @@ HotelController {
 
     @RequestMapping("/hotelList")
     public String listHotel(Model model) {
+        System.out.println("进入");
         model.addAttribute("hotels", hotelService.selectHotelList());
         return "hotelList";
     }
@@ -49,6 +53,23 @@ HotelController {
         model.addAttribute("longitude",104.09789443016);
         model.addAttribute("latitude",30.6766381);
         return "hotelMap";
+    }
+
+
+    @RequestMapping("/hotelSearch")
+    public String hotelSearch(@PathParam(value = "type") String type,
+                                     @PathParam(value = "content")String content,
+                                     Model model){
+
+        List<H_Hotel> h_hotelList ;
+        if(type.equals("按名称搜索")){
+            h_hotelList = hotelService.selectByTransName(content);
+        }
+        else{
+            h_hotelList = hotelService.selectByAddress(content);
+        }
+        model.addAttribute("hotels",h_hotelList);
+        return "hotelList";
     }
 
 }
