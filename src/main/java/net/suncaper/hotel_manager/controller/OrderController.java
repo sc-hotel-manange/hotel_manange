@@ -56,7 +56,7 @@ public class OrderController {
         roomTypeService.reduceStock(h_roomtype.getRtId());
 
         H_Order h_order = new H_Order();
-        h_order.setrId(h_room.getrId());
+        h_order.setrNumber(h_room.getrNumber());
         h_order.setuId(userSession.getId());
         h_order.setoPrice(h_roomtype.getRtPrice());
         h_order.setoOrdertime(new Date());
@@ -75,7 +75,7 @@ public class OrderController {
     //展示用户订单列表
     @GetMapping("/order")
     public ModelAndView listOrder(@RequestParam(value = "u_id") int u_id) {
-        ModelAndView mav = new ModelAndView("listOrder");
+        ModelAndView mav = new ModelAndView("orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
         mav.addObject("h_orders", h_orders);
