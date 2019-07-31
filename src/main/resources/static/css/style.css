@@ -406,6 +406,7 @@ body {
   line-height: 1.6;
   font-family: "Poppins", Helvetica, sans-serif;
   color: white;
+
 }
 
 h1,
@@ -4717,6 +4718,7 @@ ul.hotel_facilities li img {
   background-color: rgba(66, 76, 85, 0.48);     /*设置登陆框透明*/
   /*min-height: 100vh;*/
   }
+
 @media (max-width: 767px) {
   #login aside, #register aside {
     width: 100%;
@@ -6891,6 +6893,7 @@ ul.bullets li:before {
 
 a#forgot {
   color: white;
+
   font-weight: 500;
   font-size: 13px;
   font-size: 0.8125rem;
