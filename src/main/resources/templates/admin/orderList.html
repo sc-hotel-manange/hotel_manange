@@ -291,7 +291,7 @@
                     <p th:text="${order.oPrice}"></p>
                      <hr>
 
-                     <form action="/user/cancelOrder" method="get">
+                     <form action="/admin/cancelOrder" method="get">
                      <input type="text" th:value="${order.oId}" style="display: none" name="o_id">
                      <button   type="submit" class="btn btn-block btn-primary button submit_btn">取消订单</button>
                      </form>

@@ -95,7 +95,7 @@ public class UserController {
 
     @RequestMapping("/registerPage")
     public String register() {
-        return "register";
+        return "admin/register";
     }
 
     @RequestMapping("/register")

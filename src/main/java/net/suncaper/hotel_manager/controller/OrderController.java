@@ -78,7 +78,7 @@ public class OrderController {
     public ModelAndView listOrder(HttpServletRequest request) {
         UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
         int u_id = userSession.getId();
-        ModelAndView mav = new ModelAndView("orderList");
+        ModelAndView mav = new ModelAndView("admin/orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
         mav.addObject("h_orders", h_orders);
@@ -110,6 +110,6 @@ public class OrderController {
     @PutMapping("/order")
     public String updateOrder(@RequestParam(value = "o_id") H_Order h_order) {
         orderService.finishOrder(h_order);
-        return "orderInfo";
+        return "admin/orderInfo";
     }
 }
