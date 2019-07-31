@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Faded的网页</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}" href="../static/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../static/dist/css/AdminLTE.css" th:href="@{/dist/css/AdminLTE.css}">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-daterangepicker/daterangepicker.css" th:href="@{/bower_components/bootstrap-daterangepicker/daterangepicker.css}" >
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="../static/plugins/timepicker/bootstrap-timepicker.min.css" th:href="@{/plugins/timepicker/bootstrap-timepicker.min.css}">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+<body class="hold-transition skin-blue sidebar-mini">
+        <!--百度API-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="starter.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>D</b>m</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>F</b>aded</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <!-- <i class="fa fa-dedent"></i> -->
+                <!-- <span class="sr-only">Toggle navigation</span> -->
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">5</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">您有五条消息</li>
+                            <li>
+                                <!-- inner menu: contains the messages -->
+                                <ul class="menu">
+                                    <li><!-- start message -->
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <!-- User Image -->
+                                                <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <!-- Message title and timestamp -->
+                                            <h4>
+                                                Support Team
+                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                            </h4>
+                                            <!-- The message -->
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                    <!-- end message -->
+                                </ul>
+                                <!-- /.menu -->
+                            </li>
+                            <li class="footer"><a href="#">See All Messages</a></li>
+                        </ul>
+                    </li>
+                    <!-- /.messages-menu -->
+
+                    <!-- Notifications Menu -->
+                    <li class="dropdown notifications-menu">
+                        <!-- Menu toggle button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 10 notifications</li>
+                            <li>
+                                <!-- Inner Menu: contains the notifications -->
+                                <ul class="menu">
+                                    <li><!-- start notification -->
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                    <!-- end notification -->
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </li>
+                    <!-- Tasks Menu -->
+                    <li class="dropdown tasks-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-flag-o"></i>
+                            <span class="label label-danger">9</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 9 tasks</li>
+                            <li>
+                                <!-- Inner menu: contains the tasks -->
+                                <ul class="menu">
+                                    <li><!-- Task item -->
+                                        <a href="#">
+                                            <!-- Task title and progress text -->
+                                            <h3>
+                                                Design some buttons
+                                                <small class="pull-right">20%</small>
+                                            </h3>
+                                            <!-- The progress bar -->
+                                            <div class="progress xs">
+                                                <!-- Change the css width attribute to simulate progress -->
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
+                                                     aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">20% Complete</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- end task item -->
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="#">View all tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="user-image" alt="User Image">
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <span class="hidden-xs">Faded</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
+                                <p>
+                                    Faded - Web Developer
+                                    <small>Member since June. 2019</small>
+                                </p>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Details</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Orders</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="#">Friends</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <!-- search form (Optional) -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <!-- <li class="header">HEADER</li> -->
+                <!-- Optionally, you can add icons to the links -->
+                <li class=""><a href="./starter.html" th:href="@{/user/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-tag"></i> <span>个人信息</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="userInfo.html" th:href="@{/user/userinfo}">查看信息</a></li>
+                        <li><a href="alterInfo.html" th:href="@{/user/alterinfo}">修改信息</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+                <li class="treeview active" >
+                    <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">酒店地址</a></li>
+                        <li><a href="./hotelList.html" th:href="@{/user/hotelList}">酒店信息</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                酒店信息页面
+                <small>Hotel infomation</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                <li class="active">Here</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+            <!--------------------------
+              | Your Page Content Here |
+              -------------------------->
+            <div class="row margin-bottom">
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo1}" alt="Photo">
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo2}" alt="Photo">
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive float-img" th:src="${hotel.photo3}" alt="Photo">
+                </div>
+            </div>
+
+            <!-- About Me Box                  下面是表格用于填写详细信息的-->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">详情</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div th:if="${hotel.chainName}!='No chain'">
+                    <strong><i class="fa  fa-bank margin-r-5" ></i> 酒店连锁</strong>
+                    <p class="text-muted" th:text="${hotel.chainName}">
+                    </p>
+                     <hr>
+                    </div>
+
+
+                    <strong><i class="fa fa-book margin-r-5"></i> 酒店名称</strong>
+                    <p class="text-muted" th:text="${hotel.hotelTranslatedName}">
+                    </p>
+
+                    <hr>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> 位置</strong>
+
+                    <p class="text-muted" th:text="${hotel.country}+','+${hotel.city}+','+${hotel.addressline}"></p>
+                    <hr>
+
+                    <strong><i class="fa fa-pencil margin-r-5"></i> 评价</strong>
+
+                    <p>
+                        <span class="label label-danger">卫生好</span>
+                        <span class="label label-success">服务好</span>
+                        <span class="label label-info">环境好</span>
+                        <span class="label label-warning">食物好</span>
+                        <span class="label label-primary">价格便宜</span>
+                    </p>
+                    <hr>
+                    <strong><i class=" margin-r-5 glyphicon glyphicon-star" ></i> 酒店星级</strong>
+                    <div th:switch="${hotel.starRating}">
+                    <p th:case="'1'">
+                    <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                    </p>
+                     <p th:case="'2'">
+                      <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                         <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                      </p>
+                     <p th:case="'3'">
+                       <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                         <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                     </p>
+                        <p th:case="'3.5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'4'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'4.5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                        <p th:case="'5'">
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                            <i class="glyphicon glyphicon-star" style="color: yellow"></i>
+                        </p>
+                    </div>
+
+                    <hr>
+                    <strong><i class="fa fa-user margin-r-5"></i> 评分</strong>
+
+                    <p class="text-muted" th:text="${hotel.ratingAverage}" style="text-indent:20px"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-bookmark-o margin-r-5"></i> 酒店描述</strong>
+                    <p class="text-muted" th:text="${hotel.overview}" style="text-indent:20px"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-calendar-check-o margin-r-5"></i> 酒店开设时间</strong>
+                    <p class="text-muted" th:text="${hotel.yearopened}" style="text-indent:15px"></p>
+
+                    <hr>
+                    <strong><i class="fa fa-bar-chart margin-r-5"></i> 房间数量</strong>
+                    <p class="text-muted" th:text="${hotel.numberrooms}" style="text-indent:20px"></p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+<!--            下面是地图！！！！！！！！！！！-->
+            <div id="allmap" style="height: 600px"></div>
+
+            <input id="longitude" type="hidden"  th:value="${hotel.longitude}"/>
+            <input id="latitude" type="hidden"   th:value="${hotel.latitude}"/>
+            <input id="hotelTranslatedName"type="hidden"  th:value="${hotel.hotelTranslatedName}">
+
+            <button type="button" class="btn btn-warning button submit_btn btn-block" data-toggle="modal" data-target="#modal-primary">
+                下订单
+            </button>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+<!--    下面是模态框         !!!!!!!!!!!!!!!!!!!!!!-->
+    <div class="modal modal-primary fade" id="modal-primary">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">预定</h4>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Date 输入框！！！！！！！！！！-->
+                    <form action="/user/order" method="post" autocomplete="off">
+                    <div class="form-group">
+                        <label>入住时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                           <input type="text" class="form-control pull-right" id="datepicker" name="o_checkin">  <!-- 预定日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+
+                    <!-- Date 输入框  二！！！！！！！！！！-->
+                    <div class="form-group">
+                        <label>退房时间:</label>
+
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="datepicker2" name="o_checkout">  <!-- 截止日期-->
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+                    <!--      date输入框结束       !!!!!!!!!!!!!!!!!-->
+                    <!--                手机号  ！！！！！！！！！！！                 -->
+                    <div class="form-group">
+                        <label>手机号</label>
+                        <input type="text" class="form-control" name="o_tel">   <!-- 手机号码-->
+                    </div>
+                        <input type="text" name="hotel_id" th:value="${hotel.getHotelId()}" style="display: none">
+                    <!-- select   选择框，用来选择房间类型 -->
+                    <div class="form-group">
+                        <label>房型选择</label>
+                        <select class="form-control" name="rt_type">
+                            <div th:each="room:${roomTypes}">
+                            <option th:text="${room.getRtType()}"></option>
+                            </div>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                    <button  class="btn btn-outline" type="submit">提交订单</button>
+                </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+<!--    模态框结束位置                  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+
+<!-- jQuery 3 -->
+<script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
+<script src="../static/bower_components/bootstrap-daterangepicker/daterangepicker.js"  th:src="@{/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- bootstrap datepicker -->
+<script src="../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<script src="../static/bower_components/moment/min/moment.min.js" th:src="@{/bower_components/moment/min/moment.min.js}"></script>
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
+</div>
+</body>
+</html>
+
+<style>
+    .float-img{
+        float: left;
+    }
+</style>
+<script>
+    $(function () {
+        //Date range picker
+        $('#reservation').daterangepicker()
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+        //Date range as a button
+
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+        $('#datepicker2').datepicker({
+            autoclose: true
+        })
+        //Timepicker
+        $('.timepicker').timepicker({
+            showInputs: false
+        })
+    })
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var longitude = $("#longitude").val();
+    var latitude = $("#latitude").val();
+    var hotelTranslatedName = $("#hotelTranslatedName").val();
+    var point = new BMap.Point(longitude,latitude);  // 中心位置
+    map.centerAndZoom(point,15);
+    var marker = new BMap.Marker(point);//创建标注
+    map.enableScrollWheelZoom(true);
+    map.addOverlay(marker);              // 将标注添加到地图中
+
+    marker.addEventListener('click', function (e) {
+        // 通过点击的坐标创建一个点对象，添加标签
+        var point = new BMap.Point(e.point.lng, e.point.lat);
+        var opts = {
+            title: hotelTranslatedName,
+            enableMessage: false,
+        };
+        var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+        map.openInfoWindow(infowindow, point);
+    });
+
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            map.panTo(r.point);
+            mk.addEventListener('click', function (e) {
+                // 通过点击的坐标创建一个点对象，添加标签
+                var point = new BMap.Point(e.point.lng, e.point.lat);
+                var opts = {
+                    title: "您 的 位 置 在 这 里",
+                    enableMessage: false,
+                }
+                var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+                map.openInfoWindow(infowindow, point);
+            });
+            // alert('您的位置：'+r.point.lng+','+r.point.lat);
+            var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+            driving.search(r.point,point);
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true})
+
+
+
+</script>
+

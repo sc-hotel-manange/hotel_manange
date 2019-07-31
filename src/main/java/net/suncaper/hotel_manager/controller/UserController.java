@@ -22,7 +22,7 @@ public class UserController {
 
     @RequestMapping("/")   //登陆
     public String home() {
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping("/userinfo")  //用户信息

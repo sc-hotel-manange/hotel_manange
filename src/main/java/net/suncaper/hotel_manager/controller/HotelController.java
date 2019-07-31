@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin")
 public class
 HotelController {
     @Autowired
