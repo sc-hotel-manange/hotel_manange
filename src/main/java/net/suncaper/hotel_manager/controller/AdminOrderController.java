@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class OrderController {
+public class AdminOrderController {
     @Autowired
     OrderService orderService;
     @Autowired
@@ -30,6 +30,7 @@ public class OrderController {
     @Autowired
     RoomTypeService roomTypeService;
 
+    /*
     //下订单
     @PostMapping("/order")
     public String placeOrder(@RequestParam(value = "rt_type") String rt_type,
@@ -72,19 +73,21 @@ public class OrderController {
 
         return "redirect:orderList";
     }
+    */
 
-    //展示用户订单列表   返回订单List
+    //展示所有订单列表   返回订单List
     @GetMapping("/orderList")
     public ModelAndView listOrder(HttpServletRequest request) {
-        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
-        int u_id = userSession.getId();
-        ModelAndView mav = new ModelAndView("orderList");
-        List<H_Order> h_orders = orderService.listOrder(u_id);
+//        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
+//        int u_id = userSession.getId();
+        ModelAndView mav = new ModelAndView("admin/orderList");
+        List<H_Order> h_orders = orderService.listOrder();
 
         mav.addObject("h_orders", h_orders);
         return mav;
     }
 
+    /*
     //用户取消订单
     @GetMapping("/cancelOrder")
     public String cancelOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
@@ -105,6 +108,7 @@ public class OrderController {
 
         return "redirect:orderList";
     }
+    */
 
     //管理员处理退房
     @PutMapping("/order")
@@ -112,4 +116,5 @@ public class OrderController {
         orderService.finishOrder(h_order);
         return "orderInfo";
     }
+
 }

@@ -216,7 +216,7 @@
                     </ul>
                 </li>
 
-                <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+                <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>订单列表</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
                         <span class="pull-right-container">
@@ -263,6 +263,20 @@
                 </div>
                 <!-- /.box-header -->
                  <div class="box-body">
+                     <strong><i class="fa fa-map-marker margin-r-5"></i> 用户ID</strong>
+
+                     <p class="text-muted" th:text="${order.uId}"></p>
+                     <hr>
+
+                     <strong><i class="fa fa-map-marker margin-r-5"></i> 酒店ID</strong>
+
+                     <p class="text-muted" th:text="${order.hotelId}"></p>
+                     <hr>
+
+                     <strong><i class="fa  fa-bookmark margin-r-5"></i> 门牌号</strong>
+                     <p th:text="${order.rNumber}"></p>
+                     <hr>
+
                     <strong><i class="fa fa-book margin-r-5"></i> 入房时间</strong>
 
                     <p class="text-muted" th:text="${order.oCheckin}">
@@ -277,10 +291,6 @@
 
                     <strong><i class="glyphicon glyphicon-phone-alt margin-r-5"></i> 电话</strong>
                     <p th:text="${order.oTel}"></p>
-                     <hr>
-
-                    <strong><i class="fa  fa-bookmark margin-r-5"></i> 房间ID</strong>
-                    <p th:text="${order.rNumber}"></p>
                      <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>

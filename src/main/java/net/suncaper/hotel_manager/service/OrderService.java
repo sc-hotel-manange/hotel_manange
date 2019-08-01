@@ -40,6 +40,13 @@ public class OrderService {
         return h_orderMapper.selectByExample(example);
     }
 
+    //展示所有订单
+    public List<H_Order> listOrder() {
+        H_OrderExample example = new H_OrderExample();
+
+        return h_orderMapper.selectByExample(example);
+    }
+
     //用户取消订单, 订单状态置为3
     public void cancelOrder(int o_id, int u_id) {
         H_OrderExample example = new H_OrderExample();
