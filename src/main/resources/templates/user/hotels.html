@@ -102,6 +102,8 @@
 		
 		<div class="collapse" id="collapseMap">
 			<div id="map" class="map"></div>
+			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${longitude}"/>
+			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${latitude}"/>
 		</div>
 		<!-- End Map -->
 
@@ -393,12 +395,70 @@
     <script src="../../static/js/main.js"></script>
 	<script src="../../static/assets/validate.js"></script>
 	
-<!--	&lt;!&ndash; Map &ndash;&gt;   这个到时候要换成百度API-->
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="../../static/js/markerclusterer.js"></script>
-	<script src="../../static/js/map_hotels.js"></script>
-	<script src="../../static/js/infobox.js"></script>
-	
+<!--&lt;!&ndash;	&lt;!&ndash; Map &ndash;&gt;   这个到时候要换成百度API&ndash;&gt;-->
+	<!--<script src="http://maps.googleapis.com/maps/api/js"></script>-->
+	<!--<script src="../../static/js/markerclusterer.js"></script>-->
+	<!--<script src="../../static/js/map_hotels.js"></script>-->
+	<!--<script src="../../static/js/infobox.js"></script>-->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+	<script type="text/javascript">
+		// 百度地图API功能
+		var map = new BMap.Map("map");
+		var longitude = $("#longitude").val();
+		var latitude = $("#latitude").val();
+		var point = new BMap.Point(longitude,latitude);  // 中心位置
+		map.addControl(new BMap.NavigationControl());   //平移缩放控件
+		map.addControl(new BMap.ScaleControl());        //比例尺
+		map.addControl(new BMap.OverviewMapControl());  //缩略地图
+		map.addControl(new BMap.MapTypeControl());      //地图类型
+		map.centerAndZoom(point,15);
+		var marker = new BMap.Marker(point);//创建标注
+		map.enableScrollWheelZoom(true);
+		map.addOverlay(marker);              // 将标注添加到地图中
+		// // 用经纬度设置地图中心点
+		// function theLocation(){
+		//   if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+		//     map.clearOverlays();
+		//     var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+		//
+		//   }
+		// }
+		marker.addEventListener('click', function (e) {
+			// 通过点击的坐标创建一个点对象，添加标签
+			var point = new BMap.Point(e.point.lng, e.point.lat);
+			var opts = {
+				title: hotelTranslatedName,
+				enableMessage: false,
+			};
+			var infowindow = new BMap.InfoWindow("<br/>", opts);
+			map.openInfoWindow(infowindow, point);
+		});
+
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+		    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		        var mk = new BMap.Marker(r.point);
+		        map.addOverlay(mk);
+		        map.panTo(r.point);
+		        mk.addEventListener('click', function (e) {
+		            // 通过点击的坐标创建一个点对象，添加标签
+		            var point = new BMap.Point(e.point.lng, e.point.lat);
+		            var opts = {
+		                title: "您 的 位 置 在 这 里",
+		                enableMessage: false,
+		            }
+		            var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+		            map.openInfoWindow(infowindow, point);
+		        });
+		        // alert('您的位置：'+r.point.lng+','+r.point.lat);
+		        var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+		        driving.search(r.point,point);
+		    }
+		    else {
+		        alert('failed'+this.getStatus());
+		    }
+		},{enableHighAccuracy: true})
+	</script>
 	<!-- Masonry Filtering -->
 	<script src="../../static/js/isotope.min.js"></script>
 	<script>
