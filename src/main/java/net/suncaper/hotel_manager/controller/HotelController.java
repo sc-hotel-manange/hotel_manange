@@ -21,8 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class
-HotelController {
+public class HotelController {
     @Autowired
     HotelService hotelService;
     @Autowired
@@ -32,14 +31,14 @@ HotelController {
     public String listHotel(Model model) {
         System.out.println("进入");
         model.addAttribute("hotels", hotelService.selectHotelList());
-        return "hotelList";
+        return "admin/hotelList";
     }
 
     @RequestMapping("/hotelInfo")
     public String hotelInfo(@RequestParam("hotel_id") int hotel_id, Model model) {
         model.addAttribute("hotel", hotelService.selectHotelInfo(hotel_id));
         model.addAttribute("roomTypes", roomTypeService.findRoomType(hotel_id));
-        return "hotelInfo";
+        return "admin/hotelInfo";
     }
 
     @RequestMapping("/hotelMap")
@@ -52,7 +51,7 @@ HotelController {
     public String hotelMap(Model model){
         model.addAttribute("longitude",104.09789443016);
         model.addAttribute("latitude",30.6766381);
-        return "hotelMap";
+        return "admin/hotelMap";
     }
 
 
@@ -69,7 +68,7 @@ HotelController {
             h_hotelList = hotelService.selectByAddress(content);
         }
         model.addAttribute("hotels",h_hotelList);
-        return "hotelList";
+        return "admin/hotelList";
     }
 
 }

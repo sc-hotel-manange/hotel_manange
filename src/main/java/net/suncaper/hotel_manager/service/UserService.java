@@ -42,7 +42,6 @@ public class UserService {
 
     public void insertUser(H_User h_user) {
         h_userMapper.insert(h_user);
-
     }
 
     public H_User getUserInfo(int u_id){
