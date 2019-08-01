@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/loginPage")
     public String Home(){return "user/login";}
 
     @RequestMapping("/registerPage")  //注册
@@ -36,13 +36,13 @@ public class UserController {
                         HttpServletResponse response,
                         HttpServletRequest request,
                         Model model){
-        int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
+        Integer u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 
         if(u_id == -1){
             return "redirect:/user/";
         }
         else {
-
+            System.out.println(u_account+u_password);
             Session u = new Session(u_id);
             request.getSession().setAttribute("u_id",new Session(u_id));
             return  "user/index";
