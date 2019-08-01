@@ -14,8 +14,8 @@ public class IndexController {
     @RequestMapping("")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("user/index");
-        mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotel());
-        mav.addObject("topRatedHotels", hotelService.selectTopRatedHotel());
+        mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
+        mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
 
         return mav;
     }
