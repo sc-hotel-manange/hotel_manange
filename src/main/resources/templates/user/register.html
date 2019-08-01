@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -72,7 +72,7 @@
 
 				<div id="pass-info" class="clearfix"></div>
 				<button type="submit" class="btn_1 rounded full-width add_top_30">注册!</button>
-				<div class="text-center add_top_10">已经有账号了? <strong><a href="login.html">登录</a></strong></div>
+				<div class="text-center add_top_10">已经有账号了? <strong><a href="./login.html" th:href="@{/user/loginPage}">登录</a></strong></div>
 			</form>
 			<div class="copy">© 2019 酒店管理系统</div>
 		</aside>

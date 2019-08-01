@@ -128,11 +128,11 @@
 					   <div class="box_grid">
 						<figure>
 							<a href="" class="wish_bt"></a>
-							<a href="tour-detail.html"><img src="../../static/img/tour_1.jpg"  th:src="${topratehotels.photo2}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
+							<a href=""><img src="../../static/img/tour_1.jpg"  th:src="${topratehotels.photo2}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
 <!--							<small>Historic</small>-->
 						</figure>
 						<div class="wrapper">
-							<h3><a href="tour-detail.html" th:text="${topratehotels.hotelTranslatedName}"></a></h3>
+							<h3><a href="" th:text="${topratehotels.hotelTranslatedName}"></a></h3>
 							<p th:text="${topratehotels.overview}"></p>
 							<span class="price"> <strong th:text="${topratehotels.city}"></strong> </span>
 						</div>
@@ -165,59 +165,22 @@
 				<div class="row">
 
 <!--				!!!!!!!!!!!!!	下面使用thymeleaf进行循环 !!!!!!!!!!-->
-					<div class="col-xl-3 col-lg-6 col-md-6">
+
+					  <div class="col-xl-3 col-lg-6 col-md-6" th:each="fivestarhotels:${fiveStarHotels}">
 						<a href="" class="grid_item">
 							<figure>
-								<div class="score"><strong>8.9</strong></div>
-								<img src="../../static/img/hotel_1.jpg" th:src="@{/img/hotel_1.jpg}" class="img-fluid" alt="">
+								<div class="score"><strong th:text="${fivestarhotels.ratingAverage}"></strong></div>
+								<img th:src="${fivestarhotels.photo2}" class="img-fluid" alt="" >  <!--style="width: 300px;height:300px;"-->
 								<div class="info">
 <!--									下面是星星的图表，使用thymeleaf进行数量上的选择-->
-									<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
-									<h3>Mariott Hotel</h3>
+									<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+									<h3 th:text="${fivestarhotels.hotelTranslatedName}"></h3>
 								</div>
 							</figure>
 						</a>
 					</div>
 					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.9</strong></div>
-								<img src="../../static/img/hotel_2.jpg" th:src="@{/img/hotel_2.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
-									<h3>Concorde Hotel </h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.0</strong></div>
-								<img src="../../static/img/hotel_3.jpg" th:src="@{/img/hotel_3.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
-									<h3>Louvre Hotel</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>8.9</strong></div>
-								<img src="../../static/img/hotel_4.jpg"  th:src="@{/img/hotel_4.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
-									<h3>Park Yatt Hotel</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
+
 				</div>
 				<!-- /row -->
 				<a href=""><strong>查看全部 <i class="arrow_carrot-right"></i></strong></a>
@@ -300,7 +263,7 @@
 					<div class="col-lg-6">
 						<a class="box_news" href="">
 							<figure><img src="../../static/img/news_home_1.jpg"  th:src="@{/img/news_home_1.jpg}" alt="">
-								<figcaption><strong>8月</strong>1日</figcaption>
+								<figcaption><strong>8月</strong></figcaption>
 							</figure>
 							<ul>
 								<li>成都</li>
@@ -314,7 +277,7 @@
 					<div class="col-lg-6">
 						<a class="box_news" href="">
 							<figure><img src="../../static/img/news_home_2.jpg" th:src="@{/img/news_home_2.jpg}" alt="">
-								<figcaption><strong>8月</strong>2日</figcaption>
+								<figcaption><strong>8月</strong></figcaption>
 							</figure>
 							<ul>
 								<li>成都</li>
@@ -328,7 +291,7 @@
 					<div class="col-lg-6">
 						<a class="box_news" href="">
 							<figure><img src="../../static/img/news_home_3.jpg"  th:src="@{/img/news_home_3.jpg}" alt="">
-								<figcaption><strong>8月</strong>3号</figcaption>
+								<figcaption><strong>8月</strong></figcaption>
 							</figure>
 							<ul>
 								<li>成都</li>
@@ -342,7 +305,7 @@
 					<div class="col-lg-6">
 						<a class="box_news" href="">
 							<figure><img src="../../static/img/news_home_4.jpg" th:src="@{/img/news_home_4.jpg}" alt="">
-								<figcaption><strong>8月</strong>4号</figcaption>
+								<figcaption><strong>8月</strong></figcaption>
 							</figure>
 							<ul>
 								<li>成都</li>
