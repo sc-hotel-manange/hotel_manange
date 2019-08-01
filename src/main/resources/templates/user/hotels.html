@@ -14,7 +14,7 @@
     <!-- BASE CSS -->
     <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../static/css/style.css" rel="stylesheet">
-	<link href="../../static/css/vendors.css" rel="stylesheet">
+	<link href="../../static/css/vendors.min.css" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
     <link href="../../static/css/custom.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
 		<ul id="top_menu">
 			<li><a href="" class="cart-menu-btn" title="购物车"><strong>4</strong></a></li>
-			<li><a href="#sign-in-dialog" id="sign-in" class="login" title="登陆">登陆</a></li>
+			<li><a href="./login.html" id="sign-in" class="login" title="登陆">登陆</a></li>
 			<li><a href="" class="wishlist_bt_top" title="喜欢">喜欢</a></li>
 		</ul>
 		<!-- /top_menu -->
@@ -43,9 +43,9 @@
 
 		<nav id="menu" class="main-menu">
 			<ul>
-				<li><span><a href="#0">首页</a></span>
+				<li><span><a href="./index.html">首页</a></span>
 				</li>
-				<li><span><a href="#0">住宿</a></span>
+				<li><span><a href="./hotels.html">住宿</a></span>
 				</li>
 				<li><span><a href="#0">饮食</a></span>
 				</li>
@@ -87,10 +87,12 @@
 					</li>
 					<li>
 						<div class="layout_view">
-							<a href="#0" class="active"><i class="icon-th"></i></a>
-							<a href="hotels-list-isotope.html"><i class="icon-th-list"></i></a>
+							<a href="" class="active"><i class="icon-th"></i></a>
+							<a href=""><i class="icon-th-list"></i></a>
 						</div>
 					</li>
+
+<!--					这里是地图哦-->
 					<li>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">查看地图</a>
 					</li>
@@ -107,43 +109,16 @@
 
 <!--        这里是搜索栏哦！！！！！！！ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 		<div class="container margin_60_35">
-			<div class="col-lg-12">
-				<div class="row no-gutters custom-search-input-2 inner">
-					<div class="col-lg-4">
-						<div class="form-group">
-							<input class="form-control" type="text" placeholder="酒店名称...">
-							<i class="icon_search"></i>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="form-group">
-							<input class="form-control" type="text" placeholder="地点...">
-							<i class="icon_pin_alt"></i>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<select class="wide">
-							<option>条件...</option>
-							<option>附近地区</option>
-							<option>中高档型</option>
-							<option>经济舒适</option>
-						</select>
-					</div>
-					<div class="col-lg-2">
-						<input type="submit" class="btn_search" value="搜索">
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
+
 			<!-- /custom-search-input-2 -->
-			
+
 			<div class="isotope-wrapper">
 			<div class="row">
 				<div class="col-xl-4 col-lg-6 col-md-6 isotope-item popular">
 					<div class="box_grid">
 						<figure>
 							<a href="#0" class="wish_bt"></a>
-							<a href=""><img src="../../static/img/hotel_1.jpg" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
+							<a href=""><img src="../../static/img/hotel_1.jpg"  th:src="@{/img/hotel_1.jpg}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
 							<small>Paris Centre</small>
 						</figure>
 						<div class="wrapper">
@@ -307,8 +282,8 @@
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-5 col-md-12 p-r-5">
-					<p><img src="img/logo.png" width="150" height="36" data-retina="true" alt=""></p>
-					<p></p>
+
+
 				</div>
 				<div class="col-lg-3 col-md-6 ml-lg-auto">
 
@@ -388,19 +363,19 @@
 	<div id="toTop"></div><!-- Back to top button -->
 	
 	<!-- COMMON SCRIPTS -->
-    <script src="../../static/js/jquery-2.2.4.min.js"></script>
-    <script src="../../static/js/common_scripts.js"></script>
-    <script src="../../static/js/main.js"></script>
-	<script src="../../static/assets/validate.js"></script>
+    <script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
+    <script src="../../static/js/main.js" th:src="@{/js/main.js}"></script>
+	<script src="../../static/assets/validate.js" th:src="@{/assets/validate.js}"></script>
 	
-<!--	&lt;!&ndash; Map &ndash;&gt;   这个到时候要换成百度API-->
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="../../static/js/markerclusterer.js"></script>
-	<script src="../../static/js/map_hotels.js"></script>
-	<script src="../../static/js/infobox.js"></script>
+<!--&lt;!&ndash;	&lt;!&ndash; Map &ndash;&gt;   这个到时候要换成百度API&ndash;&gt;-->
+<!--	<script src="http://maps.googleapis.com/maps/api/js"></script>-->
+<!--	<script src="../../static/js/markerclusterer.js"></script>-->
+<!--	<script src="../../static/js/map_hotels.js"></script>-->
+<!--	<script src="../../static/js/infobox.js"></script>-->
 	
 	<!-- Masonry Filtering -->
-	<script src="../../static/js/isotope.min.js"></script>
+	<script src="../../static/js/isotope.min.js" th:src="@{/js/isotope.min.js}"></script>
 	<script>
 	$(window).load(function(){
 	  var $container = $('.isotope-wrapper');
