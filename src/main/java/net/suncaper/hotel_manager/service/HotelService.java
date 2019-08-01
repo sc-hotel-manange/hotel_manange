@@ -46,7 +46,22 @@ public class HotelService {
         return h_hotelMapper.selectByExample(example);
     }
 
+    //筛选五星级酒店
+    public List<H_Hotel> selectFiveStarHotel() {
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andStarRatingEqualTo("5");
 
+        return h_hotelMapper.selectByExample(example);
+    }
+
+    //筛选评分高的酒店
+    public List<H_Hotel> selectTopRatedHotel() {
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andRatingAverageGreaterThanOrEqualTo("8");
+        example.setOrderByClause("rating_average DESC");
+
+        return h_hotelMapper.selectByExample(example);
+    }
 
 }
 
