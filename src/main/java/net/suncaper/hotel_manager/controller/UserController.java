@@ -1,5 +1,6 @@
 package net.suncaper.hotel_manager.controller;
 
+import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.domain.Session;
 import net.suncaper.hotel_manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String Home(){return "user/login";}
+    @RequestMapping("/loginPage")
+    public String loginPage(){return "user/login";}
 
     @RequestMapping("/registerPage")  //注册
-    public String register() {
+    public String registerPage() {
         return "user/register";
     }
 
@@ -47,5 +48,31 @@ public class UserController {
             request.getSession().setAttribute("u_id",new Session(u_id));
             return  "user/index";
         }
+    }
+
+    @RequestMapping("/register")
+    public String register(@PathParam(value = "u_name")String u_name,
+                           @PathParam(value = "u_tel") String u_tel,
+                           @PathParam(value = "u_nickName") String u_nickName,
+                           @PathParam(value = "u_account") String u_account,
+                           @PathParam(value = "u_password") String u_password,
+                           @PathParam(value = "u_idNumber") String u_idNumber) {
+        int u_id = userService.getIdByAccount(u_account);
+        if(u_id == -1) {
+            H_User h_user = new H_User();
+            h_user.setuName(u_name);
+            h_user.setuTel(u_tel);
+            h_user.setuNickname(u_nickName);
+            h_user.setuAccount(u_account);
+            h_user.setuPassword(u_password);
+            h_user.setuIdnumber(u_idNumber);
+
+            userService.insertUser(h_user);
+        }else {
+            System.out.println("账号已存在");
+            return "user/register";
+        }
+        System.out.println("注册成功");
+        return "user/login";
     }
 }
