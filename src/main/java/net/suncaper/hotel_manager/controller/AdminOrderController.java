@@ -3,9 +3,7 @@ package net.suncaper.hotel_manager.controller;
 import net.suncaper.hotel_manager.domain.H_Order;
 import net.suncaper.hotel_manager.domain.H_Room;
 import net.suncaper.hotel_manager.domain.H_Roomtype;
-import net.suncaper.hotel_manager.domain.UserSession;
 import net.suncaper.hotel_manager.service.OrderService;
-import net.suncaper.hotel_manager.service.RoomService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +23,8 @@ import java.util.List;
 public class AdminOrderController {
     @Autowired
     OrderService orderService;
-    @Autowired
-    RoomService roomService;
+//    @Autowired
+//    RoomService roomService;
     @Autowired
     RoomTypeService roomTypeService;
 

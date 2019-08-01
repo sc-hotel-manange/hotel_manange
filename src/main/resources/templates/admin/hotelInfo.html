@@ -217,20 +217,20 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <!-- <li class="header">HEADER</li> -->
                 <!-- Optionally, you can add icons to the links -->
-                <li class=""><a href="./starter.html" th:href="@{/user/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
+                <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-tag"></i> <span>个人信息</span>
+                    <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="userInfo.html" th:href="@{/user/userinfo}">查看信息</a></li>
-                        <li><a href="alterInfo.html" th:href="@{/user/alterinfo}">修改信息</a></li>
+                        <li><a href="adminInfo.html" th:href="@{/admin/admininfo}">查看信息</a></li>
+                        <li><a href="alterInfo.html" th:href="@{/admin/alterinfo}">修改信息</a></li>
                     </ul>
                 </li>
 
-                <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+                <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
                 <li class="treeview active" >
                     <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
                         <span class="pull-right-container">
@@ -239,7 +239,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#">酒店地址</a></li>
-                        <li><a href="./hotelList.html" th:href="@{/user/hotelList}">酒店信息</a></li>
+                        <li><a href="./hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
                     </ul>
                 </li>
             </ul>
@@ -402,7 +402,7 @@
 
                 <div class="modal-body">
                     <!-- Date 输入框！！！！！！！！！！-->
-                    <form action="/user/order" method="post" autocomplete="off">
+                    <form action="/admin/order" method="post" autocomplete="off">
                     <div class="form-group">
                         <label>入住时间:</label>
 
