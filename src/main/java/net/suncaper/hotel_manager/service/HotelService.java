@@ -2,6 +2,7 @@ package net.suncaper.hotel_manager.service;
 
 import net.suncaper.hotel_manager.domain.H_Hotel;
 import net.suncaper.hotel_manager.domain.H_HotelExample;
+import net.suncaper.hotel_manager.mapper.CustomizeMapper;
 import net.suncaper.hotel_manager.mapper.H_HotelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import java.util.List;
 public class HotelService {
     @Autowired
     H_HotelMapper h_hotelMapper;
+    @Autowired
+    CustomizeMapper customizeMapper;
 
     //酒店列表
     public List<H_Hotel> selectHotelList() {
@@ -47,20 +50,20 @@ public class HotelService {
     }
 
     //筛选五星级酒店
-    public List<H_Hotel> selectFiveStarHotel() {
-        H_HotelExample example = new H_HotelExample();
-        example.createCriteria().andStarRatingEqualTo("5");
+    public List<H_Hotel> selectFiveStarHotels() {
+//        H_HotelExample example = new H_HotelExample();
+//        example.createCriteria().andStarRatingEqualTo("5");
 
-        return h_hotelMapper.selectByExample(example);
+        return customizeMapper.selectFiveStarHotels();
     }
 
     //筛选评分高的酒店
-    public List<H_Hotel> selectTopRatedHotel() {
-        H_HotelExample example = new H_HotelExample();
-        example.createCriteria().andRatingAverageGreaterThanOrEqualTo("8");
-        example.setOrderByClause("rating_average DESC");
+    public List<H_Hotel> selectTopRatedHotels() {
+//        H_HotelExample example = new H_HotelExample();
+//        example.createCriteria().andRatingAverageGreaterThanOrEqualTo("8");
+//        example.setOrderByClause("rating_average DESC");
 
-        return h_hotelMapper.selectByExample(example);
+        return customizeMapper.selectTopRatedHotels();
     }
 
 }
