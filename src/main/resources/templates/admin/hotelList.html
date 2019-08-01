@@ -208,7 +208,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">HEADER</li> -->
         <!-- Optionally, you can add icons to the links -->
-        <li class=""><a href="./starter.html" th:href="@{/user/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
+        <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-tag"></i> <span>个人信息</span>
             <span class="pull-right-container">
@@ -216,12 +216,12 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="userInfo.html" th:href="@{/user/userinfo}">查看信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/user/alterinfo}">修改信息</a></li>
+            <li><a href="adminInfo.html" th:href="@{/admin/admininfo}">查看信息</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/alterinfo}">修改信息</a></li>
           </ul>
         </li>
 
-        <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+        <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
         <li class="treeview active" >
           <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
             <span class="pull-right-container">
@@ -230,7 +230,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#">酒店地址</a></li>
-            <li><a href="./hotelList.html" th:href="@{/user/hotelList}">酒店信息</a></li>
+            <li><a href="./hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
           </ul>
         </li>
       </ul>
@@ -261,7 +261,7 @@
         -------------------------->
          <!-- Main content -->
       <!--<section class="content">-->
-        <!--<form th:action="@{/user/hotelSearch}" class="form-inline">-->
+        <!--<form th:action="@{/admin/hotelSearch}" class="form-inline">-->
           <!--<div id="type">-->
           <!--<div>按名称搜索</div>-->
           <!--<div>按地址搜索</div>-->
@@ -271,7 +271,7 @@
       <!--</section>-->
 
 <!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
-      <form th:action="@{/user/hotelSearch}" method="get" class="sidebar-form whitebkg">
+      <form th:action="@{/admin/hotelSearch}" method="get" class="sidebar-form whitebkg">
         <div class="input-group">
           <input name="type" th:value="按名称搜索" style="display: none">
           <input type="text" name="content" class="form-control" placeholder="Search...">
@@ -308,7 +308,7 @@
                     <td th:text="${hotelinfo.addressline}">
                     </td>
                     <td>
-                      <a th:href="@{'/user/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
+                      <a th:href="@{'/admin/hotelInfo?hotel_id='+ ${hotelinfo.hotelId}}">
                         <button type="button" class="btn btn-block btn-info hotel-info-btn">详情</button>
                       </a>
                     </td>

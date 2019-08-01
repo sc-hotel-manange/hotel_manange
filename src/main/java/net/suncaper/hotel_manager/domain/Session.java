@@ -1,11 +1,11 @@
 package net.suncaper.hotel_manager.domain;
 
-public class UserSession {         //这个类用于存储session
+public class Session {         //这个类用于存储session
     private int id;
     public int getId() {
         return id;
     }
-    public UserSession(int id){
+    public Session(int id){
         this.id=id;
     }
 

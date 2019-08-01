@@ -26,7 +26,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="./starter.html" th:href="@{/user/starter}" class="logo">
+    <a href="./starter.html" th:href="@{/admin/starter}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>D</b>m</span>     
       <!-- logo for regular state and mobile devices -->
@@ -201,7 +201,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header">HEADER</li> -->
         <!-- Optionally, you can add icons to the links -->
-        <li class=""><a href="./starter.html" th:href="@{/user/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
+        <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
         <li class="treeview active">
           <a href="#"><i class="fa fa-tag"></i> <span>个人信息</span>
             <span class="pull-right-container">
@@ -209,12 +209,12 @@
               </span>
           </a>
           <ul class="treeview-menu ">
-            <li><a href="userInfo.html" th:href="@{/user/userinfo}">查看信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/user/alterinfo}">修改信息</a></li>
+            <li><a href="adminInfo.html" th:href="@{/admin/admininfo}">查看信息</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/alterinfo}">修改信息</a></li>
           </ul>
         </li>
 
-        <li><a href="./orderList.html" th:href="@{/user/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
+        <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>已购订单</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
             <span class="pull-right-container">
@@ -223,7 +223,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#">酒店地址</a></li>
-            <li><a href="hotelList.html" th:href="@{/user/hotelList}">酒店信息</a></li>
+            <li><a href="hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
           </ul>
         </li>
       </ul>
@@ -261,28 +261,16 @@
               <form role="form">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>用户名</label>
-                  <input type="text" class="form-control" th:placeholder="${userInfo.uNickname}"  disabled>
-                </div>
-                <div class="form-group">
                   <label>账号</label>
-                  <input type="text" class="form-control" th:placeholder="${userInfo.uAccount}"  disabled>
+                  <input type="text" class="form-control" th:placeholder="${adminInfo.aAccount}"  disabled>
+                </div>
+                <div class="form-group" type='password'>
+                  <label>密码</label>
+                  <input type="text" class="form-control" th:placeholder="${adminInfo.aPassword}"  disabled>
                 </div>
                 <div class="form-group">
-                  <label>姓名</label>
-                  <input type="text" class="form-control" th:placeholder="${userInfo.uName}" disabled>
-                </div>
-                <div class="form-group">
-                    <label>电话</label>
-                    <input type="text" class="form-control" th:placeholder="${userInfo.uTel}" disabled>
-                  </div>
-                <div type='password' class="form-group">
-                    <label>密码</label>
-                    <input type="text" class="form-control" th:placeholder="${userInfo.uPassword}" disabled>
-                  </div>
-                <div class="form-group">
-                    <label>身份证号</label>
-                    <input type="text" class="form-control" th:placeholder="${userInfo.uIdnumber}" disabled>
+                    <label>权限</label>
+                    <input type="text" class="form-control" th:placeholder="${adminInfo.aPermission}" disabled>
                   </div>
                 <!-- textarea -->
                 <div class="form-group">
