@@ -382,77 +382,77 @@
             <input id="latitude" type="hidden"   th:value="${hotel.latitude}"/>
             <input id="hotelTranslatedName"type="hidden"  th:value="${hotel.hotelTranslatedName}">
 
-            <button type="button" class="btn btn-warning button submit_btn btn-block" data-toggle="modal" data-target="#modal-primary">
-                下订单
-            </button>
+            <!--<button type="button" class="btn btn-warning button submit_btn btn-block" data-toggle="modal" data-target="#modal-primary">-->
+                <!--下订单-->
+            <!--</button>-->
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
 <!--    下面是模态框         !!!!!!!!!!!!!!!!!!!!!!-->
-    <div class="modal modal-primary fade" id="modal-primary">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">预定</h4>
-                </div>
+    <!--<div class="modal modal-primary fade" id="modal-primary">-->
+        <!--<div class="modal-dialog">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span></button>-->
+                    <!--<h4 class="modal-title">预定</h4>-->
+                <!--</div>-->
 
-                <div class="modal-body">
-                    <!-- Date 输入框！！！！！！！！！！-->
-                    <form action="/admin/order" method="post" autocomplete="off">
-                    <div class="form-group">
-                        <label>入住时间:</label>
+                <!--<div class="modal-body">-->
+                    <!--&lt;!&ndash; Date 输入框！！！！！！！！！！&ndash;&gt;-->
+                    <!--<form action="/admin/order" method="post" autocomplete="off">-->
+                    <!--<div class="form-group">-->
+                        <!--<label>入住时间:</label>-->
 
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                           <input type="text" class="form-control pull-right" id="datepicker" name="o_checkin">  <!-- 预定日期-->
-                        </div>
-                        <!-- /.input group -->
-                    </div>
+                        <!--<div class="input-group date">-->
+                            <!--<div class="input-group-addon">-->
+                                <!--<i class="fa fa-calendar"></i>-->
+                            <!--</div>-->
+                           <!--<input type="text" class="form-control pull-right" id="datepicker" name="o_checkin">  &lt;!&ndash; 预定日期&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; /.input group &ndash;&gt;-->
+                    <!--</div>-->
 
-                    <!-- Date 输入框  二！！！！！！！！！！-->
-                    <div class="form-group">
-                        <label>退房时间:</label>
+                    <!--&lt;!&ndash; Date 输入框  二！！！！！！！！！！&ndash;&gt;-->
+                    <!--<div class="form-group">-->
+                        <!--<label>退房时间:</label>-->
 
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control pull-right" id="datepicker2" name="o_checkout">  <!-- 截止日期-->
-                        </div>
-                        <!-- /.input group -->
-                    </div>
-                    <!--      date输入框结束       !!!!!!!!!!!!!!!!!-->
-                    <!--                手机号  ！！！！！！！！！！！                 -->
-                    <div class="form-group">
-                        <label>手机号</label>
-                        <input type="text" class="form-control" name="o_tel">   <!-- 手机号码-->
-                    </div>
-                        <input type="text" name="hotel_id" th:value="${hotel.getHotelId()}" style="display: none">
-                    <!-- select   选择框，用来选择房间类型 -->
-                    <div class="form-group">
-                        <label>房型选择</label>
-                        <select class="form-control" name="rt_type">
-                            <div th:each="room:${roomTypes}">
-                            <option th:text="${room.getRtType()}"></option>
-                            </div>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
-                    <button  class="btn btn-outline" type="submit">提交订单</button>
-                </div>
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
+                        <!--<div class="input-group date">-->
+                            <!--<div class="input-group-addon">-->
+                                <!--<i class="fa fa-calendar"></i>-->
+                            <!--</div>-->
+                            <!--<input type="text" class="form-control pull-right" id="datepicker2" name="o_checkout">  &lt;!&ndash; 截止日期&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; /.input group &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;      date输入框结束       !!!!!!!!!!!!!!!!!&ndash;&gt;-->
+                    <!--&lt;!&ndash;                手机号  ！！！！！！！！！！！                 &ndash;&gt;-->
+                    <!--<div class="form-group">-->
+                        <!--<label>手机号</label>-->
+                        <!--<input type="text" class="form-control" name="o_tel">   &lt;!&ndash; 手机号码&ndash;&gt;-->
+                    <!--</div>-->
+                        <!--<input type="text" name="hotel_id" th:value="${hotel.getHotelId()}" style="display: none">-->
+                    <!--&lt;!&ndash; select   选择框，用来选择房间类型 &ndash;&gt;-->
+                    <!--<div class="form-group">-->
+                        <!--<label>房型选择</label>-->
+                        <!--<select class="form-control" name="rt_type">-->
+                            <!--<div th:each="room:${roomTypes}">-->
+                            <!--<option th:text="${room.getRtType()}"></option>-->
+                            <!--</div>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>-->
+                    <!--<button  class="btn btn-outline" type="submit">提交订单</button>-->
+                <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+    <!--</div>-->
     <!-- /.modal -->
 <!--    模态框结束位置                  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
@@ -523,34 +523,34 @@
             title: hotelTranslatedName,
             enableMessage: false,
         };
-        var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+        var infowindow = new BMap.InfoWindow("<br/>", opts);
         map.openInfoWindow(infowindow, point);
     });
-
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-        if(this.getStatus() == BMAP_STATUS_SUCCESS){
-            var mk = new BMap.Marker(r.point);
-            map.addOverlay(mk);
-            map.panTo(r.point);
-            mk.addEventListener('click', function (e) {
-                // 通过点击的坐标创建一个点对象，添加标签
-                var point = new BMap.Point(e.point.lng, e.point.lat);
-                var opts = {
-                    title: "您 的 位 置 在 这 里",
-                    enableMessage: false,
-                }
-                var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
-                map.openInfoWindow(infowindow, point);
-            });
-            // alert('您的位置：'+r.point.lng+','+r.point.lat);
-            var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
-            driving.search(r.point,point);
-        }
-        else {
-            alert('failed'+this.getStatus());
-        }
-    },{enableHighAccuracy: true})
+    //
+    // var geolocation = new BMap.Geolocation();
+    // geolocation.getCurrentPosition(function(r){
+    //     if(this.getStatus() == BMAP_STATUS_SUCCESS){
+    //         var mk = new BMap.Marker(r.point);
+    //         map.addOverlay(mk);
+    //         map.panTo(r.point);
+    //         mk.addEventListener('click', function (e) {
+    //             // 通过点击的坐标创建一个点对象，添加标签
+    //             var point = new BMap.Point(e.point.lng, e.point.lat);
+    //             var opts = {
+    //                 title: "您 的 位 置 在 这 里",
+    //                 enableMessage: false,
+    //             }
+    //             var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+    //             map.openInfoWindow(infowindow, point);
+    //         });
+    //         // alert('您的位置：'+r.point.lng+','+r.point.lat);
+    //         var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+    //         driving.search(r.point,point);
+    //     }
+    //     else {
+    //         alert('failed'+this.getStatus());
+    //     }
+    // },{enableHighAccuracy: true})
 
 
 
