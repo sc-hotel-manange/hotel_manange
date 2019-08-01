@@ -6,18 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="酒店管理系统">
-    <title>酒店管理系统</title>
+    <title>酒店辅助管理系统</title>
 
-    <!-- Favicons-->
-    <link rel="shortcut icon" href="../../static/img/favicon.ico" type="image/x-icon">
+	<!-- Favicons-->
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
 
-    <!-- BASE CSS -->
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../static/css/style.css" rel="stylesheet">
-	<link href="../../static/css/vendors.min.css" rel="stylesheet">
+	<!-- BASE CSS -->
 
-    <!-- YOUR CUSTOM CSS -->
-    <link href="../../static/css/custom.css" rel="stylesheet">
+	<link href="../../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link href="../../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+	<link href="../../static/css/vendors.css" rel="stylesheet" th:href="@{/css/vendors.css}">
+
+	<!-- YOUR CUSTOM CSS -->
+	<link href="../../static/css/custom.css" rel="stylesheet" th:href="@{/css/custom.css}">
 
 </head>
 
@@ -29,7 +30,7 @@
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
 		<ul id="top_menu">
 			<li><a href="" class="cart-menu-btn" title="购物车"><strong>4</strong></a></li>
-			<li><a href="./login.html" id="sign-in" class="login" title="登陆">登陆</a></li>
+			<li><a href="./login.html" th:href="@{/user/loginPage}"  class="login" title="登陆">登陆</a></li>
 			<li><a href="" class="wishlist_bt_top" title="喜欢">喜欢</a></li>
 		</ul>
 		<!-- /top_menu -->
@@ -104,8 +105,8 @@
 		
 		<div class="collapse" id="collapseMap">
 			<div id="map" class="map"></div>
-			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${longitude}"/>
-			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${latitude}"/>
+<!--			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${longitude}"/>-->
+<!--			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${latitude}"/>-->
 		</div>
 		<!-- End Map -->
 
@@ -434,7 +435,7 @@
 		    }
 		},{enableHighAccuracy: true})
 	</script>
->>>>>>> 2f85013b30ad5d463eb6268436e5d617fb66e98f
+
 	<!-- Masonry Filtering -->
 	<script src="../../static/js/isotope.min.js" th:src="@{/js/isotope.min.js}"></script>
 	<script>

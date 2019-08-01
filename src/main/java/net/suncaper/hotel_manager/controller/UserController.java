@@ -18,6 +18,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("")
+    public String index(){
+        return "redirect:/user/index";
+    }
+
+    @RequestMapping("/details")
+    public String hotel_detail(){
+        return "user/hotel_detail";
+    }
+
     @RequestMapping("/loginPage")
     public String loginPage(){return "user/login";}
 
@@ -29,6 +39,11 @@ public class UserController {
     @RequestMapping("/index")   //首页
     public String starter() {
         return "user/index";
+    }
+
+    @RequestMapping("/hotels")   //首页
+    public String hotels() {
+        return "user/hotels";
     }
 
     @RequestMapping("/login")
