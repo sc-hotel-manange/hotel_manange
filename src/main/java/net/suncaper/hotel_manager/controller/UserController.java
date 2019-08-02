@@ -2,11 +2,13 @@ package net.suncaper.hotel_manager.controller;
 
 import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.domain.Session;
+import net.suncaper.hotel_manager.service.HotelService;
 import net.suncaper.hotel_manager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,8 @@ import javax.websocket.server.PathParam;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
+    HotelService hotelService;
     @Autowired
     private UserService userService;
 
@@ -25,7 +29,7 @@ public class UserController {
 
     @RequestMapping("/details")
     public String hotel_detail(){
-        return "user/hotel_detail";
+        return "hotelInfo";
     }
 
     @RequestMapping("/loginPage")
@@ -37,13 +41,12 @@ public class UserController {
     }
 
     @RequestMapping("/index")   //首页
-    public String starter() {
-        return "user/index";
-    }
+    public ModelAndView starter() {
 
-    @RequestMapping("/hotels")   //首页
-    public String hotels() {
-        return "user/hotels";
+        ModelAndView mav = new ModelAndView("user/index");
+        mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
+        mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
+        return mav;
     }
 
     @RequestMapping("/login")
@@ -55,13 +58,14 @@ public class UserController {
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 
         if(u_id == -1){
-            return "redirect:/user/";
+            return "redirect:/user/login";
         }
         else {
 
             Session u = new Session(u_id);
-            request.getSession().setAttribute("u_id",new Session(u_id));
-            return  "user/index";
+           request.getSession().setAttribute("u_id",new Session(u_id));         // 这里设置cookie
+
+            return  "redirect:/user/index";
         }
     }
 
@@ -84,7 +88,7 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
-            System.out.println("账号已存在");
+            System.out.println("账号已存在");            //这里需要更改
             return "user/register";
         }
         System.out.println("注册成功");
