@@ -33,15 +33,20 @@ public class UserOrderController {
     HotelService hotelService;
 
     //用户自己的订单列表
-    @RequestMapping("/listOrder")
-    public ModelAndView listOrder(HttpServletRequest request){
+    @RequestMapping("/orderList")
+    public ModelAndView listOrder(@RequestParam(value = "id") Integer id,  HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
-        int u_id = session.getId();
 
         ModelAndView mav = new ModelAndView("user/orderList");
-        List<H_Order> h_orders = orderService.listOrder(u_id);
+        List<H_Order> h_orders = orderService.listOrder(session.getId());
 
         mav.addObject("h_orders", h_orders);
+
+        if(id == null)
+            mav.addObject("id", 0);
+        else
+            mav.addObject("id", id);
+
         return mav;
     }
 
@@ -56,7 +61,7 @@ public class UserOrderController {
 
     //下订单
     @PostMapping("/order")
-    public String placeOrder(@RequestParam(value = "rt_type") String rt_type,
+    public ModelAndView placeOrder(@RequestParam(value = "rt_type") String rt_type,
                                    @RequestParam(value = "hotel_id") int hotel_id,
                                    @RequestParam(value = "o_checkin") Date o_checkin,
                                    @RequestParam(value = "o_checkout") Date o_checkout,
@@ -68,7 +73,7 @@ public class UserOrderController {
         //根据房型分配一个房间
         H_Room h_room = roomService.findRoom(rt_type, hotel_id);
         //查找该房型
-        H_Roomtype h_roomtype = roomTypeService.findRoomType(rt_type, hotel_id);
+        H_Roomtype h_roomtype = roomTypeService.selectRoomType(rt_type, hotel_id);
         //得到该酒店对象
         H_Hotel h_hotel = hotelService.selectHotelInfo(hotel_id);
 
@@ -90,17 +95,15 @@ public class UserOrderController {
         h_order.setoCheckout(o_checkout);
         h_order.setoStatus("0"); //未支付状态
         h_order.setoTel(o_tel);
-        orderService.placeOrder(h_order);
+        orderService.insertOrder(h_order);
         h_order.setHotelTranslatedName(h_hotel.getHotelTranslatedName());
         h_order.setRtType(rt_type);
         h_order.setPhoto(h_hotel.getPhoto1());
 
-//        ModelAndView mav = new ModelAndView("orderList");
-//        mav.addObject("h_order", h_order);
-//
-//        return mav;
+        ModelAndView mav = new ModelAndView("user/payPage");
+        mav.addObject("h_order", h_order);
 
-        return "redirect:/user/orderList";
+        return mav;
     }
 
 
@@ -111,12 +114,12 @@ public class UserOrderController {
         Session userSession = (Session)request.getSession().getAttribute("u_id");
         int u_id = userSession.getId();
 
-        H_Order h_order = orderService.findOrder(o_id, u_id);
+        H_Order h_order = orderService.selectOrder(o_id, u_id);
         H_Room h_room = roomService.findRoom(h_order.getHotelId(), h_order.getrNumber());
-        H_Roomtype h_roomtype = roomTypeService.findRoomType(h_room.getRtType(), h_room.getHotelId());
+        H_Roomtype h_roomtype = roomTypeService.selectRoomType(h_room.getRtType(), h_room.getHotelId());
 
         //取消订单，置订单状态为3
-        orderService.cancelOrder(o_id, u_id);
+        orderService.deleteOrder(o_id, u_id);
         //更新房间状态
         roomService.updateRoom(h_order.getrNumber(), h_order.getHotelId());
         //增加该房型库存

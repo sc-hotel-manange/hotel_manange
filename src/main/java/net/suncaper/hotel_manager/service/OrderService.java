@@ -19,15 +19,13 @@ public class OrderService {
     @Autowired
     H_OrderMapper h_orderMapper;
 
-
     //订单详情
     public H_Order orderInfo(int o_id){
         return h_orderMapper.selectByPrimaryKey(o_id);
-
     }
 
     //查找订单
-    public H_Order findOrder(int o_id, int u_id) {
+    public H_Order selectOrder(int o_id, int u_id) {
         H_OrderExample example = new H_OrderExample();
         example.createCriteria().andOIdEqualTo(o_id).andUIdEqualTo(u_id);
 
@@ -35,7 +33,7 @@ public class OrderService {
     }
 
     //插入订单
-    public void placeOrder(H_Order h_order) {
+    public void insertOrder(H_Order h_order) {
         h_orderMapper.insert(h_order);
     }
 
@@ -55,7 +53,7 @@ public class OrderService {
     }
 
     //用户取消订单, 订单状态置为3
-    public void cancelOrder(int o_id, int u_id) {
+    public void deleteOrder(int o_id, int u_id) {
         H_OrderExample example = new H_OrderExample();
         example.createCriteria().andOIdEqualTo(o_id).andUIdEqualTo(u_id).andOStatusEqualTo("0");
 

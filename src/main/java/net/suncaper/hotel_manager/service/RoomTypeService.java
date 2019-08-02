@@ -23,14 +23,14 @@ public class RoomTypeService {
     H_RoomtypeMapper h_roomtypeMapper;
 
     //查找房型
-    public H_Roomtype findRoomType(String rt_type, int hotel_id) {
+    public H_Roomtype selectRoomType(String rt_type, int hotel_id) {
         H_RoomtypeExample example = new H_RoomtypeExample();
         example.createCriteria().andRtTypeEqualTo(rt_type).andHotelIdEqualTo(hotel_id);
         return h_roomtypeMapper.selectByExample(example).get(0);
     }
 
     //查找该酒店有哪些房型
-    public List<H_Roomtype> findRoomType(int hotel_id) {
+    public List<H_Roomtype> selectRoomType(int hotel_id) {
         H_RoomtypeExample example = new H_RoomtypeExample();
         example.createCriteria().andHotelIdEqualTo(hotel_id);
 

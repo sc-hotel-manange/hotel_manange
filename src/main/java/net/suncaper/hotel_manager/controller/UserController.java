@@ -83,10 +83,8 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
-            System.out.println("账号已存在");            //这里需要更改
             return "user/register";
         }
-        System.out.println("注册成功");
         return "user/login";
     }
 }
