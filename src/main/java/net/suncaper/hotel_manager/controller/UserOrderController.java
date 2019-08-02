@@ -1,0 +1,27 @@
+package net.suncaper.hotel_manager.controller;
+
+import net.suncaper.hotel_manager.domain.H_Order;
+import net.suncaper.hotel_manager.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/user")
+public class UserOrderController {
+    @Autowired
+    OrderService orderService;
+    @RequestMapping("/listOrder")
+    public ModelAndView listOrder(@RequestParam(value = "u_id")int u_id){
+        ModelAndView mav = new ModelAndView("user/orderList");
+        List<H_Order> h_orders = orderService.listOrder(u_id);
+
+        mav.addObject("h_orders", h_orders);
+        return mav;
+    }
+}
+
