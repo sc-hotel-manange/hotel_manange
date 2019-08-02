@@ -25,7 +25,7 @@ public class UserController {
 
     @RequestMapping("/details")
     public String hotel_detail(){
-        return "user/hotel_detail";
+        return "hotelInfo";
     }
 
     @RequestMapping("/loginPage")
@@ -39,11 +39,6 @@ public class UserController {
     @RequestMapping("/index")   //首页
     public String starter() {
         return "user/index";
-    }
-
-    @RequestMapping("/hotels")   //首页
-    public String hotels() {
-        return "user/hotels";
     }
 
     @RequestMapping("/login")
