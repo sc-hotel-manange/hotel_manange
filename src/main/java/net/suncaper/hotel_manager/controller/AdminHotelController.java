@@ -38,7 +38,7 @@ public class AdminHotelController {
     @RequestMapping("/hotelInfo")
     public String hotelInfo(@RequestParam("hotel_id") int hotel_id, Model model) {
         model.addAttribute("hotel", hotelService.selectHotelInfo(hotel_id));
-        model.addAttribute("roomTypes", roomTypeService.findRoomType(hotel_id));
+        model.addAttribute("roomTypes", roomTypeService.selectRoomType(hotel_id));
         return "admin/hotelInfo";
     }
 
