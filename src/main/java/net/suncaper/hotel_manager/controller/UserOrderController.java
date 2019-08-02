@@ -1,6 +1,7 @@
 package net.suncaper.hotel_manager.controller;
 
 import net.suncaper.hotel_manager.domain.H_Order;
+import net.suncaper.hotel_manager.domain.Session;
 import net.suncaper.hotel_manager.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,10 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/listOrder")
-    public ModelAndView listOrder(@RequestParam(value = "u_id")int u_id){
+    public ModelAndView listOrder(HttpServletRequest request){
+        Session session = (Session)request.getSession().getAttribute("u_id");
+        int u_id = session.getId();
+
         ModelAndView mav = new ModelAndView("user/orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
