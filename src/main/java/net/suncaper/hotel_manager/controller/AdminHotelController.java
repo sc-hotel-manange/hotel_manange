@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class HotelController {
+public class AdminHotelController {
     @Autowired
     HotelService hotelService;
     @Autowired

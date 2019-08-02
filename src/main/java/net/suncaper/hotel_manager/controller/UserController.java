@@ -27,10 +27,6 @@ public class UserController {
         return "redirect:/user/index";
     }
 
-    @RequestMapping("/details")
-    public String hotel_detail(){
-        return "user/hotel_detail";
-    }
 
     @RequestMapping("/loginPage")
     public String loginPage(){return "user/login";}
@@ -47,11 +43,6 @@ public class UserController {
         mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
         mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
         return mav;
-    }
-
-    @RequestMapping("/hotels")   //首页
-    public String hotels() {
-        return "user/hotels";
     }
 
     @RequestMapping("/login")
