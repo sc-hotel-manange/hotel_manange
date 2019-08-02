@@ -42,7 +42,7 @@ public class OrderService {
     //展示用户订单列表
     public List<H_Order> listOrder(int u_id) {
         H_OrderExample example = new H_OrderExample();
-        example.createCriteria().andUIdEqualTo(u_id).andOStatusNotEqualTo("3");
+        example.createCriteria().andUIdEqualTo(u_id);
 
         return h_orderMapper.selectByExample(example);
     }

@@ -27,11 +27,6 @@ public class UserController {
         return "redirect:/user/index";
     }
 
-    @RequestMapping("/details")
-    public String hotel_detail(){
-        return "hotelInfo";
-    }
-
     @RequestMapping("/loginPage")
     public String loginPage(){return "user/login";}
 

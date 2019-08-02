@@ -18,7 +18,6 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/listOrder")
-
     public ModelAndView listOrder(@RequestParam(value = "u_id")int u_id){
         ModelAndView mav = new ModelAndView("user/orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
