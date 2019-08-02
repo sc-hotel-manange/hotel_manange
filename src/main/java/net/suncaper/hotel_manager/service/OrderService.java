@@ -19,6 +19,13 @@ public class OrderService {
     @Autowired
     H_OrderMapper h_orderMapper;
 
+
+    //订单详情
+    public H_Order orderInfo(int o_id){
+        return h_orderMapper.selectByPrimaryKey(o_id);
+
+    }
+
     //查找订单
     public H_Order findOrder(int o_id, int u_id) {
         H_OrderExample example = new H_OrderExample();

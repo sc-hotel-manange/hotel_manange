@@ -15,7 +15,10 @@ import java.util.List;
 public class UserOrderController {
     @Autowired
     OrderService orderService;
+
+    //用户自己的订单列表
     @RequestMapping("/listOrder")
+
     public ModelAndView listOrder(@RequestParam(value = "u_id")int u_id){
         ModelAndView mav = new ModelAndView("user/orderList");
         List<H_Order> h_orders = orderService.listOrder(u_id);
@@ -23,5 +26,15 @@ public class UserOrderController {
         mav.addObject("h_orders", h_orders);
         return mav;
     }
+
+    //用户的订单详情
+    @RequestMapping("/orderInfo")
+
+    public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id){
+        ModelAndView mav = new ModelAndView("user/orderInfo");
+        mav.addObject("h_order", orderService.orderInfo(o_id));
+        return mav;
+    }
+
 }
 
