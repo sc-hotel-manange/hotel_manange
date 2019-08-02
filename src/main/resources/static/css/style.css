@@ -816,7 +816,7 @@ header.header.sticky {
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid #ededed;
   background-color: #fff;
-  padding: 15px 20px;
+  padding: 10px 20px;
 }
 @media (max-width: 991px) {
   header.header.sticky {
