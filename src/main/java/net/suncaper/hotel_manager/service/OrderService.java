@@ -9,15 +9,22 @@ import java.util.List;
 
 /**
  * 订单状态说明：
- * 0 - 未入住
- * 1 - 已入住
- * 2 - 已退房
- * 3 - 取消订单
+ * 0 - 待支付
+ * 1 - 已确认（还未入住）
+ * 2 - 已成交（入住后成功退房完成订单）
+ * 3 - 已取消（提前取消订单）
  */
 @Service
 public class OrderService {
     @Autowired
     H_OrderMapper h_orderMapper;
+
+
+    //订单详情
+    public H_Order orderInfo(int o_id){
+        return h_orderMapper.selectByPrimaryKey(o_id);
+
+    }
 
     //查找订单
     public H_Order findOrder(int o_id, int u_id) {
@@ -35,7 +42,7 @@ public class OrderService {
     //展示用户订单列表
     public List<H_Order> listOrder(int u_id) {
         H_OrderExample example = new H_OrderExample();
-        example.createCriteria().andUIdEqualTo(u_id).andOStatusNotEqualTo("3");
+        example.createCriteria().andUIdEqualTo(u_id);
 
         return h_orderMapper.selectByExample(example);
     }

@@ -26,8 +26,7 @@ public class UserController {
     public String index(){
         return "redirect:/user/index";
     }
-
-
+    
     @RequestMapping("/loginPage")
     public String loginPage(){return "user/login";}
 
