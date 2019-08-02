@@ -26,14 +26,6 @@ public class UserController {
     public String index(){
         return "redirect:/user/index";
     }
-    
-    @RequestMapping("/loginPage")
-    public String loginPage(){return "user/login";}
-
-    @RequestMapping("/registerPage")  //注册
-    public String registerPage() {
-        return "user/register";
-    }
 
     @RequestMapping("/index")   //首页
     public ModelAndView starter() {
@@ -43,6 +35,21 @@ public class UserController {
         mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
         return mav;
     }
+
+    @RequestMapping("/about") //关于
+    public String about() {
+        return "user/about";
+    }
+
+    @RequestMapping("/loginPage")
+    public String loginPage(){return "user/login";}
+
+    @RequestMapping("/registerPage")  //注册
+    public String registerPage() {
+        return "user/register";
+    }
+
+
 
     @RequestMapping("/login")
     public String login(@PathParam(value = "u_account") String u_account,
