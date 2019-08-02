@@ -75,9 +75,7 @@ public class AdminOrderController {
 
     //展示所有订单列表   返回订单List
     @GetMapping("/orderList")
-    public ModelAndView listOrder(HttpServletRequest request) {
-//        UserSession userSession = (UserSession)request.getSession().getAttribute("u_id");      //这里现在是使用session
-//        int u_id = userSession.getId();
+    public ModelAndView listOrder() {
         ModelAndView mav = new ModelAndView("admin/orderList");
         List<H_Order> h_orders = orderService.listOrder();
 
