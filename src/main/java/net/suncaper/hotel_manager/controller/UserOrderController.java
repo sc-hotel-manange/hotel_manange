@@ -62,12 +62,13 @@ public class UserOrderController {
 
     //下订单
     @PostMapping("/order")
-    public ModelAndView placeOrder(@RequestParam(value = "rt_type") String rt_type,
-                                   @RequestParam(value = "hotel_id") int hotel_id,
-                                   @RequestParam(value = "o_checkin") Date o_checkin,
-                                   @RequestParam(value = "o_checkout") Date o_checkout,
-                                   @RequestParam(value = "o_tel") String o_tel,
+    public ModelAndView placeOrder(@RequestParam(value = "rt_type", required = false) String rt_type,
+                                   @RequestParam(value = "hotel_id", required = false) int hotel_id,
+                                   @RequestParam(value = "dates") String date,
+                                   @RequestParam(value = "o_tel", required = false) String o_tel,
                                    HttpServletRequest request) {
+
+        System.out.println(date);
 
         Session session = (Session)request.getSession().getAttribute("u_id");     //这里使用session
 
