@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
@@ -58,7 +56,6 @@ public class UserOrderController {
 
     //用户的订单详情
     @RequestMapping("/orderInfo")
-
     public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id){
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", orderService.orderInfo(o_id));
@@ -165,13 +162,15 @@ public class UserOrderController {
         Date o_checkout = normalDates[1];   //退房时间
 
         //计算用户住的天数
-
+        int stay = (int)(o_checkout.getTime() - o_checkin.getTime()) / (1000*3600*24);
 
         H_Order h_order = new H_Order();
         h_order.setrNumber(h_room.getrNumber());
         h_order.setuId(session.getId());
         h_order.setHotelId(hotel_id);
-//        h_order.setoPrice(h_roomtype.getRtPrice() * stay); //总价 = 单价 * 天数
+        h_order.setoCheckin(o_checkin);
+        h_order.setoCheckout(o_checkout);
+        h_order.setoPrice(h_roomtype.getRtPrice() * stay); //总价 = 单价 * 天数
         h_order.setoOrdertime(new Date());
         h_order.setoStatus("0"); //未支付状态
         h_order.setoTel(o_tel);
