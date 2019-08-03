@@ -147,7 +147,7 @@
             </div>
             <!-- /custom-search-input-2 -->
 
-         <div class="isotope-wrapper" id="refreshthis">    <!--   这里要进行局部刷新-->
+         <div class="isotope-wrapper" >
                 <div class="row">
             <!--             下面是用thymeleaf进行循环的          hotellist     -->
 				<div class="col-xl-4 col-lg-6 col-md-6 isotope-item popular" th:each="hotellist,status:${hotelList}" th:if="${status.count}<=((${id}+1)*9) and (${id}*9)<${status.count}" >   <!--th:if="${status.count}<10"-->

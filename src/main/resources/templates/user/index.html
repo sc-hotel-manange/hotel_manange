@@ -75,41 +75,37 @@
 					<h3>酒店订购</h3>
 					<p>全球顶级旅游、酒店和餐厅</p>
 					<form>
-						<div class="row no-gutters custom-search-input-2">
-							<div class="col-lg-4">
-								<div class="form-group">
-<!--									这个是index页面的地点搜索框       ！！！！！！！！！！！！！-->
-									<input class="form-control" type="text"  name="place" placeholder="地点">
-									<i class="icon_pin_alt"></i>
-								</div>
-							</div>
-							<div class="col-lg-3">
-								<div class="form-group">
-<!--									这个是index页面的关键字搜索框 ！！！！！！！！！！！11-->
-									<input class="form-control" type="text" name="name" placeholder="关键字">
-<!--									<i class="icon_calendar"></i>-->
-								</div>
-							</div>
-							<div class="col-lg-3">
-								<div class="panel-dropdown">
-									<a href="#">人数 <span class="qtyTotal">1</span></a>
-									<div class="panel-dropdown-content">
-										<!-- Quantity Buttons -->
-										<div class="qtyButtons">
-											<label>成人</label>
-											<input type="text" name="qtyInput" value="1">
-										</div>
-										<div class="qtyButtons">
-											<label>儿童</label>
-											<input type="text" name="qtyInput" value="0">
+						<!--        这里是搜索栏哦！！！！！！！ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+						<div class="container margin_60_35">
+							<div class="col-lg-12">
+								<div class="row no-gutters custom-search-input-2 inner">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="酒店名称">
+											<i class="icon_search"></i>
 										</div>
 									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="地点">
+											<i class="icon_pin_alt"></i>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<select class="wide">
+											<option>条件</option>
+											<option>高档</option>
+											<option>舒适</option>
+											<option>经济</option>
+										</select>
+									</div>
+									<div class="col-lg-2">
+										<input type="submit" class="btn_search" value="搜索">
+									</div>
 								</div>
+								<!-- /row -->
 							</div>
-							<div class="col-lg-2">
-								<input type="submit" class="btn_search" value="搜索">
-							</div>
-						</div>
+							<!-- /custom-search-input-2 -->
 						<!-- /row -->
 					</form>
 				</div>
