@@ -11,18 +11,13 @@ public class IndexController {
     @Autowired
     HotelService hotelService;
 
-    @RequestMapping("")     //首页
+    @RequestMapping("")
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("redirect:user/index");
+        ModelAndView mav = new ModelAndView("user/index");
         mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
         mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
 
         return mav;
-    }
-
-    @RequestMapping("/about")   //关于
-    public String about() {
-        return "user/about";
     }
 
 }

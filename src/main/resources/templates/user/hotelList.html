@@ -53,7 +53,7 @@
                 <li><span><a href="#0">饮食</a></span>
 
                 </li>
-                <li><span><a href="./orderList.html"th:href="@{/user/orderList}">订单</a></span>
+                <li><span><a href="#0">订单</a></span>
 
                 </li>
                 <li><span><a href="#0">信息</a></span>
@@ -150,7 +150,7 @@
          <div class="isotope-wrapper" id="refreshthis">    <!--   这里要进行局部刷新-->
                 <div class="row">
             <!--             下面是用thymeleaf进行循环的          hotellist     -->
-				<div class="col-xl-4 col-lg-6 col-md-6 isotope-item popular" th:each="hotellist,status:${hotelList}" th:if="${status.count}<=((${id}+1)*9) and (${id}*9)<${status.count}">   <!-- (${id}*9)<     th:if="${status.count}<10"-->
+				<div class="col-xl-4 col-lg-6 col-md-6 isotope-item popular" th:each="hotellist,status:${hotelList}" >   <!--th:if="${status.count}<10"-->
 					<div class="box_grid">
 						<figure>
 							<a href="#0" class="wish_bt"></a>
@@ -159,7 +159,7 @@
 						</figure>
 						<div class="wrapper">
 							<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
-							<h3 style="white-space: nowrap"><a href="" th:href="@{'/user/hotelInfo'+'?hotel_id='+${hotellist.hotelId}}"  th:text="${hotellist.hotelTranslatedName}"></a></h3>
+							<h3><a href=""  th:text="${hotellist.hotelTranslatedName}"></a></h3>
 							<p th:text="${hotellist.overview}"></p>
 							<span class="price">房间数<strong th:text="${hotellist.numberrooms}"></strong> </span>
 						</div>
@@ -175,7 +175,7 @@
 			<!-- /isotope-wrapper -->
 			</div>
 <!--           下面这个是更多 按钮  绑定了点击事件-->
-			<p class="text-center"><a th:href="@{'/user/hotelList?id='+${id+1}}"  id="more_btn" class="btn_1 rounded add_top_30">更多</a></p>
+			<p class="text-center"><a href="javascript:void(0);" id="more_btn" class="btn_1 rounded add_top_30">更多</a></p>
 		<!-- /container -->
 	</main>
 	<!--/main-->
@@ -234,33 +234,32 @@
 
 <!--    下面js代码用于实现显示更多 !!!!!!!!!!!-->
     <script>
-        // var num=9;
-        // console.log($('.box_grid').length);
-        // var i = 1;
-        // $('.box_grid').each(function () {
-        //     if(i<=num){
-        //         $(this).show();
-        //         i++;
-        //     }
-        //     else{
-        //         $(this).hide()
-        //     }
-        // });
+        var num=9;
+        console.log($('.box_grid').length);
+        var i = 1;
+        $('.box_grid').each(function () {
+            if(i<=num){
+                $(this).show();
+                i++;
+            }
+            else{
+                $(this).hide()
+            }
+        });
         $('#more_btn').bind("click",function(){
-            // num=num+9;
-            // console.log("这是num" + num);
-            // i=1;
-            // $('.box_grid').each(function () {
-            //     if(i<=num){
-            //         $(this).show();
-            //         i++;
-            //     }
-            //     else{
-            //         $(this).hide()
-            //     }
-            // })
-            // parent.location.reload();
-			window.location.reload()
+            num=num+9;
+            console.log("这是num" + num);
+            i=1;
+            $('.box_grid').each(function () {
+                if(i<=num){
+                    $(this).show();
+                    i++;
+                }
+                else{
+                    $(this).hide()
+                }
+            })
+            parent.location.reload();
         });
     </script>
 	<script type="text/javascript">
