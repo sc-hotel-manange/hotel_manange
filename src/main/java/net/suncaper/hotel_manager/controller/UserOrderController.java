@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.channels.SeekableByteChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +39,7 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/orderList")
-    public ModelAndView listOrder(HttpServletRequest request){
+    public ModelAndView listOrder(@RequestParam(value = "id") Integer id,  HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
         int u_id = session.getId();
 
@@ -47,6 +47,12 @@ public class UserOrderController {
         List<H_Order> h_orders = orderService.listOrder(u_id);
 
         mav.addObject("h_orders", h_orders);
+
+        if(id == null)
+            mav.addObject("id", 0);
+        else
+            mav.addObject("id", id);
+
         return mav;
     }
 
@@ -137,12 +143,13 @@ public class UserOrderController {
 
     //下订单
     @PostMapping("/order")
-    public String placeOrder(@RequestParam(value = "rt_type") String rt_type,
+    public ModelAndView insertOrder(@RequestParam(value = "rt_type") String rt_type,
                                    @RequestParam(value = "hotel_id") int hotel_id,
-                                   @RequestParam(value = "o_checkin") Date o_checkin,
-                                   @RequestParam(value = "o_checkout") Date o_checkout,
+                                   @RequestParam(value = "dates") String dates,
                                    @RequestParam(value = "o_tel") String o_tel,
-                                   HttpServletRequest request) {
+                                   HttpServletRequest request) throws ParseException {
+
+        System.out.println("这是前端传过来的日期: " + dates);
 
         Session session = (Session)request.getSession().getAttribute("u_id");     //这里使用session
 
@@ -152,11 +159,14 @@ public class UserOrderController {
         H_Roomtype h_roomtype = roomTypeService.selectRoomType(rt_type, hotel_id);
         //得到该酒店对象
         H_Hotel h_hotel = hotelService.selectHotelInfo(hotel_id);
-
         //更新该房间状态
         roomService.updateRoom(h_room.getrNumber(), hotel_id);
         //减少该房型库存
         roomTypeService.reduceStock(h_roomtype.getRtId());
+
+        Date[] normalDates = orderService.parseDates(dates);
+        Date o_checkin = normalDates[0];    //入住时间
+        Date o_checkout = normalDates[1];   //退房时间
 
         //计算用户住的天数
         int stay = (int)(o_checkout.getTime()-o_checkin.getTime()) / (1000*3600*24);
@@ -171,33 +181,30 @@ public class UserOrderController {
         h_order.setoCheckout(o_checkout);
         h_order.setoStatus("0"); //未支付状态
         h_order.setoTel(o_tel);
-        orderService.insertOrder(h_order);
         h_order.setHotelTranslatedName(h_hotel.getHotelTranslatedName());
         h_order.setRtType(rt_type);
         h_order.setPhoto(h_hotel.getPhoto1());
+        orderService.insertOrder(h_order);
 
-//        ModelAndView mav = new ModelAndView("orderList");
-//        mav.addObject("h_order", h_order);
-//
-//        return mav;
+        ModelAndView mav = new ModelAndView("user/payPage");
+        mav.addObject("h_order", h_order);
 
-        return "redirect:/user/orderList";
+        return mav;
     }
 
 
     //用户取消订单
     @GetMapping("/cancelOrder")
-    public String cancelOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
+    public String deleteOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
         //通过session获取用户id
-        Session userSession = (Session)request.getSession().getAttribute("u_id");
-        int u_id = userSession.getId();
+        Session session = (Session)request.getSession().getAttribute("u_id");
 
-        H_Order h_order = orderService.selectOrder(o_id, u_id);
+        H_Order h_order = orderService.selectOrder(o_id, session.getId());
         H_Room h_room = roomService.findRoom(h_order.getHotelId(), h_order.getrNumber());
         H_Roomtype h_roomtype = roomTypeService.selectRoomType(h_room.getRtType(), h_room.getHotelId());
 
         //取消订单，置订单状态为3
-        orderService.deleteOrder(o_id, u_id);
+        orderService.deleteOrder(o_id, session.getId());
         //更新房间状态
         roomService.updateRoom(h_order.getrNumber(), h_order.getHotelId());
         //增加该房型库存
@@ -206,6 +213,4 @@ public class UserOrderController {
         return "redirect:/user/orderList";
     }
 
-
 }
-
