@@ -13,7 +13,7 @@ public class IndexController {
 
     @RequestMapping("")     //首页
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("user/index");
+        ModelAndView mav = new ModelAndView("redirect:user/index");
         mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
         mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
 

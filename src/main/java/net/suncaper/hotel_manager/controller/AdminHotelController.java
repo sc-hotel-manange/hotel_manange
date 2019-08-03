@@ -43,17 +43,17 @@ public class AdminHotelController {
     }
 
     @RequestMapping("/hotelMap")
-//    public String hotelMap(@PathParam(value = "hotel_id") int hotel_id,Model model){
-//        H_Hotel h_hotel =hotelService.selectHotelInfo(hotel_id);
-//        model.addAttribute("longitude",h_hotel.getLongitude());
-//        model.addAttribute("latitude",h_hotel.getLatitude());
-//        return "hotelMap";
-//    }
-    public String hotelMap(Model model){
-        model.addAttribute("longitude",104.09789443016);
-        model.addAttribute("latitude",30.6766381);
-        return "admin/hotelMap";
+    public String hotelMap(@PathParam(value = "hotel_id") int hotel_id,Model model){
+        H_Hotel h_hotel =hotelService.selectHotelInfo(hotel_id);
+        model.addAttribute("longitude",h_hotel.getLongitude());
+        model.addAttribute("latitude",h_hotel.getLatitude());
+        return "hotelMap";
     }
+//    public String hotelMap(Model model){
+//        model.addAttribute("longitude",104.09789443016);
+//        model.addAttribute("latitude",30.6766381);
+//        return "admin/hotelMap";
+//    }
 
 
     @RequestMapping("/hotelSearch")

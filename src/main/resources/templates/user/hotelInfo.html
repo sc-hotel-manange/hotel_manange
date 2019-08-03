@@ -82,6 +82,28 @@
 		</section>
 		<!--/hero_in-->
 
+		<div class="filters_listing sticky_horizontal">
+			<div class="container">
+				<ul class="clearfix">
+					<li>
+						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="查看地图">查看地图</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /filters -->
+<!--下面是地图的展示区域-->
+		<div class="collapse" id="collapseMap">
+			<div id="map" class="map">
+				<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.longitude}"/>
+				<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.latitude}"/>
+			</div>
+		</div>
+		<!-- End Map -->
+
+
+
 		<div class="bg_color_1">
 <!--			<nav class="secondary_nav sticky_horizontal">-->
 <!--				<div class="container">-->
@@ -178,8 +200,7 @@
 							<p th:text="${hotelInfo.country}" style="margin-bottom: 0px"></p>
 							<p th:text="${hotelInfo.city}" style="margin-bottom: 0px"></p>
 							<p th:text="${hotelInfo.addressline}"></p>
-						<!--	<div id="map" class="map map_single add_bottom_30"></div>  --> 
-							<!-- End Map -->
+
 						</section>
 						<!-- /section -->
 					
@@ -197,7 +218,7 @@
 								<div class="score"><span>Good</span><strong th:text="${hotelInfo.ratingAverage}"></strong></div>
 							</div>
 
-						<form action="/user/order" >        <!-- 在这里发送订单哦！！！！！！！！-->
+						<form action="/user/order" method="post">        <!-- 在这里发送订单哦！！！！！！！！-->
 							<div class="form-group">
 								<input class="form-control" type="text" name="dates" placeholder="时间">
 								<i class="icon_calendar"></i>
@@ -219,7 +240,7 @@
 
 							<div class="form-group clearfix">
 								<div class="custom-select-form">
-									<select class="wide">
+									<select class="wide" name="rt_type">
 										<option>房间类型</option>
 										<option>大床房</option>
 										<option>标准间</option>
@@ -229,8 +250,11 @@
 									</select>
 								</div>
 							</div>
-                            <div class="form-group">
-                                <input type="text" id="tel" >
+<!--							下面这个input框用来提交hotel_id   ！！！！！！！！！！-->
+                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${hotelInfo.hotelId}">
+<!--							下面这个input框用来提交电话 !!!!!!!!!!!!!!!!-->
+                            <div class="form-group ">
+                                <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话">
                             </div>
 <!--							提交按钮   ！！！！！！！！！！！！！！！！！！-->
 							<div class="form-group col-md-12 add_top_20">
@@ -334,8 +358,76 @@
 			});
 		});
 	</script>
-	
-	
+
+<!--	下面是百度api-->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+	<script type="text/javascript">
+
+		// 百度地图API功能
+		var map = new BMap.Map("map");
+		var longitude = $("#longitude").val();
+		var latitude = $("#latitude").val();
+		var point = new BMap.Point(longitude,latitude);  // 中心位置
+		map.addControl(new BMap.NavigationControl());   //平移缩放控件
+		map.addControl(new BMap.ScaleControl());        //比例尺
+		map.addControl(new BMap.OverviewMapControl());  //缩略地图
+		map.addControl(new BMap.MapTypeControl());      //地图类型
+		map.centerAndZoom(point,15);
+		var marker = new BMap.Marker(point);//创建标注
+		map.enableScrollWheelZoom(true);
+		map.addOverlay(marker);              // 将标注添加到地图中
+		// // 用经纬度设置地图中心点
+		// function theLocation(){
+		//   if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+		//     map.clearOverlays();
+		//     var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+		//
+		//   }
+		// }
+		marker.addEventListener('click', function (e) {
+			// 通过点击的坐标创建一个点对象，添加标签
+			var point = new BMap.Point(e.point.lng, e.point.lat);
+			var opts = {
+				title: hotelTranslatedName,
+				enableMessage: false,
+			};
+			var infowindow = new BMap.InfoWindow("<br/>", opts);
+			map.openInfoWindow(infowindow, point);
+		});
+
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var mk = new BMap.Marker(r.point);
+				map.addOverlay(mk);
+				map.panTo(r.point);
+				mk.addEventListener('click', function (e) {
+					// 通过点击的坐标创建一个点对象，添加标签
+					var point = new BMap.Point(e.point.lng, e.point.lat);
+					var opts = {
+						title: "您 的 位 置 在 这 里",
+						enableMessage: false,
+					}
+					var infowindow = new BMap.InfoWindow("<br/>请跟随导航前进", opts);
+					map.openInfoWindow(infowindow, point);
+				});
+				// alert('您的位置：'+r.point.lng+','+r.point.lat);
+				var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+				driving.search(r.point,point);
+			}
+			else {
+				alert('failed'+this.getStatus());
+			}
+		},{enableHighAccuracy: true})
+	</script>
   
 </body>
 </html>
+<style>
+	.map{
+		width:70% !important;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+</style>
