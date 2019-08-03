@@ -21,7 +21,7 @@ public class AdminController {
     private AdminService adminService;
 
 
-    @RequestMapping("/")   //登陆
+    @RequestMapping("")   //登陆
     public String home() {
         return "admin/login";
     }

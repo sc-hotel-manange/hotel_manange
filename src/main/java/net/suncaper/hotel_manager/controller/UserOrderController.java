@@ -1,12 +1,9 @@
 package net.suncaper.hotel_manager.controller;
 
 import net.suncaper.hotel_manager.domain.*;
-import net.suncaper.hotel_manager.service.HotelService;
+import net.suncaper.hotel_manager.service.*;
 import net.suncaper.hotel_manager.domain.H_Order;
 import net.suncaper.hotel_manager.domain.Session;
-import net.suncaper.hotel_manager.service.OrderService;
-import net.suncaper.hotel_manager.service.RoomService;
-import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +31,8 @@ public class UserOrderController {
     RoomService roomService;
     @Autowired
     HotelService hotelService;
+    @Autowired
+    UserService userService;
 
     //用户自己的订单列表
     @RequestMapping("/orderList")
@@ -142,7 +141,7 @@ public class UserOrderController {
                                    @RequestParam(value = "o_tel") String o_tel,
                                    HttpServletRequest request) throws ParseException {
 
-        System.out.println("这是前端传过来的日期: " + dates);
+//        System.out.println("这是前端传过来的日期: " + dates);
 
         Session session = (Session)request.getSession().getAttribute("u_id");     //这里使用session
 
@@ -179,8 +178,10 @@ public class UserOrderController {
         h_order.setPhoto(h_hotel.getPhoto1());
         orderService.insertOrder(h_order);
 
-        ModelAndView mav = new ModelAndView("user/payPage");
-        mav.addObject("h_order", h_order);
+        ModelAndView mav = new ModelAndView("user/invoice");
+        mav.addObject("h_order", h_order);  //订单信息
+        mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(hotel_id));   //酒店信息
 
         return mav;
     }
