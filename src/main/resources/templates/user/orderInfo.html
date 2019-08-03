@@ -71,12 +71,12 @@
 		<section class="hero_in hotels_detail">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp" ><span ></span><h1  class="fadeInUp" th:text="${hotelInfo.hotelTranslatedName}"></h1></h1>  <!--	 <p style="width: 500px" ></p>-->
+					<h1 class="fadeInUp" ><span ></span><h1  class="fadeInUp" th:text="${h_hotel.hotelTranslatedName}"></h1></h1>  <!--	 <p style="width: 500px" ></p>-->
 				</div>
 				<span class="magnific-gallery">
-					<a href="../../static/img/gallery/hotel_list_1.jpg"  th:href="${hotelInfo.photo1}" class="btn_photos" title="Photo title" data-effect="mfp-zoom-in">查看酒店照片</a>
-					<a href="../../static/img/gallery/hotel_list_2.jpg" th:href="${hotelInfo.photo2}" title="Photo title" data-effect="mfp-zoom-in"></a>
-					<a href="../../static/img/gallery/hotel_list_3.jpg" th:href="${hotelInfo.photo3}" title="Photo title" data-effect="mfp-zoom-in"></a>
+					<a href="../../static/img/gallery/hotel_list_1.jpg"  th:href="${h_hotel.photo1}" class="btn_photos" title="Photo title" data-effect="mfp-zoom-in">查看酒店照片</a>
+					<a href="../../static/img/gallery/hotel_list_2.jpg" th:href="${h_hotel.photo2}" title="Photo title" data-effect="mfp-zoom-in"></a>
+					<a href="../../static/img/gallery/hotel_list_3.jpg" th:href="${h_hotel.photo3}" title="Photo title" data-effect="mfp-zoom-in"></a>
 				</span>
 			</div>
 		</section>
@@ -96,8 +96,8 @@
 <!--下面是地图的展示区域-->
 		<div class="collapse" id="collapseMap">
 			<div id="map" class="map"></div>
-			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.longitude}"/>
-			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.latitude}"/>
+			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${h_hotel.longitude}"/>
+			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${h_hotel.latitude}"/>
 		</div>
 		<!-- End Map -->
 
@@ -109,7 +109,7 @@
 					<div class="col-lg-8">
 						<section id="description">
 							<h2>详情</h2>
-							<p th:text="${hotelInfo.overview}"></p>
+							<p th:text="${h_hotel.overview}"></p>
 
 							<div class="row">
 <!--								<div class="col-lg-6">-->
@@ -187,9 +187,9 @@
 							<!-- /rom_type -->
 							<hr>
 							<h3>地点</h3>
-							<p th:text="${hotelInfo.country}" style="margin-bottom: 0px"></p>
-							<p th:text="${hotelInfo.city}" style="margin-bottom: 0px"></p>
-							<p th:text="${hotelInfo.addressline}"></p>
+							<p th:text="${h_hotel.country}" style="margin-bottom: 0px"></p>
+							<p th:text="${h_hotel.city}" style="margin-bottom: 0px"></p>
+							<p th:text="${h_hotel.addressline}"></p>
 
 						</section>
 						<!-- /section -->
@@ -205,7 +205,7 @@
 						<div class="box_detail booking">
 							<div class="price">
 								<span>下订单 <small></small></span>
-								<div class="score"><span>Good</span><strong th:text="${hotelInfo.ratingAverage}"></strong></div>
+								<div class="score"><span>Good</span><strong th:text="${h_hotel.ratingAverage}"></strong></div>
 							</div>
 
 
@@ -242,7 +242,7 @@
 								</div>
 							</div>
 <!--							下面这个input框用来提交hotel_id   ！！！！！！！！！！-->
-                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${hotelInfo.hotelId}">
+                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${h_hotel.hotelId}">
 <!--							下面这个input框用来提交电话 !!!!!!!!!!!!!!!!-->
                             <div class="form-group ">
                                 <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话">

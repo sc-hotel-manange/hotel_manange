@@ -117,11 +117,14 @@
 
 				<div class="col-lg-9" id="list_sidebar" >
 					<div class="isotope-wrapper" th:each="h_order : ${h_orders}">
+						<a href="" th:href="@{'/user/orderInfo?o_id='+${h_order.oId}}">
 						<div class="box_list isotope-item latest">
 							<div class="row no-gutters">
 								<div class="col-lg-5">
 									<div style="width:100%; height:100%">
+
 										<img style="width: 100%;height: 100%" th:src="${h_order.photo}" alt="Photo">
+
 									</div>
 								</div>
 								<div class="col-lg-7">
@@ -135,6 +138,7 @@
 								</div>
 							</div>
 						</div>
+						</a>
 						<!-- /box_list -->
 					</div>
 					<!-- /isotope-wrapper -->

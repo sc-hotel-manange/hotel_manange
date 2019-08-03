@@ -55,9 +55,15 @@ public class UserOrderController {
 
     //用户的订单详情
     @RequestMapping("/orderInfo")
-    public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id){
+    public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id, HttpServletRequest request){
+        Session session = (Session)request.getSession().getAttribute("u_id");
+        if (session == null)
+            return new ModelAndView("user/loginPage");
+
         ModelAndView mav = new ModelAndView("user/orderInfo");
-        mav.addObject("h_order", orderService.orderInfo(o_id));
+        mav.addObject("h_order", orderService.selectOrder(o_id, session.getId()));  //订单信息
+        mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.orderInfo(o_id).getHotelId()));   //酒店信息
         return mav;
     }
 
