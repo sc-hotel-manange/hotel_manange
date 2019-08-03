@@ -39,7 +39,7 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/orderList")
-    public ModelAndView listOrder(@RequestParam(value = "id") Integer id,  HttpServletRequest request){
+    public ModelAndView listOrder(@RequestParam(value = "id",required = false) Integer id,  HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
         int u_id = session.getId();
 

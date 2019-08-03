@@ -19,7 +19,7 @@ public class UserHotelController {
     RoomTypeService roomTypeService;
 
     @RequestMapping("/hotelList")
-    public ModelAndView hotelList(@RequestParam(value = "id") Integer id) {
+    public ModelAndView hotelList(@RequestParam(value = "id",required = false) Integer id) {
         ModelAndView mav = new ModelAndView("user/hotelList");
         mav.addObject("hotelList", hotelService.selectHotelList());
 
