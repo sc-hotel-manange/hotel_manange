@@ -9,6 +9,7 @@ import net.suncaper.hotel_manager.service.RoomService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.channels.SeekableByteChannel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -34,19 +39,14 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/orderList")
-    public ModelAndView listOrder(@RequestParam(value = "id") Integer id,  HttpServletRequest request){
+    public ModelAndView listOrder(HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
+        int u_id = session.getId();
 
         ModelAndView mav = new ModelAndView("user/orderList");
-        List<H_Order> h_orders = orderService.listOrder(session.getId());
+        List<H_Order> h_orders = orderService.listOrder(u_id);
 
         mav.addObject("h_orders", h_orders);
-
-        if(id == null)
-            mav.addObject("id", 0);
-        else
-            mav.addObject("id", id);
-
         return mav;
     }
 
@@ -59,9 +59,69 @@ public class UserOrderController {
         return mav;
     }
 
+    @RequestMapping("/orderSearch")
+    public String orderSearch(@PathParam(value = "dates") String  dates,
+                              @PathParam(value = "hotel_translated_name") String hotel_translated_name,
+                              @PathParam(value = "o_status") String o_status,
+                              HttpServletRequest request,
+                              Model model) throws ParseException {
+         Session session = (Session) request.getSession().getAttribute("u_id");
+         int u_id = session.getId();
+         List<H_Order> orders = orderService.listOrder(u_id);
+
+         String status = "-1";
+         if (o_status=="全部"){status = "-1";}
+         if (o_status=="待支付"){status = "0";}
+         if (o_status=="已确认"){status = "1";}
+         if (o_status=="已成交"){status = "2";}
+         if (o_status=="已取消"){status = "3";}
+        System.out.println(dates);
+        if(dates!=null) {
+            String[] date = dates.split(" > ");
+            String[] dateStartArray = date[0].split("-");
+            String[] dateEndArray = date[1].split("-");
+            String start = "20" + dateStartArray[2] + "-" + dateStartArray[0] + "-" + dateStartArray[1];
+            String end = "20" + dateEndArray[2] + "-" + dateEndArray[0] + "-" + dateEndArray[1];
+            System.out.println(start);
+            System.out.println(end);
+            Date dateStart = new SimpleDateFormat("yyyy-MM-dd ").parse(start);
+            Date dateEnd = new SimpleDateFormat("yyyy-MM-dd ").parse(end);
+            for (int i = 0; i < orders.size(); i++) {
+                Date time = orders.get(i).getoOrdertime();
+                if (dateStart.compareTo(time) > 0 || time.compareTo(dateEnd) > 0) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+        }
+        if(hotel_translated_name!=null){
+            for (int i = 0; i < orders.size(); i++) {
+                String name = orders.get(i).getHotelTranslatedName();
+                if (name.indexOf(hotel_translated_name)==-1) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+        }
+        if (status=="-1"){
+            model.addAttribute("h_orders",orders);
+        }
+        else{
+            for (int i = 0; i < orders.size(); i++) {
+                String RealStatus = orders.get(i).getoStatus();
+                if (status!=RealStatus) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+            model.addAttribute("h_orders",orders);
+        }
+        return "redirect:orderList";
+    }
+
     //下订单
     @PostMapping("/order")
-    public ModelAndView placeOrder(@RequestParam(value = "rt_type") String rt_type,
+    public String placeOrder(@RequestParam(value = "rt_type") String rt_type,
                                    @RequestParam(value = "hotel_id") int hotel_id,
                                    @RequestParam(value = "o_checkin") Date o_checkin,
                                    @RequestParam(value = "o_checkout") Date o_checkout,
@@ -100,10 +160,12 @@ public class UserOrderController {
         h_order.setRtType(rt_type);
         h_order.setPhoto(h_hotel.getPhoto1());
 
-        ModelAndView mav = new ModelAndView("user/payPage");
-        mav.addObject("h_order", h_order);
+//        ModelAndView mav = new ModelAndView("orderList");
+//        mav.addObject("h_order", h_order);
+//
+//        return mav;
 
-        return mav;
+        return "redirect:/user/orderList";
     }
 
 
