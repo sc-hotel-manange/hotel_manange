@@ -37,7 +37,6 @@ public class UserHotelController {
         ModelAndView mav = new ModelAndView("user/hotelInfo");
         mav.addObject("hotelInfo", hotelService.selectHotelInfo(hotel_id));
         mav.addObject("roomTypes", roomTypeService.selectRoomType(hotel_id));    //这里提供酒店的类型type
-
         return mav;
     }
 }
