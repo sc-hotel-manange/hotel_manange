@@ -9,6 +9,7 @@ import net.suncaper.hotel_manager.service.RoomService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -61,6 +63,66 @@ public class UserOrderController {
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", orderService.orderInfo(o_id));
         return mav;
+    }
+
+    @RequestMapping("/orderSearch")
+    public String orderSearch(@PathParam(value = "dates") String  dates,
+                              @PathParam(value = "hotel_translated_name") String hotel_translated_name,
+                              @PathParam(value = "o_status") String o_status,
+                              HttpServletRequest request,
+                              Model model) throws ParseException {
+         Session session = (Session) request.getSession().getAttribute("u_id");
+         int u_id = session.getId();
+         List<H_Order> orders = orderService.listOrder(u_id);
+
+         String status = "-1";
+         if (o_status=="全部"){status = "-1";}
+         if (o_status=="待支付"){status = "0";}
+         if (o_status=="已确认"){status = "1";}
+         if (o_status=="已成交"){status = "2";}
+         if (o_status=="已取消"){status = "3";}
+        System.out.println(dates);
+        if(dates!=null) {
+            String[] date = dates.split(" > ");
+            String[] dateStartArray = date[0].split("-");
+            String[] dateEndArray = date[1].split("-");
+            String start = "20" + dateStartArray[2] + "-" + dateStartArray[0] + "-" + dateStartArray[1];
+            String end = "20" + dateEndArray[2] + "-" + dateEndArray[0] + "-" + dateEndArray[1];
+            System.out.println(start);
+            System.out.println(end);
+            Date dateStart = new SimpleDateFormat("yyyy-MM-dd ").parse(start);
+            Date dateEnd = new SimpleDateFormat("yyyy-MM-dd ").parse(end);
+            for (int i = 0; i < orders.size(); i++) {
+                Date time = orders.get(i).getoOrdertime();
+                if (dateStart.compareTo(time) > 0 || time.compareTo(dateEnd) > 0) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+        }
+        if(hotel_translated_name!=null){
+            for (int i = 0; i < orders.size(); i++) {
+                String name = orders.get(i).getHotelTranslatedName();
+                if (name.indexOf(hotel_translated_name)==-1) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+        }
+        if (status=="-1"){
+            model.addAttribute("h_orders",orders);
+        }
+        else{
+            for (int i = 0; i < orders.size(); i++) {
+                String RealStatus = orders.get(i).getoStatus();
+                if (status!=RealStatus) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+            model.addAttribute("h_orders",orders);
+        }
+        return "redirect:orderList";
     }
 
     //下订单
@@ -109,21 +171,6 @@ public class UserOrderController {
         orderService.insertOrder(h_order);
 
         ModelAndView mav = new ModelAndView("user/payPage");
-        mav.addObject("h_order", h_order);
-
-        return mav;
-    }
-
-    //支付
-    @PostMapping("/payPage")
-    public ModelAndView pay(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
-        Session session = (Session)request.getSession().getAttribute("u_id");
-        ModelAndView mav = new ModelAndView("user/orderInfo");
-
-        //更新支付订单状态
-        orderService.pay(o_id, session.getId());
-
-        H_Order h_order = orderService.selectOrder(o_id, session.getId());
         mav.addObject("h_order", h_order);
 
         return mav;

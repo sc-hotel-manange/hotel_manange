@@ -89,8 +89,9 @@
 
 		<div class="container margin_60_35">
 			<div class="row">
-				<aside class="col-lg-3">
-					<div class="custom-search-input-2 inner-2" th:action="">
+				<aside class="col-lg-3" >
+					<div class="custom-search-input-2 inner-2">
+						<form th:action="@{/user/orderSearch}">
 						<div class="form-group">
 							<input class="form-control" type="text" name="dates" placeholder="订单起止日期" style="color: black">
 							<i class="icon_calendar"></i>
@@ -101,13 +102,15 @@
 						</div>
 						<div class="form-group" >
 							<select class="wide" name="o_status">
+								<option>全部</option>
 								<option>待支付</option>
 								<option>已确认</option>
 								<option>已成交</option>
 								<option>已取消</option>
 							</select>
 						</div>
-						<input type="submit" class="btn_search" value="搜索">
+						<input type="submit" class="btn_search" value="搜索" >
+						</form>
 					</div>
 				</aside>
 				<!-- /aside -->
