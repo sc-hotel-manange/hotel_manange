@@ -81,7 +81,6 @@ public class UserOrderController {
          if (o_status=="已确认"){status = "1";}
          if (o_status=="已成交"){status = "2";}
          if (o_status=="已取消"){status = "3";}
-        System.out.println(dates);
         if(dates!="") {
             String[] date = dates.split(" > ");
 
@@ -119,15 +118,12 @@ public class UserOrderController {
         }
         if (orders.size()==0){
             model.addAttribute("h_orders",null);
-            System.out.println(666);
         }
         else {
             if (status=="-1"){
                 model.addAttribute("h_orders",orders);
-                System.out.println(777);
             }
             else{
-                System.out.println(8881);
                 for (int i = 0; i < orders.size(); i++) {
                     String RealStatus = orders.get(i).getoStatus();
                     if (status!=RealStatus) {
