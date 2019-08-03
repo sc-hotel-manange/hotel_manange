@@ -39,12 +39,12 @@ public class UserOrderController {
 
     //用户自己的订单列表
     @RequestMapping("/orderList")
-
-    public ModelAndView listOrder(@RequestParam(value = "id", required = false) Integer id,  HttpServletRequest request){
+    public ModelAndView listOrder(@RequestParam(value = "id") Integer id,  HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
+        int u_id = session.getId();
 
         ModelAndView mav = new ModelAndView("user/orderList");
-        List<H_Order> h_orders = orderService.listOrder(session.getId());
+        List<H_Order> h_orders = orderService.listOrder(u_id);
 
         mav.addObject("h_orders", h_orders);
 
@@ -81,48 +81,60 @@ public class UserOrderController {
          if (o_status=="已确认"){status = "1";}
          if (o_status=="已成交"){status = "2";}
          if (o_status=="已取消"){status = "3";}
-        System.out.println(dates);
-        if(dates!=null) {
+        if(dates!="") {
             String[] date = dates.split(" > ");
+
             String[] dateStartArray = date[0].split("-");
             String[] dateEndArray = date[1].split("-");
+
             String start = "20" + dateStartArray[2] + "-" + dateStartArray[0] + "-" + dateStartArray[1];
             String end = "20" + dateEndArray[2] + "-" + dateEndArray[0] + "-" + dateEndArray[1];
-            System.out.println(start);
-            System.out.println(end);
-            Date dateStart = new SimpleDateFormat("yyyy-MM-dd ").parse(start);
-            Date dateEnd = new SimpleDateFormat("yyyy-MM-dd ").parse(end);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date dateStart = null;
+            Date dateEnd = null;
+            System.out.println(start+"+"+end);
+            dateStart = simpleDateFormat.parse(start);
+            dateEnd = simpleDateFormat.parse(end);
+
             for (int i = 0; i < orders.size(); i++) {
                 Date time = orders.get(i).getoOrdertime();
-                if (dateStart.compareTo(time) > 0 || time.compareTo(dateEnd) > 0) {
+                if (dateStart.compareTo(time) == 1 || dateEnd.compareTo(time) == -1) {
+                    System.out.println(time);
                     orders.remove(i);
                     i--;
                 }
             }
         }
-        if(hotel_translated_name!=null){
+        if(hotel_translated_name!=""){
             for (int i = 0; i < orders.size(); i++) {
                 String name = orders.get(i).getHotelTranslatedName();
-                if (name.indexOf(hotel_translated_name)==-1) {
+                if (!name.contains(hotel_translated_name)) {
                     orders.remove(i);
                     i--;
                 }
             }
         }
-        if (status=="-1"){
-            model.addAttribute("h_orders",orders);
+        if (orders.size()==0){
+            model.addAttribute("h_orders",null);
         }
-        else{
-            for (int i = 0; i < orders.size(); i++) {
-                String RealStatus = orders.get(i).getoStatus();
-                if (status!=RealStatus) {
-                    orders.remove(i);
-                    i--;
-                }
+        else {
+            if (status=="-1"){
+                model.addAttribute("h_orders",orders);
             }
-            model.addAttribute("h_orders",orders);
+            else{
+                for (int i = 0; i < orders.size(); i++) {
+                    String RealStatus = orders.get(i).getoStatus();
+                    if (status!=RealStatus) {
+                        orders.remove(i);
+                        i--;
+                    }
+                }
+                model.addAttribute("h_orders",orders);
+            }
         }
-        return "redirect:orderList";
+        return "user/orderList";
     }
 
     //下订单
