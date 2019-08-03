@@ -190,77 +190,16 @@
 							<p th:text="${hotelInfo.country}" style="margin-bottom: 0px"></p>
 							<p th:text="${hotelInfo.city}" style="margin-bottom: 0px"></p>
 							<p th:text="${hotelInfo.addressline}"></p>
-
 						</section>
 						<!-- /section -->
-					
-
 						<hr>
-
 					</div>
 					<!-- /col -->
-
-<!--					下面是账单哦！！！！！ ！！！！！！！！！！！！！！-->
-					<aside class="col-lg-4" id="sidebar">
-						<div class="box_detail booking">
-							<div class="price">
-								<span>下订单 <small></small></span>
-								<div class="score"><span>Good</span><strong th:text="${hotelInfo.ratingAverage}"></strong></div>
-							</div>
-
-
-						<form action="/user/order" method="post">        <!-- 在这里发送订单哦！！！！！！！！-->
-							<div class="form-group">
-								<input class="form-control" type="text" name="dates" placeholder="时间" autocomplete="off">
-								<i class="icon_calendar"></i>
-							</div>
-
-							<div class="panel-dropdown">
-								<a href="#">人员 <span class="qtyTotal"></span></a>
-								<div class="panel-dropdown-content right">
-									<div class="qtyButtons">
-										<label>成人</label>
-										<input type="text" name="qtyInput" value="1">
-									</div>
-									<div class="qtyButtons">
-										<label>儿童</label>
-										<input type="text" name="qtyInput" value="0">
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<div class="custom-select-form">
-									<select class="wide" name="rt_type">
-										<option>房间类型</option>
-										<option>大床房</option>
-										<option>标准间</option>
-										<option>三人间</option>
-										<option>大套房</option>
-										<option>总统套房</option>
-									</select>
-								</div>
-							</div>
-<!--							下面这个input框用来提交hotel_id   ！！！！！！！！！！-->
-                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${hotelInfo.hotelId}">
-<!--							下面这个input框用来提交电话 !!!!!!!!!!!!!!!!-->
-                            <div class="form-group ">
-                                <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话">
-                            </div>
-<!--							提交按钮   ！！！！！！！！！！！！！！！！！！-->
-							<div class="form-group col-md-12 add_top_20">
-								<input type="submit" value="预订" class="btn_1" id="submit-review">
-							</div>
-							</form>
-						</div>
-
-					</aside>
-				</div>
-				<!-- /row -->
-			</div>
 			<!-- /container -->
 		</div>
 		<!-- /bg_color_1 -->
+			</div>
+			</div>
 	</main>
 	<!--/main-->
 	
