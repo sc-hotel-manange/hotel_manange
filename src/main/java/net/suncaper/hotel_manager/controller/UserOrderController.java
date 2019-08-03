@@ -127,7 +127,7 @@ public class UserOrderController {
 
     //下订单
     @PostMapping("/order")
-    public ModelAndView placeOrder(@RequestParam(value = "rt_type") String rt_type,
+    public ModelAndView insertOrder(@RequestParam(value = "rt_type") String rt_type,
                                    @RequestParam(value = "hotel_id") int hotel_id,
                                    @RequestParam(value = "dates") String dates,
                                    @RequestParam(value = "o_tel") String o_tel,
@@ -179,7 +179,7 @@ public class UserOrderController {
 
     //用户取消订单
     @GetMapping("/cancelOrder")
-    public String cancelOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
+    public String deleteOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
         //通过session获取用户id
         Session session = (Session)request.getSession().getAttribute("u_id");
 
