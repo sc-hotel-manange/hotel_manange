@@ -52,9 +52,9 @@
     			<div class="col-6">
     				<address>
     				<strong>付款方</strong><br>
-    					<p th:text=""></p>  <!--  用户名-->
-    					<p th:text=""></p>  <!--姓名-->
-    					<p th:text=""></p>   <!--电话-->
+    					<p th:text="${'用户名：'+h_user.uNickname}"></p>  <!--  用户名-->
+    					<p th:text="${'姓名：'+h_user.uName}"></p>  <!--姓名-->
+    					<p th:text="${'电话：'+h_user.uTel}"></p>   <!--电话-->
 
     				</address>
     			</div>
@@ -62,15 +62,17 @@
     		<div class="row">
     			<div class="col-6">
     				<address>
-    					<strong>Payment Method:</strong><br>
-    					Visa ending **** 4242<br>
-    					jsmith@email.com
+    					<strong>预订信息:</strong><br>
+    					<p th:text="${'酒店名称：'+h_order.hotelTranslatedName}"></p>
+    					<p th:text="${'入住时间：'+h_order.oCheckin+'  退房时间：'+h_order.oCheckout}"></p>
+						<p th:text="${'房型：'+h_order.rtType}"></p>
+						<p th:text="${'门牌号：'+h_order.rNumber}"></p>
     				</address>
     			</div>
     			<div class="col-6 text-right">
     				<address>
-    					<strong>Order Date:</strong><br>
-    					March 7, 2014<br><br>
+    					<strong>下订单时间:</strong><br>
+    					<p th:text="${h_order.oOrdertime}"></p><br><br>
     				</address>
     			</div>
     		</div>
@@ -80,62 +82,72 @@
     <div class="row">
     	<div class="col-lg-12">
     		<div class="add_top_15">
-    			<h3><strong>Order summary</strong></h3>
+    			<h3><strong>订单总结</strong></h3>
     				<div class="table-responsive">
     					<table class="table table-condensed">
     						<thead>
                                 <tr>
-        							<td><strong>Item</strong></td>
-        							<td class="text-center"><strong>Price</strong></td>
-        							<td class="text-center"><strong>Quantity</strong></td>
-        							<td class="text-right"><strong>Totals</strong></td>
+        							<td><strong>项目</strong></td>
+        							<td class="text-center"><strong>价格</strong></td>
+        							<td class="text-right"><strong>总计</strong></td>
+
                                 </tr>
     						</thead>
     						<tbody>
-    							<tr>
-    								<td>BS-200</td>
-    								<td class="text-center">$10.99</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$10.99</td>
-    							</tr>
-                                <tr>
-        							<td>BS-400</td>
-    								<td class="text-center">$20.00</td>
-    								<td class="text-center">3</td>
-    								<td class="text-right">$60.00</td>
-    							</tr>
-                                <tr>
-            						<td>BS-1000</td>
-    								<td class="text-center">$600.00</td>
-    								<td class="text-center">1</td>
-    								<td class="text-right">$600.00</td>
-    							</tr>
-    							<tr>
-    								<td class="thick-line"></td>
-    								<td class="thick-line"></td>
-    								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-    								<td class="thick-line text-right">$670.99</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Shipping</strong></td>
-    								<td class="no-line text-right">$15</td>
-    							</tr>
-    							<tr>
-    								<td class="no-line"></td>
-    								<td class="no-line"></td>
-    								<td class="no-line text-center"><strong>Total</strong></td>
-    								<td class="no-line text-right">$685.99</td>
-    							</tr>
+							<tr>
+								<td th:text="${h_order.rtType}"></td>
+								<td class="text-center" th:text="${h_order.oPrice+'￥'}"></td>
+								<td class="text-right" th:text="${h_order.oPrice+'￥'}"></td>
+							</tr>
     						</tbody>
     					</table>
     				</div>
     			</div>
     		</div>
     	</div>
+	  <div  style="width: 100%;height: 250px;">
+	  <img src="" th:src="@{/img/dm.jpg}" alt="" style="width: 20% ;height:100%;float: left">
+	  <img src="" th:src="@{/img/tjm.jpg}" alt="" style="width: 20%;height:100%; float:left">
+	  <img src="" th:src="@{/img/jrk.jpg}" alt="" style="width: 20%;height:100%; float:left">
+		  <img src="" th:src="@{/img/hpc.jpg}" alt="" style="width: 20%; height:100%;float:left">
+	  </div>
+<!--	  <img src="" th:src="@{/img/dm.jpg}" alt="">-->
+	  <br>
+	  <div class="col-lg-2">
+		  <a href="./orderInfo.html" th:href="@{/user/orderInfo}">
+			  <input type="submit" class="btn_search" value="提交">
+		  </a>
+	  </div>
+	  <br>
+	  <br>
+	  <br>
     </div>
 
 
   </body>
 </html>
+
+<style itemscope>
+	p{
+		margin-bottom: 0 !important;
+	}
+	.btn_search{
+		transition: all 0.3s ease-in-out;
+		color: #fff;
+		font-weight: 600;
+		font-size: 14px;
+		font-size: 0.875rem;
+		border: 0;
+		padding: 0 25px;
+		height: 50px;
+		cursor: pointer;
+		outline: none;
+		width: 100%;
+		-webkit-border-radius: 0 3px 3px 0;
+		-moz-border-radius: 0 3px 3px 0;
+		-ms-border-radius: 0 3px 3px 0;
+		border-radius: 0 3px 3px 0;
+		background-color: #00a7d0;
+		margin-right: -1px;
+	}
+</style>
