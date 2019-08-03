@@ -50,6 +50,11 @@ public class UserController {
         return "user/aboutUs";
     }
 
+    @RequestMapping("/foodInfo")
+    public String foodInfo() {
+        return "user/foodInfo";
+    }
+
     @RequestMapping("/login")
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
