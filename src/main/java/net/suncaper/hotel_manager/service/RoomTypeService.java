@@ -9,14 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * 房型说明：
- * 0 - 大床房
- * 1 - 标准房
- * 2 - 三人房
- * 3 - 大套房
- * 4 - 总统套房
- */
 @Service
 public class RoomTypeService {
     @Autowired
