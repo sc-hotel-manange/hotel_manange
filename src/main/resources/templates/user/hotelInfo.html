@@ -71,7 +71,7 @@
 		<section class="hero_in hotels_detail">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp"><span></span>酒店详情页</h1>
+					<h1 class="fadeInUp"><span ><p style="width: 500px" th:text="${hotelInfo.hotelTranslatedName}"></p></span></h1>
 				</div>
 				<span class="magnific-gallery">
 					<a href="../../static/img/gallery/hotel_list_1.jpg"  th:href="${hotelInfo.photo1}" class="btn_photos" title="Photo title" data-effect="mfp-zoom-in">查看酒店照片</a>
@@ -95,10 +95,9 @@
 		<!-- /filters -->
 <!--下面是地图的展示区域-->
 		<div class="collapse" id="collapseMap">
-			<div id="map" class="map">
-				<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.longitude}"/>
-				<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.latitude}"/>
-			</div>
+			<div id="map" class="map"></div>
+			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.longitude}"/>
+			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.latitude}"/>
 		</div>
 		<!-- End Map -->
 
@@ -377,14 +376,6 @@
 		var marker = new BMap.Marker(point);//创建标注
 		map.enableScrollWheelZoom(true);
 		map.addOverlay(marker);              // 将标注添加到地图中
-		// // 用经纬度设置地图中心点
-		// function theLocation(){
-		//   if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
-		//     map.clearOverlays();
-		//     var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
-		//
-		//   }
-		// }
 		marker.addEventListener('click', function (e) {
 			// 通过点击的坐标创建一个点对象，添加标签
 			var point = new BMap.Point(e.point.lng, e.point.lat);
