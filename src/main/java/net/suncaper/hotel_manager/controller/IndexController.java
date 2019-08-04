@@ -8,16 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-    @Autowired
-    HotelService hotelService;
 
     @RequestMapping("")
-    public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("user/index");
-        mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
-        mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());
-
-        return mav;
+    public String index() {
+        return "redirect:/user/index";
     }
 
 }

@@ -38,7 +38,6 @@ public class UserController {
 
     @RequestMapping("/index")   //首页
     public ModelAndView starter() {
-
         ModelAndView mav = new ModelAndView("user/index");
         mav.addObject("fiveStarHotels", hotelService.selectFiveStarHotels());
         mav.addObject("topRatedHotels", hotelService.selectTopRatedHotels());

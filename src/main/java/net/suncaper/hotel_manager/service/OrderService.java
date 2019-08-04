@@ -79,10 +79,8 @@ public class OrderService {
     }
 
     //用户完成支付，订单状态置为1
-    public void pay(int o_id, int u_id) {
-        H_Order h_order = selectOrder(o_id, u_id);
+    public void payOrder(H_Order h_order) {
         h_order.setoStatus("1");
-
         updateOrder(h_order);
     }
 

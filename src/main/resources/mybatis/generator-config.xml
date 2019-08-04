@@ -35,28 +35,27 @@
 
         <!-- 这里开始是表的信息 -->
         <table schema="hotel" tableName="h_hotel" domainObjectName="H_Hotel">
-            <!--<property name="rootInterface" value="net.suncaper.hotel_manager.mapper.UserMapperExt"/>-->
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+
         </table>
 
         <table schema="hotel" tableName="h_user" domainObjectName="H_User">
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+            <generatedKey column="u_id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="hotel" tableName="h_room" domainObjectName="H_Room">
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+            <generatedKey column="r_id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="hotel" tableName="h_roomtype" domainObjectName="H_Roomtype">
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+            <generatedKey column="rt_id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="hotel" tableName="h_order" domainObjectName="H_Order">
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+            <generatedKey column="o_id" sqlStatement="MySql" identity="true"/>
         </table>
 
         <table schema="hotel" tableName="h_admin" domainObjectName="H_Admin">
-            <generatedKey column="id" sqlStatement="select uuid()" identity="false"/>
+            <generatedKey column="a_id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>
