@@ -47,10 +47,10 @@
 				<li><span><a href="./index.html" th:href="@{/user}">首页</a></span>
 				</li>
 
-				<li><span><a href="hotelList.html" th:href="@{/user/hotelList}">住宿</a></span>
+				<li><span><a href="./hotelList.html" th:href="@{/user/hotelList}">住宿</a></span>
 
 				</li>
-				<li><span><a href="#0">饮食</a></span>
+				<li><span><a href="./foodInfo.html" th:href="@{/user/foodInfo}">饮食</a></span>
 
 				</li>
 				<li><span><a href="./orderList.html"th:href="@{/user/orderList}">订单</a></span>
@@ -71,12 +71,12 @@
 		<section class="hero_in hotels_detail">
 			<div class="wrapper">
 				<div class="container">
-					<h1 class="fadeInUp" ><span ></span><h1  class="fadeInUp" th:text="${hotelInfo.hotelTranslatedName}"></h1></h1>  <!--	 <p style="width: 500px" ></p>-->
+					<h1 class="fadeInUp" ><span ></span><h1  class="fadeInUp" th:text="${h_hotel.hotelTranslatedName}"></h1></h1>  <!--	 <p style="width: 500px" ></p>-->
 				</div>
 				<span class="magnific-gallery">
-					<a href="../../static/img/gallery/hotel_list_1.jpg"  th:href="${hotelInfo.photo1}" class="btn_photos" title="Photo title" data-effect="mfp-zoom-in">查看酒店照片</a>
-					<a href="../../static/img/gallery/hotel_list_2.jpg" th:href="${hotelInfo.photo2}" title="Photo title" data-effect="mfp-zoom-in"></a>
-					<a href="../../static/img/gallery/hotel_list_3.jpg" th:href="${hotelInfo.photo3}" title="Photo title" data-effect="mfp-zoom-in"></a>
+					<a href="../../static/img/gallery/hotel_list_1.jpg"  th:href="${h_hotel.photo1}" class="btn_photos" title="Photo title" data-effect="mfp-zoom-in">查看酒店照片</a>
+					<a href="../../static/img/gallery/hotel_list_2.jpg" th:href="${h_hotel.photo2}" title="Photo title" data-effect="mfp-zoom-in"></a>
+					<a href="../../static/img/gallery/hotel_list_3.jpg" th:href="${h_hotel.photo3}" title="Photo title" data-effect="mfp-zoom-in"></a>
 				</span>
 			</div>
 		</section>
@@ -96,8 +96,8 @@
 <!--下面是地图的展示区域-->
 		<div class="collapse" id="collapseMap">
 			<div id="map" class="map"></div>
-			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.longitude}"/>
-			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${hotelInfo.latitude}"/>
+			<input id="longitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${h_hotel.longitude}"/>
+			<input id="latitude" type="hidden" style="width:100px; margin-right:10px;" th:value="${h_hotel.latitude}"/>
 		</div>
 		<!-- End Map -->
 
@@ -108,8 +108,15 @@
 				<div class="row">
 					<div class="col-lg-8">
 						<section id="description">
-							<h2>详情</h2>
-							<p th:text="${hotelInfo.overview}"></p>
+							<h2>订单详情</h2>
+
+							<p th:text="${'酒店名称：'+h_order.hotelTranslatedName}"></p>
+							<p th:text="${'下单时间：'+h_order.oOrdertime}"></p>
+							<p th:text="${'预订房型：'+h_order.rtType}"></p>
+							<p th:text="${'入住时间：'+h_order.oCheckin}"></p>
+							<p th:text="${'退房时间：'+h_order.oCheckout}"></p>
+							<p th:text="${'联系人电话'+h_order.oTel}"></p>
+							<p th:text="${'房间号：'+h_order.rNumber}"></p>
 
 							<div class="row">
 <!--								<div class="col-lg-6">-->
@@ -119,85 +126,24 @@
 							</div>
 							<!-- /row -->
 							<hr>
-							<h3>照片墙</h3>
+							<h3>酒店信息</h3>
 							<div id="instagram-feed-hotel" class="clearfix">
-
-							</div>
-							<hr>
-							<div class="room_type first">
-								<div class="row">
-									<div class="col-md-4">
-										<img src="../../static/img/gallery/hotel_list_1.jpg" th:src="@{/img/gallery/hotel_list_1.jpg}" class="img-fluid" alt="">
-									</div>
-									<div class="col-md-8">
-										<h4>大床房</h4>
-										<p></p>
-										<ul class="hotel_facilities">
-											<li><img src="../../static/img/hotel_facilites_icon_2.svg" th:src="@{/img/hotel_facilites_icon_2.svg}" alt="">大床</li>
-											<li><img src="../../static/img/hotel_facilites_icon_4.svg" th:src="@{/img/hotel_facilites_icon_4.svg}" alt="">免费wifi</li>
-											<li><img src="../../static/img/hotel_facilites_icon_5.svg" th:src="@{/img/hotel_facilites_icon_5.svg}" alt="">淋浴</li>
-											<li><img src="../../static/img/hotel_facilites_icon_7.svg" th:src="@{/img/hotel_facilites_icon_7.svg}" alt="">空调</li>
-											<li><img src="../../static/img/hotel_facilites_icon_8.svg" th:src="@{/img/hotel_facilites_icon_8.svg}" alt="">吹风机</li>
-										</ul>
-									</div>
-								</div>
-								<!-- /row -->
-							</div>
-							<!-- /rom_type -->
-							<div class="room_type gray">
-								<div class="row">
-									<div class="col-md-4">
-										<img src="../../static/img/gallery/hotel_list_2.jpg" th:src="@{/img/gallery/hotel_list_2.jpg}" class="img-fluid" alt="">
-									</div>
-									<div class="col-md-8">
-										<h4>标准间</h4>
-										<p></p>
-										<ul class="hotel_facilities">
-											<li><img src="../../static/img/hotel_facilites_icon_3.svg" th:src="@{/img/hotel_facilites_icon_3.svg}" alt="">两张床</li>
-											<li><img src="../../static/img/hotel_facilites_icon_4.svg" th:src="@{/img/hotel_facilites_icon_4.svg}" alt="">免费wifi</li>
-											<li><img src="../../static/img/hotel_facilites_icon_6.svg" th:src="@{/img/hotel_facilites_icon_6.svg}" alt="">浴缸</li>
-											<li><img src="../../static/img/hotel_facilites_icon_7.svg" th:src="@{/img/hotel_facilites_icon_7.svg}" alt="">空调</li>
-											<li><img src="../../static/img/hotel_facilites_icon_8.svg" th:src="@{/img/hotel_facilites_icon_8.svg}" alt="">吹风机</li>
-										</ul>
-									</div>
-								</div>
-								<!-- /row -->
-							</div>
-							<!-- /rom_type -->
-							<div class="room_type last">
-								<div class="row">
-									<div class="col-md-4">
-										<img src="../../static/img/gallery/hotel_list_3.jpg" th:src="@{/img/gallery/hotel_list_3.jpg}" class="img-fluid" alt="">
-									</div>
-									<div class="col-md-8">
-										<h4>大套房</h4>
-										<p></p>
-										<ul class="hotel_facilities">
-											<li><img src="../../static/img/hotel_facilites_icon_3.svg" th:src="@{/img/hotel_facilites_icon_3.svg}" alt="">皇室大床</li>
-											<li><img src="../../static/img/hotel_facilites_icon_4.svg" th:src="@{/img/hotel_facilites_icon_4.svg}" alt="">免费wifi</li>
-											<li><img src="../../static/img/hotel_facilites_icon_6.svg" th:src="@{/img/hotel_facilites_icon_6.svg}" alt="">浴缸</li>
-											<li><img src="../../static/img/hotel_facilites_icon_7.svg" th:src="@{/img/hotel_facilites_icon_7.svg}" alt="">空调</li>
-											<li><img src="../../static/img/hotel_facilites_icon_9.svg" th:src="@{/img/hotel_facilites_icon_9.svg}" alt="">游泳池</li>
-											<li><img src="../../static/img/hotel_facilites_icon_3.svg" th:src="@{/img/hotel_facilites_icon_3.svg}" alt="">吹风机</li>
-										</ul>
-									</div>
-								</div>
-								<!-- /row -->
+								<p></p>
 							</div>
 							<!-- /rom_type -->
 							<hr>
 							<h3>地点</h3>
-							<p th:text="${hotelInfo.country}" style="margin-bottom: 0px"></p>
-							<p th:text="${hotelInfo.city}" style="margin-bottom: 0px"></p>
-							<p th:text="${hotelInfo.addressline}"></p>
+							<p th:text="${h_hotel.country}" style="margin-bottom: 0px"></p>
+							<p th:text="${h_hotel.city}" style="margin-bottom: 0px"></p>
+							<p th:text="${h_hotel.addressline}"></p>
+
 						</section>
 						<!-- /section -->
 						<hr>
 					</div>
-					<!-- /col -->
-			<!-- /container -->
-		</div>
+
 		<!-- /bg_color_1 -->
+			</div>
 			</div>
 			</div>
 	</main>
