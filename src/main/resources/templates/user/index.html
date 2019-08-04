@@ -174,148 +174,114 @@
 					</div>
 					<!-- /grid_item -->
 
-				</div>
-				<!-- /row -->
-				<a href=""><strong>查看全部 <i class="arrow_carrot-right"></i></strong></a>
-			</section>
-			<!-- /section -->
-			
-			<section>
-				<div class="main_title_3">
-					<span><em></em></span>
-					<h2>热门食物</h2>
-					<p style="letter-spacing: 5px;color:black;"> 唯有美食与爱不可辜负</p>
-				</div>
-				<div class="row">
+                </div>
+                <!-- /row -->
+                <a href=""><strong>查看全部 <i class="arrow_carrot-right"></i></strong></a>
+            </section>
+            <!-- /section -->
 
-<!--					下面可以用thymeleaf-->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>8.5</strong></div>
-								<img src="../../static/img/restaurant_1.jpg"  th:src="@{/img/restaurant_1.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Da Alfredo</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.9</strong></div>
-								<img src="../../static/img/restaurant_2.jpg" th:src="@{/img/restaurant_2.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Slow Food</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>7.5</strong></div>
-								<img src="../../static/img/restaurant_3.jpg" th:src="@{/img/restaurant_3.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Bella Napoli</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-					<div class="col-xl-3 col-lg-6 col-md-6">
-						<a href="" class="grid_item">
-							<figure>
-								<div class="score"><strong>9.0</strong></div>
-								<img src="../../static/img/restaurant_4.jpg" th:src="@{/img/restaurant_4.jpg}" class="img-fluid" alt="">
-								<div class="info">
-									<h3>Marcus</h3>
-								</div>
-							</figure>
-						</a>
-					</div>
-					<!-- /grid_item -->
-				</div>
-				<!-- /row -->
-<!--				<a href=""><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a>-->
-			</section>
-			<!-- /section -->
-		</div>
-		<!-- /container -->
+            <section>
+                <div class="main_title_3">
+                    <span><em></em></span>
+                    <h2>热门食物</h2>
+                    <p style="letter-spacing: 5px;color:black;"> 唯有美食与爱不可辜负</p>
+                </div>
+                <div class="row" th:each="re:${recommend}">
 
-		<div class="bg_color_1">
-			<div class="container margin_80_55">
-				<div class="main_title_2">
-					<span><em></em></span>
-					<h3>优惠活动</h3>
-					<p style="letter-spacing: 5px;color:black;">精彩不断，折扣连连。</p>
-				</div>
-				<div class="row">
-					<div class="col-lg-6">
-						<a class="box_news" href="">
-							<figure><img src="../../static/img/news_home_1.jpg"  th:src="@{/img/news_home_1.jpg}" alt="">
-								<figcaption><strong>8月</strong></figcaption>
-							</figure>
-							<ul>
-								<li>成都</li>
-								<li>2019.8.1</li>
-							</ul>
-							<h4>成都天府酒店</h4>
-							<p>标准间8折，欲购从速</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="">
-							<figure><img src="../../static/img/news_home_2.jpg" th:src="@{/img/news_home_2.jpg}" alt="">
-								<figcaption><strong>8月</strong></figcaption>
-							</figure>
-							<ul>
-								<li>成都</li>
-								<li>2019.8.2</li>
-							</ul>
-							<h4>成都丽江酒店</h4>
-							<p>团购七折</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="">
-							<figure><img src="../../static/img/news_home_3.jpg"  th:src="@{/img/news_home_3.jpg}" alt="">
-								<figcaption><strong>8月</strong></figcaption>
-							</figure>
-							<ul>
-								<li>成都</li>
-								<li>2019.8.3</li>
-							</ul>
-							<h4>成都郫县酒店</h4>
-							<p>精品房间限时7折</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-					<div class="col-lg-6">
-						<a class="box_news" href="">
-							<figure><img src="../../static/img/news_home_4.jpg" th:src="@{/img/news_home_4.jpg}" alt="">
-								<figcaption><strong>8月</strong></figcaption>
-							</figure>
-							<ul>
-								<li>成都</li>
-								<li>2019.8.4</li>
-							</ul>
-							<h4>成都成华酒店</h4>
-							<p>钟点房限时七折</p>
-						</a>
-					</div>
-					<!-- /box_news -->
-				</div>
-				<!-- /row -->
-				<p class="btn_home_align"><a href="" class="btn_1 rounded">查看更多</a></p>
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /bg_color_1 -->
+                    <!--					下面可以用thymeleaf-->
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <a href="" class="grid_item">
+                            <figure>
+                                <div class="score"><strong>8.5</strong></div>
+                                <img src="../../static/img/restaurant_1.jpg" th:src="@{/img/restaurant_1.jpg}"
+                                     class="img-fluid" alt="">
+                                <div class="info">
+                                    <h3 th:text="${re.getHotelTranslatedName()}"></h3>
+                                </div>
+                            </figure>
+                        </a>
+                    </div>
+
+                    <!-- /grid_item -->
+                </div>
+                <!-- /row -->
+                <!--				<a href=""><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a>-->
+            </section>
+            <!-- /section -->
+        </div>
+        <!-- /container -->
+
+        <div class="bg_color_1">
+            <div class="container margin_80_55">
+                <div class="main_title_2">
+                    <span><em></em></span>
+                    <h3>优惠活动</h3>
+                    <p style="letter-spacing: 5px;color:black;">精彩不断，折扣连连。</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="box_news" href="">
+                            <figure><img src="../../static/img/news_home_1.jpg" th:src="@{/img/news_home_1.jpg}" alt="">
+                                <figcaption><strong>8月</strong></figcaption>
+                            </figure>
+                            <ul>
+                                <li>成都</li>
+                                <li>2019.8.1</li>
+                            </ul>
+                            <h4>成都天府酒店</h4>
+                            <p>标准间8折，欲购从速</p>
+                        </a>
+                    </div>
+                    <!-- /box_news -->
+                    <div class="col-lg-6">
+                        <a class="box_news" href="">
+                            <figure><img src="../../static/img/news_home_2.jpg" th:src="@{/img/news_home_2.jpg}" alt="">
+                                <figcaption><strong>8月</strong></figcaption>
+                            </figure>
+                            <ul>
+                                <li>成都</li>
+                                <li>2019.8.2</li>
+                            </ul>
+                            <h4>成都丽江酒店</h4>
+                            <p>团购七折</p>
+                        </a>
+                    </div>
+                    <!-- /box_news -->
+                    <div class="col-lg-6">
+                        <a class="box_news" href="">
+                            <figure><img src="../../static/img/news_home_3.jpg" th:src="@{/img/news_home_3.jpg}" alt="">
+                                <figcaption><strong>8月</strong></figcaption>
+                            </figure>
+                            <ul>
+                                <li>成都</li>
+                                <li>2019.8.3</li>
+                            </ul>
+                            <h4>成都郫县酒店</h4>
+                            <p>精品房间限时7折</p>
+                        </a>
+                    </div>
+                    <!-- /box_news -->
+                    <div class="col-lg-6">
+                        <a class="box_news" href="">
+                            <figure><img src="../../static/img/news_home_4.jpg" th:src="@{/img/news_home_4.jpg}" alt="">
+                                <figcaption><strong>8月</strong></figcaption>
+                            </figure>
+                            <ul>
+                                <li>成都</li>
+                                <li>2019.8.4</li>
+                            </ul>
+                            <h4>成都成华酒店</h4>
+                            <p>钟点房限时七折</p>
+                        </a>
+                    </div>
+                    <!-- /box_news -->
+                </div>
+                <!-- /row -->
+                <p class="btn_home_align"><a href="" class="btn_1 rounded">查看更多</a></p>
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /bg_color_1 -->
 
 		<div class="call_section">
 			<div class="container clearfix">
@@ -376,96 +342,81 @@
 	</div>
 	<!-- page -->
 
-	<div id="toTop"></div><!-- Back to top button  返回到top的按钮 -->
+<div id="toTop"></div><!-- Back to top button  返回到top的按钮 -->
 
+<!-- COMMON SCRIPTS -->
+<script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
+<script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
+<script src="../../static/js/main.js" th:src="@{/js/main.js}"></script>
+<script src="../../static/assets/validate.js" th:src="@{/assets/validate.js}"></script>
 
-	<!-- jQuery 3 -->
-	<script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<!--百度地图服务-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+<script type="text/javascript">
+    // 百度地图API功能
+    $(function () {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function (r) {
+            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                var mk = new BMap.Marker(r.point);
+                //alert('您的位置：'+r.point.lng+','+r.point.lat);
+                var latitude = r.point.lat;
+                var longitude = r.point.lng;
+                var url = "/user/recommend";
+                var formData = {"longitude": longitude, "latitude": latitude};
 
-	<!-- COMMON SCRIPTS -->
-    <script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
-    <script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
-    <script src="../../static/js/main.js" th:src="@{/js/main.js}"></script>
-	<script src="../../static/assets/validate.js" th:src="@{/assets/validate.js}"></script>
+                $.post(url, formData, function (data) {
+                    console.log(data);
+                });
 
+            } else {
+                alert('failed' + this.getStatus());
+            }
+        }, {enableHighAccuracy: true})
+        //关于状态码
+        //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+        //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+        //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+        //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+        //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+        //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+        //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+        //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+        //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+    });
 
-	<!--百度地图服务-->
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+</script>
 
-	<script>        //这里是用于检测搜索框的，如果为空则不允许点击
-	function check() {
-		if($('#hotel_address').val()==""&&$('#hotel_translated_name').val()==""){
-		return false;
-		}
-	}
-	</script>
-	<script type="text/javascript">
-		// 百度地图API功能
-		var map = new BMap.Map("allmap");
-		var point = new BMap.Point(116.331398,39.897445);
-		map.centerAndZoom(point,12);
+<!-- DATEPICKER  -->
 
-		var geolocation = new BMap.Geolocation();
-		geolocation.getCurrentPosition(function(r){
-			if(this.getStatus() == BMAP_STATUS_SUCCESS){
-				var mk = new BMap.Marker(r.point);
-				map.addOverlay(mk);
-				map.panTo(r.point);
-				alert('您的位置：'+r.point.lng+','+r.point.lat);
-				var latitude = r.point.lat;
-				var longitude = r.point.lng;
+<script>
+    $(function () {
+        'use strict';
+        $('input[name="dates"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+        $('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('MM-DD-YY') + ' > ' + picker.endDate.format('MM-DD-YY'));
+        });
+        $('input[name="dates"]').on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val('');
+        });
+    });
+</script>
 
-				$.ajax({
-					url:"localhost:8080/user/hotelList",
-					data:{'longitude':longitude},
-					type:"GET"
-				})
-			}
-			else {
-				alert('failed'+this.getStatus());
-			}
-		},{enableHighAccuracy: true})
-		//关于状态码
-		//BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
-		//BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
-		//BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
-		//BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
-		//BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
-		//BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
-		//BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
-		//BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
-		//BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
-	</script>
-	<!-- DATEPICKER  -->
+<!-- INPUT QUANTITY  -->
+<script src="../../static/js/input_qty.js" th:src="@{/js/input_qty.js}"></script>
 
-	<script>
-	$(function() {
-	  'use strict';
-	  $('input[name="dates"]').daterangepicker({
-		  autoUpdateInput: false,
-		  locale: {
-			  cancelLabel: 'Clear'
-		  }
-	  });
-	  $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
-		  $(this).val(picker.startDate.format('MM-DD-YY') + ' > ' + picker.endDate.format('MM-DD-YY'));
-	  });
-	  $('input[name="dates"]').on('cancel.daterangepicker', function(ev, picker) {
-		  $(this).val('');
-	  });
-	});
-	</script>
-	
-	<!-- INPUT QUANTITY  -->
-	<script src="../../static/js/input_qty.js" th:src="@{/js/input_qty.js}"></script>
-	
 </body>
 </html>
 <style>
-	.overview_text{
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 3;
-		overflow: hidden;
-	}
+    .overview_text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
 </style>
