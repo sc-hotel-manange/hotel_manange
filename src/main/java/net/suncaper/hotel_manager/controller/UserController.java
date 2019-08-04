@@ -97,4 +97,36 @@ public class UserController {
         }
         return "user/login";
     }
+
+    //用户信息
+    @RequestMapping("/userInfo")
+    public ModelAndView userInfo(HttpServletRequest request) {
+        Session session = (Session)request.getSession().getAttribute("u_id");
+        ModelAndView mav = new ModelAndView("user/userInfo");
+        mav.addObject("userInfo", userService.getUserInfo(session.getId()));
+
+        return mav;
+    }
+
+    @RequestMapping("/updateInfo")
+    public String postAlterInfo(@PathParam(value = "u_nickName") String u_nickName,
+                                @PathParam(value = "u_account") String u_account,
+                                @PathParam(value = "u_name")String u_name,
+                                @PathParam(value = "u_tel") String u_tel,
+                                @PathParam(value = "u_password") String u_password,
+                                @PathParam(value = "u_idNumber") String u_idNumber,
+                                HttpServletRequest request){
+        Session session = (Session)request.getSession().getAttribute("u_id");
+        int u_id = session.getId();
+        H_User h_user = new H_User();
+        h_user.setuId(u_id);
+        h_user.setuAccount(u_account);
+        h_user.setuName(u_name);
+        h_user.setuTel(u_tel);
+        h_user.setuNickname(u_nickName);
+        h_user.setuPassword(u_password);
+        h_user.setuIdnumber(u_idNumber);
+        userService.updateInfo(h_user);
+        return "redirect:/user/userInfo";        //修改完信息后重新跳转到个人信息界面
+    }
 }

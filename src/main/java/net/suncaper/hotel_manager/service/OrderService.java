@@ -37,6 +37,54 @@ public class OrderService {
         return normalDates;
     }
 
+    //保留订单数组中符合前端传回的下订单时间的订单
+    public List<H_Order> orderFitData(List<H_Order> orders,Date dateStart,Date dateEnd){
+        for (int i = 0; i < orders.size(); i++) {
+            Date time = orders.get(i).getoOrdertime();
+            if (dateStart.compareTo(time) == 1 || dateEnd.compareTo(time) == -1) {
+                System.out.println(time);
+                orders.remove(i);
+                i--;
+            }
+        }
+        return orders;
+    }
+
+    //保留订单数组中包含符合前端传回的酒店名称的订单
+    public List<H_Order> orderFitName(List<H_Order> orders,String hotel_translated_name){
+        for (int i = 0; i < orders.size(); i++) {
+            String name = orders.get(i).getHotelTranslatedName();
+            if (!name.contains(hotel_translated_name)) {
+                orders.remove(i);
+                i--;
+            }
+        }
+        return orders;
+    }
+
+    //保留订单数组中符合前端传回的订单状态的订单
+    public List<H_Order> orderFitStatus(List<H_Order> orders,String o_status){
+        String status = "-1";
+        if (o_status=="全部"){status = "-1";}
+        if (o_status=="待支付"){status = "0";}
+        if (o_status=="已确认"){status = "1";}
+        if (o_status=="已成交"){status = "2";}
+        if (o_status=="已取消"){status = "3";}
+        if (status=="-1"){
+            return orders;
+        }
+        else{
+            for (int i = 0; i < orders.size(); i++) {
+                String RealStatus = orders.get(i).getoStatus();
+                if (status!=RealStatus) {
+                    orders.remove(i);
+                    i--;
+                }
+            }
+            return orders;
+        }
+    }
+
     //订单详情
     public H_Order orderInfo(int o_id){
         return h_orderMapper.selectByPrimaryKey(o_id);
