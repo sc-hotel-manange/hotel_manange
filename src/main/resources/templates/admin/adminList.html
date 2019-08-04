@@ -217,7 +217,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/admin/adminInfo}">管理员信息</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员信息</a></li>
           </ul>
         </li>
 
@@ -279,15 +279,15 @@
               <table id="example2" class="table table-bordered table-hover" >
                 <thead>
                 <tr>              <!--列表标题-->
-                  <th>用户ID</th>
-                  <th>用户账号</th>
-                  <th>用户姓名</th>
-                  <th>用户电话</th>
+                  <th>管理员ID</th>
+                  <th>管理员账号</th>
+                  <th>管理员密码</th>
+                  <th>权限</th>
                   <th>修改</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="user : ${users}">
+                  <tr th:each="user : ${admin}">
                     <td th:text="${user.uId}">
                     </td>
                     <td th:text="${user.uAccount}">

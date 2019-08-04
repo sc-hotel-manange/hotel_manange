@@ -133,13 +133,15 @@ public class AdminController {
     }
 
     @RequestMapping("/userUpdate")
-    public boolean userUpdate(@PathParam(value = "u_id") int u_id,
+    public String userUpdate(@PathParam(value = "u_id") int u_id,
                               @PathParam(value = "u_nickName") String u_nickName,
                               @PathParam(value = "u_account") String u_account,
                               @PathParam(value = "u_name")String u_name,
                               @PathParam(value = "u_tel") String u_tel,
                               @PathParam(value = "u_password") String u_password,
-                              @PathParam(value = "u_idNumber") String u_idNumber) {
+                              @PathParam(value = "u_idNumber") String u_idNumber,
+                            Model model) {
+
         H_User h_user = new H_User();
         h_user.setuId(u_id);
         h_user.setuAccount(u_account);
@@ -149,7 +151,9 @@ public class AdminController {
         h_user.setuPassword(u_password);
         h_user.setuIdnumber(u_idNumber);
         adminService.updateInfo(h_user);
-        return true;
+
+        model.addAttribute("checkUpdate", true);
+        return "redirect:/admin/userInfo?u_id="+u_id;
     }
 
 }

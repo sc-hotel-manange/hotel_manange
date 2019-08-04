@@ -6,31 +6,29 @@
   <title>Faded的网页</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/bower_components/font-awesome/css/font-awesome.min.css" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
   <!-- Ionicons -->
-  <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}" href="../static/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../static/bower_components/Ionicons/css/ionicons.min.css" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">
   <!-- Theme style -->
   <link rel="stylesheet" href="../static/dist/css/AdminLTE.css" th:href="@{/dist/css/AdminLTE.css}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
-  <link rel="stylesheet" href="../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
-  <style>#a{}</style>
-</head>
-<body class="hold-transition skin-blue sidebar-mini" >
 
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="starter.html" class="logo">
+    <a href="./starter.html" th:href="@{/admin/starter}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>D</b>m</span>
+      <span class="logo-mini"><b>D</b>m</span>     
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>F</b>aded</span>
     </a>
@@ -151,9 +149,6 @@
               <span class="hidden-xs">Faded</span>
             </a>
             <ul class="dropdown-menu">
-
-              <!-- The user image in the menu -->
-
               <li class="user-header">
                 <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
 
@@ -166,13 +161,13 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Details</a>
+                    <a href="#">信息</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Orders</a>
+                    <a href="#">订单</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                    <a href="#">朋友</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -180,10 +175,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">配置</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="#" class="btn btn-default btn-flat">退出</a>
                 </div>
               </li>
             </ul>
@@ -197,9 +192,7 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
       <!-- Sidebar user panel (optional) -->
-
       <!-- search form (Optional) -->
       
       <!-- /.search form -->
@@ -209,20 +202,20 @@
         <!-- <li class="header">HEADER</li> -->
         <!-- Optionally, you can add icons to the links -->
         <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-tag active" ></i> <span>用户列表</span>
+        <li class="treeview active">
+          <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
+          <ul class="treeview-menu ">
             <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/admin/adminInfo}">管理员信息</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员信息</a></li>
           </ul>
         </li>
 
         <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>订单列表</span></a></li>
-        <li class="treeview " >
+        <li class="treeview">
           <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -230,7 +223,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#">酒店地址</a></li>
-            <li><a href="./hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
+            <li><a href="hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
           </ul>
         </li>
       </ul>
@@ -244,92 +237,68 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        用户信息列表
-        <small>Hotel infomation</small>
+        查看用户列表
+        <small>personal infomation</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">当前</li>
+        <li><a href="./starter.html"><i class="fa fa-university"></i> 首页</a></li>
+        <li class="active">用户列表</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
 
-<!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
-
-<!--      这里需要更改！！！！！！！！！！！！！！改成userSearch-->
-      <form th:action="@{'/admin/hotelInfo'}" method="get" class="sidebar-form whitebkg">
-        <div class="input-group">
-          <input name="type" th:value="按名称搜索" style="display: none">
-          <input type="text" name="content" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search"  onclick="localRefresh" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-
-
-    <section class="content" >
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+        <div class="box box-warning user_table">
+            <!-- <div class="box-header with-border">
+               <h3 class="box-title">General Elements</h3> 
+            </div> -->
+            <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover" >
-                <thead>
-                <tr>              <!--列表标题-->
-                  <th>用户ID</th>
-                  <th>用户账号</th>
-                  <th>用户姓名</th>
-                  <th>用户电话</th>
-                  <th>修改</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="user : ${users}">
-                    <td th:text="${user.uId}">
-                    </td>
-                    <td th:text="${user.uAccount}">
-                    </td>
-                    <td th:text="${user.uName}">
-                    </td>
-                    <td th:text="${user.uTel}">
-                    </td>
-                    <td>
-                      <a th:href="@{'/admin/userInfo?u_id='+ ${user.uId}}">
-                        <button type="submit" class="btn btn-block btn-info hotel-info-btn">修改</button>
-                      </a>
-                    </td>
-                  </tr>
+              <form role="form" action="/admin/userUpdate"  method="post">
+                <!-- text input -->
+                <div class="form-group">
+                  <label>账号</label>
+                  <input type="text" class="form-control" th:value="${user.uAccount}" name="u_account" >
+                </div>
+                <div class="form-group" type='password'>
+                  <label>密码</label>
+                  <input type="text" class="form-control" th:value="${user.uPassword}"  name="u_password">
+                </div>
+                <div class="form-group">
+                    <label>电话</label>
+                    <input type="text" class="form-control" th:value="${user.uTel}" name="u_tel">
+                  </div>
+                <div class="form-group">
+                  <label>用户名</label>
+                  <input type="text" class="form-control" th:value="${user.uNickname}" name="u_nickName">
+                </div>
+                <div class="form-group">
+                  <label>真实姓名</label>
+                  <input type="text" class="form-control" th:value="${user.uName}" name="u_name">
+                </div>
+                <div class="form-group">
+                  <label>身份证号</label>
+                  <input type="text" class="form-control" th:value="${user.uIdnumber}" name="u_idNumber">
+                </div>
 
+                <input type="text" th:value="${user.uId}" style="display: none" name="u_id">
 
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>用户ID</th>
-                  <th>用户账号</th>
-                  <th>用户姓名</th>
-                  <th>用户电话</th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    </section>
+<!--                <a th:href="@{'/admin/userUpdate'}">         &lt;!&ndash;  ?u_id='+ ${user.uId}}&ndash;&gt;-->
+                  <button type="submit" class="btn btn-block btn-info hotel-info-btn">更改</button>
+<!--                </a>-->
     <!-- /.content -->
+              </form>
   </div>
   <!-- /.content-wrapper -->
-
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
 
   </footer>
-
 
 </div>
 <!-- ./wrapper -->
@@ -342,44 +311,26 @@
 <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
-<script src="../static/bower_components/datatables.net/js/jquery.dataTables.min.js" th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
-<script src="../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js" th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
-<!-- SlimScroll -->
-<script src="../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js" th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
-<!-- FastClick -->
-<script src="../static/bower_components/fastclick/lib/fastclick.js" th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 
+    </section>
+  </div>
+</div>
 </body>
 </html>
-
-<style>
-  .skin-blue .sidebar-form input[type="text"], .skin-blue .sidebar-form .btn{
-    background: white !important;
-  }
-
-  .form-control{
-    background: white !important;
-  }
-.whitebkg{
-   background: white !important;
- }
-</style>
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-
+  var checkupdate = [[${checkupdate}]];
+  if (checkupdate == true){
+    alert('修改成功');
+  }
 </script>
-
+<style>
+/* .user_table{
+     width: 50%; 
+     margin-right: auto;
+    margin-left: auto; 
+} */
+</style>
