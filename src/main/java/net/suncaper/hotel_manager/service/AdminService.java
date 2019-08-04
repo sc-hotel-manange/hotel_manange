@@ -2,7 +2,10 @@ package net.suncaper.hotel_manager.service;
 
 import net.suncaper.hotel_manager.domain.H_Admin;
 import net.suncaper.hotel_manager.domain.H_AdminExample;
+import net.suncaper.hotel_manager.domain.H_User;
+import net.suncaper.hotel_manager.domain.H_UserExample;
 import net.suncaper.hotel_manager.mapper.H_AdminMapper;
+import net.suncaper.hotel_manager.mapper.H_UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,24 @@ import java.util.List;
 public class AdminService {
     @Autowired
     private H_AdminMapper h_adminMapper;
+    @Autowired
+    H_UserMapper h_userMapper;
+
+    //返回所有用户
+    public List<H_User> selectUser() {
+        H_UserExample example = new H_UserExample();
+        return h_userMapper.selectByExample(example);
+    }
+
+    //返回某用户详细信息
+    public H_User getUserInfo(int u_id) {
+        return h_userMapper.selectByPrimaryKey(u_id);
+    }
+
+    public boolean updateInfo(H_User h_user) {
+        h_userMapper.updateByPrimaryKey(h_user);
+        return true;
+    }
 
     public int getIdByAccountAndPwd(String a_account,String a_password){
         H_AdminExample example = new  H_AdminExample();
