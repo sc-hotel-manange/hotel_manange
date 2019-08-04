@@ -88,22 +88,15 @@
 									<i class="icon_calendar"></i>
 								</div>
 							</div>
-							<!--<div class="col-lg-3">-->
-								<!--<div class="panel-dropdown">-->
-									<!--<a href="#">人数 <span class="qtyTotal">1</span></a>-->
-									<!--<div class="panel-dropdown-content">-->
-										<!--&lt;!&ndash; Quantity Buttons &ndash;&gt;-->
-										<!--<div class="qtyButtons">-->
-											<!--<label>成人</label>-->
-											<!--<input type="text" name="qtyInput" value="1">-->
-										<!--</div>-->
-										<!--<div class="qtyButtons">-->
-											<!--<label>儿童</label>-->
-											<!--<input type="text" name="qtyInput" value="0">-->
-										<!--</div>-->
-									<!--</div>-->
-								<!--</div>-->
-							<!--</div>-->
+							<div class="col-lg-3">
+								<select class="wide">
+									<option>条件</option>
+									<option>高档</option>
+									<option>舒适</option>
+									<option>经济</option>
+								</select>
+							</div>
+
 							<div class="col-lg-2">
 								<input type="submit" class="btn_search" value="搜索">
 							</div>
@@ -132,7 +125,7 @@
 						</figure>
 						<div class="wrapper">
 							<h3><a href="" th:text="${topratehotels.hotelTranslatedName}"></a></h3>
-							<p th:text="${topratehotels.overview}"></p>
+							<p th:text="${topratehotels.overview}" class="overview_text"></p>
 							<span class="price"> <strong th:text="${topratehotels.city}"></strong> </span>
 						</div>
 						<ul>
@@ -455,3 +448,11 @@
 	
 </body>
 </html>
+<style>
+	.overview_text{
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
+</style>
