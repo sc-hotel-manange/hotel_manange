@@ -1,6 +1,5 @@
 package net.suncaper.hotel_manager.controller;
 
-import javafx.scene.chart.ValueAxis;
 import net.suncaper.hotel_manager.domain.H_Hotel;
 import net.suncaper.hotel_manager.service.HotelService;
 import net.suncaper.hotel_manager.service.RoomTypeService;

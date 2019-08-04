@@ -85,6 +85,15 @@ public class AdminController {
 //        return "admin/login";
 //    }
 
+    //管理员列表
+    @RequestMapping("/adminList")
+    public ModelAndView adminList() {
+        ModelAndView mav = new ModelAndView("admin/adminList");
+        mav.addObject("adminList", adminService.getAdminList());
+
+        return mav;
+    }
+
     @RequestMapping("/adminInfo")  //管理员信息
     public String adminInfo(HttpServletRequest request, Model model) {
         Session Admin = (Session)request.getSession().getAttribute("a_id");     //这里使用session

@@ -60,6 +60,12 @@ public class AdminService {
         h_adminMapper.insert(h_admin);
     }
 
+    //管理员列表
+    public List<H_Admin> getAdminList() {
+        H_AdminExample example = new H_AdminExample();
+        return h_adminMapper.selectByExample(example);
+    }
+
     public H_Admin getAdminInfo(int a_id){
         return h_adminMapper.selectByPrimaryKey(a_id);
     }
