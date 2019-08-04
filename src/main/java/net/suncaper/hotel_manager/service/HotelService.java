@@ -7,6 +7,7 @@ import net.suncaper.hotel_manager.mapper.H_HotelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -59,5 +60,20 @@ public class HotelService {
         return customizeMapper.selectTopRatedHotels();
     }
 
+
+    public List<H_Hotel> selectAround(String lng,String lat){
+        DecimalFormat df = new DecimalFormat("###.#####");
+        String s_lng_b = df.format(Float.parseFloat(lng)+(float)0.01);
+        String s_lng_l = df.format(Float.parseFloat(lng)-(float)0.01);
+
+        String s_lat_b = df.format(Float.parseFloat(lat)+(float)0.01);
+        String s_lat_l = df.format(Float.parseFloat(lat)-(float)0.01);
+
+        H_HotelExample example = new H_HotelExample();
+        example.createCriteria().andLongitudeBetween(s_lng_l,s_lng_b)
+                                .andLatitudeBetween(s_lat_l,s_lat_b);
+        List<H_Hotel> hotelList = h_hotelMapper.selectByExample(example);
+        return hotelList;
+    }
 }
 
