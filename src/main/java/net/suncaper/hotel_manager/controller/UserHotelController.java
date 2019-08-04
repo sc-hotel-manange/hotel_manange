@@ -1,13 +1,16 @@
 package net.suncaper.hotel_manager.controller;
 
+import javafx.scene.chart.ValueAxis;
 import net.suncaper.hotel_manager.domain.H_Hotel;
 import net.suncaper.hotel_manager.service.HotelService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;
@@ -23,10 +26,7 @@ public class UserHotelController {
     RoomTypeService roomTypeService;
 
     @RequestMapping("/hotelList")
-    public ModelAndView hotelList(@RequestParam(value = "id",required = false) Integer id,
-                                  @RequestParam(value = "longitude", required = false) String longitude) {
-        System.out.println("经度：" + longitude);
-
+    public ModelAndView hotelList(@RequestParam(value = "id",required = false) Integer id) {
         ModelAndView mav = new ModelAndView("user/hotelList");
         mav.addObject("hotelList", hotelService.selectHotelList());
 
@@ -63,5 +63,25 @@ public class UserHotelController {
         model.addAttribute("hotelList",hotellist);
         model.addAttribute("id",0);
         return "user/hotellist";
+    }
+
+    @RequestMapping(value = "recommend")
+    @ResponseBody
+    public List<H_Hotel>  recommend(@RequestParam(value = "longitude")String longitude,
+                                        @RequestParam(value = "latitude") String latitude,
+                                        Model model){
+        List<H_Hotel> hotelList = hotelService.selectAround(longitude,latitude);
+        if (hotelList.size()<5){
+            return hotelList;
+        }
+        else {
+            while(hotelList.size()>=5){
+                hotelList.remove(hotelList.size()-1);
+            }
+            return hotelList;
+        }
+
+
+
     }
 }
