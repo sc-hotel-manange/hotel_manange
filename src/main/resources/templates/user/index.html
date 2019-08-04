@@ -74,17 +74,18 @@
 				<div class="container">
 					<h3>酒店订购</h3>
 					<p>全球顶级旅游、酒店和餐厅</p>
-					<form th:action="@{/user/hotelSearch}">
+
+					<form th:action="@{/user/hotelSearch}"  onsubmit="return check()">    <!--这里是输入框哦！！！！！！！！！！！！！！！！！1-->
 						<div class="row no-gutters custom-search-input-2">
 							<div class="col-lg-4">
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="地点" name="hotel_address">
+									<input class="form-control" type="text" placeholder="地点" name="hotel_address" id="hotel_address">
 									<i class="icon_pin_alt"></i>
 								</div>
 							</div>
 							<div class="col-lg-3">
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="酒店名称" name="hotel_translated_name">
+									<input class="form-control" type="text" placeholder="酒店名称" name="hotel_translated_name" id="hotel_translated_name">
 									<i class="icon_calendar"></i>
 								</div>
 							</div>
@@ -98,7 +99,7 @@
 							</div>
 
 							<div class="col-lg-2">
-								<input type="submit" class="btn_search" value="搜索">
+								<input type="submit" class="btn_search" value="搜索" id="search_btn">
 							</div>
 						</div>
 					</form>
@@ -324,7 +325,7 @@
 						<div class="box_1">
 							<h3>有一个美好的旅行</h3>  <!--这里打算导向到about界面里面-->
 							<p>想要了解我们吗？我们与多家酒店进行合作，持续优质打折活动推出。确保您的旅行有个美好的过程。 </p>
-							<a href="" class="btn_1 rounded">了解我们</a>
+							<a href="./aboutUs.html" th:href="@{/user/aboutUs}" class="btn_1 rounded">了解我们</a>
 						</div>
 					</div>
 				</div>
@@ -376,7 +377,11 @@
 	<!-- page -->
 
 	<div id="toTop"></div><!-- Back to top button  返回到top的按钮 -->
-	
+
+
+	<!-- jQuery 3 -->
+	<script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+
 	<!-- COMMON SCRIPTS -->
     <script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
     <script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
@@ -385,6 +390,14 @@
 
 	<!--百度地图服务-->
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+
+	<script>        //这里是用于检测搜索框的，如果为空则不允许点击
+	function check() {
+		if($('#hotel_address').val()==""&&$('#hotel_translated_name').val()==""){
+		return false;
+		}
+	}
+	</script>
 	<script type="text/javascript">
 		// 百度地图API功能
 		var map = new BMap.Map("allmap");
