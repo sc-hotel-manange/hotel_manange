@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,6 +114,43 @@ public class AdminController {
         return "redirect:adminInfo";        //修改完信息后重新跳转到个人信息界面
     }
 
+    @RequestMapping("/userList")
+    public ModelAndView userList() {
+        ModelAndView mav = new ModelAndView("admin/userList");
+        mav.addObject("users", adminService.selectUser());
+        return mav;
+    }
+
+    @RequestMapping("/userInfo")
+    public ModelAndView userInfo(@RequestParam(value = "u_id", required = false) Integer u_id) {
+        if(u_id == null) {
+            return new ModelAndView("admin/userList");
+        }
+        ModelAndView mav = new ModelAndView("admin/userInfo");
+        mav.addObject("user", adminService.getUserInfo(u_id));
+
+        return mav;
+    }
+
+    @RequestMapping("/userUpdate")
+    public boolean userUpdate(@PathParam(value = "u_id") int u_id,
+                              @PathParam(value = "u_nickName") String u_nickName,
+                              @PathParam(value = "u_account") String u_account,
+                              @PathParam(value = "u_name")String u_name,
+                              @PathParam(value = "u_tel") String u_tel,
+                              @PathParam(value = "u_password") String u_password,
+                              @PathParam(value = "u_idNumber") String u_idNumber) {
+        H_User h_user = new H_User();
+        h_user.setuId(u_id);
+        h_user.setuAccount(u_account);
+        h_user.setuName(u_name);
+        h_user.setuTel(u_tel);
+        h_user.setuNickname(u_nickName);
+        h_user.setuPassword(u_password);
+        h_user.setuIdnumber(u_idNumber);
+        adminService.updateInfo(h_user);
+        return true;
+    }
 
 }
 
