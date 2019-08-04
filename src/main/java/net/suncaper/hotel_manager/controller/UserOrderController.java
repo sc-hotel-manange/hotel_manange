@@ -77,65 +77,19 @@ public class UserOrderController {
          int u_id = session.getId();
          List<H_Order> orders = orderService.listOrder(u_id);
 
-         String status = "-1";
-         if (o_status=="全部"){status = "-1";}
-         if (o_status=="待支付"){status = "0";}
-         if (o_status=="已确认"){status = "1";}
-         if (o_status=="已成交"){status = "2";}
-         if (o_status=="已取消"){status = "3";}
+
         if(dates!="") {
-            String[] date = dates.split(" > ");
-
-            String[] dateStartArray = date[0].split("-");
-            String[] dateEndArray = date[1].split("-");
-
-            String start = "20" + dateStartArray[2] + "-" + dateStartArray[0] + "-" + dateStartArray[1];
-            String end = "20" + dateEndArray[2] + "-" + dateEndArray[0] + "-" + dateEndArray[1];
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-            Date dateStart = null;
-            Date dateEnd = null;
-            System.out.println(start+"+"+end);
-            dateStart = simpleDateFormat.parse(start);
-            dateEnd = simpleDateFormat.parse(end);
-
-            for (int i = 0; i < orders.size(); i++) {
-                Date time = orders.get(i).getoOrdertime();
-                if (dateStart.compareTo(time) == 1 || dateEnd.compareTo(time) == -1) {
-                    System.out.println(time);
-                    orders.remove(i);
-                    i--;
-                }
-            }
+            Date[] dataArray = orderService.parseDates(dates);
+            Date dateStart = dataArray[0];
+            Date dateEnd = dataArray[1];
+            orders = orderService.orderFitData(orders,dateStart,dateEnd);
         }
         if(hotel_translated_name!=""){
-            for (int i = 0; i < orders.size(); i++) {
-                String name = orders.get(i).getHotelTranslatedName();
-                if (!name.contains(hotel_translated_name)) {
-                    orders.remove(i);
-                    i--;
-                }
-            }
+            orders = orderService.orderFitName(orders,hotel_translated_name);
         }
-        if (orders.size()==0){
-            model.addAttribute("h_orders",null);
-        }
-        else {
-            if (status=="-1"){
-                model.addAttribute("h_orders",orders);
-            }
-            else{
-                for (int i = 0; i < orders.size(); i++) {
-                    String RealStatus = orders.get(i).getoStatus();
-                    if (status!=RealStatus) {
-                        orders.remove(i);
-                        i--;
-                    }
-                }
-                model.addAttribute("h_orders",orders);
-            }
-        }
+
+        orders = orderService.orderFitStatus(orders,o_status);
+        model.addAttribute("h_orders",orders);
         return "user/orderList";
     }
 
