@@ -17,7 +17,10 @@ public class UserHotelController {
     RoomTypeService roomTypeService;
 
     @RequestMapping("/hotelList")
-    public ModelAndView hotelList(@RequestParam(value = "id",required = false) Integer id) {
+    public ModelAndView hotelList(@RequestParam(value = "id",required = false) Integer id,
+                                  @RequestParam(value = "longitude", required = false) String longitude) {
+        System.out.println("经度：" + longitude);
+
         ModelAndView mav = new ModelAndView("user/hotelList");
         mav.addObject("hotelList", hotelService.selectHotelList());
 

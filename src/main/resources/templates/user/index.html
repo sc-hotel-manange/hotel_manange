@@ -404,15 +404,14 @@
 				var mk = new BMap.Marker(r.point);
 				map.addOverlay(mk);
 				map.panTo(r.point);
-				// alert('您的位置：'+r.point.lng+','+r.point.lat);
+				alert('您的位置：'+r.point.lng+','+r.point.lat);
 				var latitude = r.point.lat;
-				var longtitude = r.point.lng;
+				var longitude = r.point.lng;
 
 				$.ajax({
-					url:"/user/index",
-					data:{longtitude:longtitude, latitude:latitude},
-					type:"GET",
-					dataType:"json"
+					url:"localhost:8080/user/hotelList",
+					data:{'longitude':longitude},
+					type:"GET"
 				})
 			}
 			else {
