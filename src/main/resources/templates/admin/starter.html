@@ -7,17 +7,17 @@
   <title>Faded的网页</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}" href="../static/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}" href="../../static/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}" href="../static/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" th:href="@{/bower_components/Ionicons/css/ionicons.min.css}" href="../../static/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../static/dist/css/AdminLTE.css" th:href="@{/dist/css/AdminLTE.css}">
+  <link rel="stylesheet" href="../../static/dist/css/AdminLTE.css" th:href="@{/dist/css/AdminLTE.css}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
+  <link rel="stylesheet" href="../../static/dist/css/skins/skin-blue.min.css" th:href="@{/dist/css/skins/skin-blue.min.css}">
 
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -61,7 +61,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
+                        <img src="../../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -148,14 +148,14 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="user-image" alt="User Image">
+              <img src="../../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Faded</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
+                <img src="../../static/dist/img/admin.jpg" th:src="@{/dist/img/admin.jpg}" class="img-circle" alt="User Image">
 
                 <p>
                   Faded - Web Developer
@@ -248,8 +248,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        首页
+        <!--<small>Optional description</small>-->
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -263,7 +263,63 @@
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- interactive chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
 
+              <h3 class="box-title">流量表</h3>
+
+              <div class="box-tools pull-right">
+
+                <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                  <button type="button" class="btn btn-default btn-xs active" data-toggle="on">开</button>
+                  <button type="button" class="btn btn-default btn-xs" data-toggle="off">关</button>
+                </div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div id="interactive" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+
+        <div class="col-md-6">
+          <!-- Bar chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">每月访问</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div id="bar-chart" style="height: 300px;"></div>
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
@@ -280,14 +336,147 @@
 
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 3 -->
-<script src="../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- jQuery 3 -->
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../../static/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
+<script src="../../static/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../static/dist/js/demo.js"></script>
+<!-- FLOT CHARTS -->
+<script src="../../static/bower_components/Flot/jquery.flot.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="../../static/bower_components/Flot/jquery.flot.resize.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="../../static/bower_components/Flot/jquery.flot.pie.js"></script>
+<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+<script src="../../static/bower_components/Flot/jquery.flot.categories.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+  /*
+       * Flot Interactive Chart
+       * -----------------------
+       */
+  // We use an inline data source in the example, usually data would
+  // be fetched from a server
+  var data = [], totalPoints = 100
+
+  function getRandomData() {
+
+    if (data.length > 0)
+      data = data.slice(1)
+
+    // Do a random walk
+    while (data.length < totalPoints) {
+
+      var prev = data.length > 0 ? data[data.length - 1] : 50,
+              y    = prev + Math.random() * 10 - 5
+
+      if (y < 0) {
+        y = 0
+      } else if (y > 100) {
+        y = 100
+      }
+
+      data.push(y)
+    }
+
+    // Zip the generated y values with the x values
+    var res = []
+    for (var i = 0; i < data.length; ++i) {
+      res.push([i, data[i]])
+    }
+
+    return res
+  }
+
+  var interactive_plot = $.plot('#interactive', [getRandomData()], {
+    grid  : {
+      borderColor: '#f3f3f3',
+      borderWidth: 1,
+      tickColor  : '#f3f3f3'
+    },
+    series: {
+      shadowSize: 0, // Drawing is faster without shadows
+      color     : '#3c8dbc'
+    },
+    lines : {
+      fill : true, //Converts the line chart to area chart
+      color: '#3c8dbc'
+    },
+    yaxis : {
+      min : 0,
+      max : 100,
+      show: true
+    },
+    xaxis : {
+      show: true
+    }
+  })
+
+  var updateInterval = 500 //Fetch data ever x milliseconds
+  var realtime       = 'on' //If == to on then fetch data every x seconds. else stop fetching
+  function update() {
+
+    interactive_plot.setData([getRandomData()])
+
+    // Since the axes don't change, we don't need to call plot.setupGrid()
+    interactive_plot.draw()
+    if (realtime === 'on')
+      setTimeout(update, updateInterval)
+  }
+
+  //INITIALIZE REALTIME DATA FETCHING
+  if (realtime === 'on') {
+    update()
+  }
+  //REALTIME TOGGLE
+  $('#realtime .btn').click(function () {
+    if ($(this).data('toggle') === 'on') {
+      realtime = 'on'
+    }
+    else {
+      realtime = 'off'
+    }
+    update()
+  })
+  /*
+     * BAR CHART
+     * ---------
+     */
+
+  var bar_data = {
+    data : [['January', 10], ['February', 8], ['March', 4], ['April', 13], ['May', 17], ['June', 9]],
+    color: '#3c8dbc'
+  }
+  $.plot('#bar-chart', [bar_data], {
+    grid  : {
+      borderWidth: 1,
+      borderColor: '#f3f3f3',
+      tickColor  : '#f3f3f3'
+    },
+    series: {
+      bars: {
+        show    : true,
+        barWidth: 0.5,
+        align   : 'center'
+      }
+    },
+    xaxis : {
+      mode      : 'categories',
+      tickLength: 0
+    }
+  })
+  /* END BAR CHART */
+
+
+
+</script>
 </body>
 </html>
