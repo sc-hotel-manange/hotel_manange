@@ -73,11 +73,11 @@ public class HotelService {
 
     public List<H_Hotel> selectAround(String lng,String lat){
         DecimalFormat df = new DecimalFormat("###.#####");
-        String s_lng_b = df.format(Float.parseFloat(lng)+(float)0.01);
-        String s_lng_l = df.format(Float.parseFloat(lng)-(float)0.01);
+        String s_lng_b = df.format(Float.parseFloat(lng)+(float)0.5);
+        String s_lng_l = df.format(Float.parseFloat(lng)-(float)0.5);
 
-        String s_lat_b = df.format(Float.parseFloat(lat)+(float)0.01);
-        String s_lat_l = df.format(Float.parseFloat(lat)-(float)0.01);
+        String s_lat_b = df.format(Float.parseFloat(lat)+(float)0.5);
+        String s_lat_l = df.format(Float.parseFloat(lat)-(float)0.5);
 
         H_HotelExample example = new H_HotelExample();
         example.createCriteria().andLongitudeBetween(s_lng_l,s_lng_b)
