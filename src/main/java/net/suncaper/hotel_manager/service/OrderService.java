@@ -135,8 +135,8 @@ public class OrderService {
         }
     }
 
-    //订单详情
-    public H_Order orderInfo(int o_id){
+    //根据订单号查找订单
+    public H_Order selectOrder(int o_id){
         return h_orderMapper.selectByPrimaryKey(o_id);
     }
 
@@ -200,16 +200,19 @@ public class OrderService {
         updateOrder(h_order);
     }
 
+    //用户退房，完成订单，订单状态置为2
+    public H_Order finishOrder(H_Order h_order) {
+        h_order.setoStatus("2");
+        updateOrder(h_order);
+
+        return h_order;
+    }
+
     //用户取消订单, 订单状态置为3
     public void deleteOrder(int o_id, int u_id) {
         H_Order h_order = selectOrder(o_id, u_id);
         h_order.setoStatus("3");
 
         updateOrder(h_order);
-    }
-
-    //管理员处理退房
-    public void finishOrder(H_Order h_order) {
-        h_orderMapper.updateByPrimaryKey(h_order);
     }
 }

@@ -63,7 +63,7 @@ public class UserOrderController {
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", orderService.selectOrder(o_id, session.getId()));  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
-        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.orderInfo(o_id).getHotelId()));   //酒店信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.selectOrder(o_id).getHotelId()));   //酒店信息
         return mav;
     }
 
@@ -161,7 +161,7 @@ public class UserOrderController {
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", h_order);  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
-        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.orderInfo(o_id).getHotelId()));   //酒店信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.selectOrder(o_id).getHotelId()));   //酒店信息
         return mav;
     }
 
