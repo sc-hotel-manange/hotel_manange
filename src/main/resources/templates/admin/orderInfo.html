@@ -217,17 +217,7 @@
                 </li>
 
                 <li class="active"><a href="./orderList.html"  th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>订单列表</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa  fa-paperclip"></i> <span>订购酒店</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">酒店地址</a></li>
-                        <li><a href="hotelList.html" th:href="@{/admin/hotelList}">酒店信息</a></li>
-                    </ul>
-                </li>
+                <li><a href="hotelList.html" th:href="@{/admin/hotelList}"><i class="fa  fa-paperclip"></i><span>酒店信息</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
 
@@ -244,17 +234,6 @@
                 <small>Optional description</small>
             </h1>
         </section>
-
-        <!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
-        <form th:action="@{'/admin/orderSearch'}" method="get" class="sidebar-form whitebkg">
-            <div class="input-group">
-                <input type="text" name="content" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-              <button type="submit" name="search"  onclick="localRefresh" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-            </div>
-        </form>
 
         <!-- Main content -->
         <section class="content container-fluid">
@@ -312,12 +291,13 @@
                          <p th:case="0">未支付</p>
                          <p th:case="1">已支付</p>
                          <p th:case="2">已完成</p>
+                         <p th:case="3">已取消</p>
                      </div>
                      <hr>
 
-                     <form action="/admin/cancelOrder" method="get">
+                     <form action="/admin/leaveRoom" method="get">
                      <input type="text" th:value="${order.oId}" style="display: none" name="o_id">
-                     <button   type="submit" class="btn btn-block btn-primary button submit_btn">修改订单</button>
+                     <button   type="submit" class="btn btn-block btn-primary button submit_btn">退房</button>
                      </form>
                  </div>
                 </div>

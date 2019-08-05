@@ -63,7 +63,7 @@ public class UserOrderController {
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", orderService.selectOrder(o_id, session.getId()));  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
-        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.orderInfo(o_id).getHotelId()));   //酒店信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.selectOrder(o_id).getHotelId()));   //酒店信息
         return mav;
     }
 
@@ -161,23 +161,22 @@ public class UserOrderController {
         ModelAndView mav = new ModelAndView("user/orderInfo");
         mav.addObject("h_order", h_order);  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
-        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.orderInfo(o_id).getHotelId()));   //酒店信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(orderService.selectOrder(o_id).getHotelId()));   //酒店信息
         return mav;
     }
 
 
     //用户取消订单
-    @GetMapping("/cancelOrder")
-    public String deleteOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
+    @RequestMapping("/cancelOrder")
+    public String cancelOrder(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
         //通过session获取用户id
         Session session = (Session)request.getSession().getAttribute("u_id");
 
         H_Order h_order = orderService.selectOrder(o_id, session.getId());
         H_Room h_room = roomService.findRoom(h_order.getHotelId(), h_order.getrNumber());
-        H_Roomtype h_roomtype = roomTypeService.selectRoomType(h_room.getRtType(), h_room.getHotelId());
 
         //取消订单，置订单状态为3
-        orderService.deleteOrder(o_id, session.getId());
+        orderService.cancelOrder(o_id, session.getId());
         //更新房间状态
         orderService.leaveRoom(h_room);
 
