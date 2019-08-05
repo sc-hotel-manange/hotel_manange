@@ -402,7 +402,7 @@ html * {
 body {
   /*overflow: hidden;*/
   background: #f8f8f8;
-  font-size: 1.1rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   font-family: "Poppins", Helvetica, sans-serif;
   /*color: white;*/
@@ -4737,7 +4737,7 @@ ul.hotel_facilities li img {
   font-size: 1.3125rem;
   position: absolute;
   left: 12px;
-  top: 34px;
+  top: 38px;
   color: #ccc;
   width: 25px;
   height: 25px;
