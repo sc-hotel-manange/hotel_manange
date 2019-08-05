@@ -210,14 +210,14 @@
         <!-- Optionally, you can add icons to the links -->
         <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-tag active" ></i> <span>用户列表</span>
+          <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/admin/adminInfo}">管理员信息</a></li>
+            <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户列表</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员列表</a></li>
           </ul>
         </li>
 
@@ -247,8 +247,6 @@
     <section class="content container-fluid">
 
 <!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
-
-<!--      这里需要更改！！！！！！！！！！！！！！改成userSearch-->
       <form th:action="@{'/admin/userSearch'}" method="get" class="sidebar-form whitebkg">
         <div class="input-group">
           <input name="type" th:value="按名称搜索" style="display: none">

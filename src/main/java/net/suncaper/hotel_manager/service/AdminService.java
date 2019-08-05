@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 管理员权限说明：
+ * 0 - 超级管理员
+ * 1 - 普通管理员
+ */
 @Service
 public class AdminService {
     @Autowired
@@ -25,7 +30,7 @@ public class AdminService {
     }
 
     //根据用户真实姓名搜索
-    public List<H_User> searchByName(String content) {
+    public List<H_User> searchUser(String content) {
         H_UserExample example = new H_UserExample();
         example.createCriteria().andUNameLike("%" + content + "%"); //模糊搜索
 
@@ -74,12 +79,22 @@ public class AdminService {
         return h_adminMapper.selectByExample(example);
     }
 
+    //获取管理员信息
     public H_Admin getAdminInfo(int a_id){
         return h_adminMapper.selectByPrimaryKey(a_id);
     }
 
+    //更新管理员信息
     public int updateInfo(H_Admin h_admin){
         h_adminMapper.updateByPrimaryKey(h_admin);
         return 1;
+    }
+
+    //根据管理员账号搜索管理员
+    public List<H_Admin> searchAdmin(String content) {
+        H_AdminExample example = new H_AdminExample();
+        example.createCriteria().andAAccountLike("%" + content + "%"); //模糊搜索
+
+        return h_adminMapper.selectByExample(example);
     }
 }
