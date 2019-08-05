@@ -249,6 +249,17 @@
             </ol>
         </section>
 
+        <!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
+        <form th:action="@{'/admin/orderSearch'}" method="get" class="sidebar-form whitebkg">
+            <div class="input-group">
+                <input type="text" name="content" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+              <button type="submit" name="search"  onclick="localRefresh" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+            </div>
+        </form>
+
         <!-- Main content -->
         <section class="content container-fluid">
 
@@ -263,6 +274,11 @@
                 </div>
                 <!-- /.box-header -->
                  <div class="box-body">
+                     <strong><i class="fa fa-map-marker margin-r-5"></i> 订单号</strong>
+
+                     <p class="text-muted" th:text="${order.oId}"></p>
+                     <hr>
+
                      <strong><i class="fa fa-map-marker margin-r-5"></i> 用户ID</strong>
 
                      <p class="text-muted" th:text="${order.uId}"></p>
