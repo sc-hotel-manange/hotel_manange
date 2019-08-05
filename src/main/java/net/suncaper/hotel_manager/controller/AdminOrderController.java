@@ -4,6 +4,7 @@ import net.suncaper.hotel_manager.domain.H_Order;
 import net.suncaper.hotel_manager.domain.H_Room;
 import net.suncaper.hotel_manager.domain.H_Roomtype;
 import net.suncaper.hotel_manager.service.OrderService;
+import net.suncaper.hotel_manager.service.RoomService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class AdminOrderController {
     OrderService orderService;
     @Autowired
     RoomTypeService roomTypeService;
+    @Autowired
+    RoomService roomService;
 
     //展示所有订单列表   返回订单List
     @GetMapping("/orderList")
@@ -41,7 +44,7 @@ public class AdminOrderController {
     @RequestMapping("/orderInfo")
     public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id) {
         ModelAndView mav = new ModelAndView("admin/orderInfo");
-        mav.addObject("order", orderService.orderInfo(o_id));
+        mav.addObject("order", orderService.selectOrder(o_id));
 
         return mav;
     }
@@ -56,10 +59,17 @@ public class AdminOrderController {
     }
 
     //管理员处理退房
-    @RequestMapping("/cancelOrder")
-    public String updateOrder(@RequestParam(value = "o_id") H_Order h_order) {
-        orderService.finishOrder(h_order);
-        return "orderInfo";
+    @RequestMapping("/leaveRoom")
+    public ModelAndView leaveRoom(@RequestParam(value = "o_id") int o_id) {
+        H_Order h_order = orderService.selectOrder(o_id);
+        H_Room h_room = roomService.findRoom(h_order.getHotelId(), h_order.getrNumber());
+        orderService.leaveRoom(h_room); //更新房间状态
+        h_order = orderService.finishOrder(h_order); //更新订单状态
+
+        ModelAndView mav = new ModelAndView("admin/orderInfo");
+        mav.addObject("order", h_order);
+
+        return mav;
     }
 
 }
