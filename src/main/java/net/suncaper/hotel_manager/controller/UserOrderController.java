@@ -101,27 +101,30 @@ public class UserOrderController {
                                    @RequestParam(value = "o_tel") String o_tel,
                                    HttpServletRequest request) throws ParseException {
 
-//        System.out.println("这是前端传过来的日期: " + dates);
-
-        Session session = (Session)request.getSession().getAttribute("u_id");     //这里使用session
-
-        //根据房型分配一个房间
-        H_Room h_room = roomService.findRoom(rt_type, hotel_id);
-        //查找该房型
-        H_Roomtype h_roomtype = roomTypeService.selectRoomType(rt_type, hotel_id);
-        //得到该酒店对象
-        H_Hotel h_hotel = hotelService.selectHotelInfo(hotel_id);
-        //更新该房间状态
-        roomService.updateRoom(h_room.getrNumber(), hotel_id);
-        //减少该房型库存
-        roomTypeService.reduceStock(h_roomtype.getRtId());
+        ModelAndView mav = new ModelAndView("user/invoice");
+        Session session = (Session)request.getSession().getAttribute("u_id");
 
         Date[] normalDates = orderService.parseDates(dates);
         Date o_checkin = normalDates[0];    //入住时间
         Date o_checkout = normalDates[1];   //退房时间
 
+        //根据房型筛选出符合条件的房间列表
+        List<H_Room> rooms = roomService.findRooms(rt_type, hotel_id);
+        //查找是否有可分配的房间
+        H_Room h_room = orderService.checkOrder(rooms, o_checkin, o_checkout);
+        //若没有找到房间，返回到酒店列表页
+        if(h_room == null)
+            return new ModelAndView("redirect:/user/hotelList");
+
+        //若找到符合条件的房间
+        //查找该房型
+        H_Roomtype h_roomtype = roomTypeService.selectRoomType(rt_type, hotel_id);
+        //得到该酒店对象
+        H_Hotel h_hotel = hotelService.selectHotelInfo(hotel_id);
+        //更新该房间状态为预订
+        orderService.orderRoom(h_room);
         //计算用户住的天数
-        int stay = (int)(o_checkout.getTime() - o_checkin.getTime()) / (1000*3600*24);
+        int stay = orderService.calculateStay(o_checkin, o_checkout);
 
         H_Order h_order = new H_Order();
         h_order.setrNumber(h_room.getrNumber());
@@ -138,7 +141,6 @@ public class UserOrderController {
         h_order.setPhoto(h_hotel.getPhoto1());
         orderService.insertOrder(h_order);
 
-        ModelAndView mav = new ModelAndView("user/invoice");
         mav.addObject("h_order", h_order);  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
         mav.addObject("h_hotel", hotelService.selectHotelInfo(hotel_id));   //酒店信息
@@ -177,9 +179,7 @@ public class UserOrderController {
         //取消订单，置订单状态为3
         orderService.deleteOrder(o_id, session.getId());
         //更新房间状态
-        roomService.updateRoom(h_order.getrNumber(), h_order.getHotelId());
-        //增加该房型库存
-        roomTypeService.addStock(h_roomtype.getRtId());
+        orderService.leaveRoom(h_room);
 
         return "redirect:/user/orderList";
     }

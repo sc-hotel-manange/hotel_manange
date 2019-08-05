@@ -2,6 +2,7 @@ package net.suncaper.hotel_manager.service;
 
 import net.suncaper.hotel_manager.domain.*;
 import net.suncaper.hotel_manager.mapper.H_OrderMapper;
+import net.suncaper.hotel_manager.mapper.H_RoomMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ import java.util.List;
 public class OrderService {
     @Autowired
     H_OrderMapper h_orderMapper;
+    @Autowired
+    H_RoomMapper h_roomMapper;
 
     //将前端传过来的日期转化为Date类型
     public Date[] parseDates(String dates) throws ParseException {
@@ -35,6 +38,53 @@ public class OrderService {
         Date[] normalDates = {o_checkin, o_checkout};
 
         return normalDates;
+    }
+
+    //计算住宿天数
+    public int calculateStay(Date o_checkin, Date o_checkout) {
+        return (int)(o_checkout.getTime() - o_checkin.getTime()) / (1000*3600*24);
+    }
+
+    //判断用户预选房是否和其他订单冲突
+    public H_Room checkOrder(List<H_Room> rooms, Date o_checkin, Date o_checkout) {
+        for(H_Room room : rooms) {
+            //筛选出有相同酒店和房间的订单
+            List<H_Order> orders = selectOrder(room.getHotelId(), room.getrNumber());
+            //假如没有相同酒店和房间的订单
+            if(orders == null) return room;
+
+            for(H_Order order : orders) {
+                Date otherCheckin = order.getoCheckin();
+                Date otherCheckout = order.getoCheckout();
+                if(o_checkin.after(otherCheckout) || o_checkout.before(otherCheckin))
+                    return room;
+            }
+        }
+
+        return null;
+    }
+
+    //订房时更新房间状态
+    public void orderRoom(H_Room h_room) {
+        String status = h_room.getrStatus();
+        //更新房间状态
+        if("0".equals(status))
+            status = "1";
+        else
+            return;
+        h_room.setrStatus(status);
+
+        h_roomMapper.updateByPrimaryKey(h_room);
+    }
+
+    //退房时更新房间状态
+    public void leaveRoom(H_Room h_room) {
+        List<H_Order> orders = selectOrder(h_room.getHotelId(), h_room.getrNumber());
+        //若没有预订该房间的订单，将房间状态置为无人预订
+        if(orders==null || orders.size()==0) {
+            h_room.setrStatus("0");
+            h_roomMapper.updateByPrimaryKey(h_room);
+        }
     }
 
     //保留订单数组中符合前端传回的下订单时间的订单
@@ -96,6 +146,14 @@ public class OrderService {
         example.createCriteria().andOIdEqualTo(o_id).andUIdEqualTo(u_id);
 
         return h_orderMapper.selectByExample(example).get(0);
+    }
+
+    //查找相同酒店和房间的订单
+    public List<H_Order> selectOrder(int hotel_id, String r_number) {
+        H_OrderExample example = new H_OrderExample();
+        example.createCriteria().andHotelIdEqualTo(hotel_id).andRNumberEqualTo(r_number);
+
+        return h_orderMapper.selectByExample(example);
     }
 
     //插入订单

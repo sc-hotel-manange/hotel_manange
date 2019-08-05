@@ -30,6 +30,7 @@ public class RoomTypeService {
         return h_roomtypes;
     }
 
+    /* 不需要对库存进行操作，库存仅用于展示
     //增加库存
     public void addStock(int rt_id) {
         H_Roomtype h_roomtype = h_roomtypeMapper.selectByPrimaryKey(rt_id);
@@ -47,4 +48,5 @@ public class RoomTypeService {
 
         h_roomtypeMapper.updateByPrimaryKey(h_roomtype);
     }
+    */
 }
