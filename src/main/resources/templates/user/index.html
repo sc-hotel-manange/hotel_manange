@@ -54,11 +54,11 @@
 				<li><span><a href="./foodInfo.html" th:href="@{/user/foodInfo}">饮食</a></span>
 
 				</li>
-				<li><span><a href=href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
+				<li ><span><a href=href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
 
 				</li>
-				<li><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人信息</a></span>
-
+				<li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人中心</a></span>
+				<li th:if="${session.u_id} == null" ><span><a href="./login.html" th:href="@{/user/loginPage}">请登录</a></span>
 				</li>
 				<li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
 				</li>
@@ -120,8 +120,8 @@
 					 <div class="item">
 					   <div class="box_grid">
 						<figure>
-							<a href="" class="wish_bt"></a>
-							<a href=""><img src="../../static/img/tour_1.jpg"  th:src="${topratehotels.photo2}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
+							<a th:href="@{'/user/hotelInfo?hotel_id='+${topratehotels.hotelId}}" class="wish_bt"></a>
+							<a th:href="@{'/user/hotelInfo?hotel_id='+${topratehotels.hotelId}}"><img src="../../static/img/tour_1.jpg"  th:src="${topratehotels.photo2}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Read more</span></div></a>
 <!--							<small>Historic</small>-->
 						</figure>
 						<div class="wrapper">
@@ -141,7 +141,7 @@
 			</div>
 			<!-- /carousel -->
 			<div class="container">
-				<p class="btn_home_align"><a href="" class="btn_1 rounded">查看全部</a></p>
+				<p class="btn_home_align"><a th:href="@{/user/hotelList}" class="btn_1 rounded">查看全部</a></p>
 			</div>
 			<!-- /container -->
 			<hr class="large">
@@ -160,7 +160,7 @@
 <!--				!!!!!!!!!!!!!	下面使用thymeleaf进行循环 !!!!!!!!!!-->
 
 					  <div class="col-xl-3 col-lg-6 col-md-6" th:each="fivestarhotels:${fiveStarHotels}">
-						<a href="" class="grid_item">
+						<a th:href="@{'/user/hotelInfo?hotel_id='+${fivestarhotels.hotelId}}" class="grid_item">
 							<figure>
 								<div class="score"><strong th:text="${fivestarhotels.ratingAverage}"></strong></div>
 								<img th:src="${fivestarhotels.photo2}" class="img-fluid" alt="" >  <!--style="width: 300px;height:300px;"-->
@@ -190,7 +190,7 @@
 
                     <!--					下面可以用thymeleaf-->
                     <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="" class="grid_item">
+                        <a th:href="@{'/user/hotelInfo?hotel_id='+${re.hotelId}}" class="grid_item">
                             <figure>
                                 <div class="score"><strong>8.5</strong></div>
                                 <img src="../../static/img/restaurant_1.jpg" th:src="@{/img/restaurant_1.jpg}"
