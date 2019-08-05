@@ -209,7 +209,7 @@ public class OrderService {
     }
 
     //用户取消订单, 订单状态置为3
-    public void deleteOrder(int o_id, int u_id) {
+    public void cancelOrder(int o_id, int u_id) {
         H_Order h_order = selectOrder(o_id, u_id);
         h_order.setoStatus("3");
 
