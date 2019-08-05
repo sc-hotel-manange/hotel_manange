@@ -56,7 +56,7 @@ public class AdminOrderController {
     }
 
     //管理员处理退房
-    @PutMapping("/order")
+    @RequestMapping("/cancelOrder")
     public String updateOrder(@RequestParam(value = "o_id") H_Order h_order) {
         orderService.finishOrder(h_order);
         return "orderInfo";

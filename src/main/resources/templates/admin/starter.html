@@ -209,6 +209,7 @@
         <!-- <li class="header">HEADER</li> -->
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
+
         <li class="treeview">
           <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
             <span class="pull-right-container">
@@ -220,6 +221,8 @@
             <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员信息</a></li>
           </ul>
         </li>
+
+
 
         <li><a href="./orderList.html" th:href="@{/admin/orderList}"><i class="fa  fa-file-o"></i> <span>订单列表</span></a></li>
 
@@ -337,23 +340,23 @@
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 3 -->
 <!-- jQuery 3 -->
-<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js" th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- FastClick -->
-<script src="../../static/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="../../static/bower_components/fastclick/lib/fastclick.js" th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 <!-- AdminLTE App -->
-<script src="../../static/dist/js/adminlte.min.js"></script>
+<script src="../../static/dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../static/dist/js/demo.js"></script>
+<script src="../../static/dist/js/demo.js" th:src="@{/dist/js/demo.js}"></script>
 <!-- FLOT CHARTS -->
-<script src="../../static/bower_components/Flot/jquery.flot.js"></script>
+<script src="../../static/bower_components/Flot/jquery.flot.js" th:src="@{/bower_components/Flot/jquery.flot.js}"></script>
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="../../static/bower_components/Flot/jquery.flot.resize.js"></script>
+<script src="../../static/bower_components/Flot/jquery.flot.resize.js" th:src="@{/bower_components/Flot/jquery.flot.resize.js}"></script>
 <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="../../static/bower_components/Flot/jquery.flot.pie.js"></script>
+<script src="../../static/bower_components/Flot/jquery.flot.pie.js" th:src="@{/bower_components/Flot/jquery.flot.pie.js}"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
-<script src="../../static/bower_components/Flot/jquery.flot.categories.js"></script>
+<script src="../../static/bower_components/Flot/jquery.flot.categories.js" th:src="@{/bower_components/Flot/jquery.flot.categories.js}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
