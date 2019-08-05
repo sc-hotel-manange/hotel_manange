@@ -170,12 +170,17 @@ public class OrderService {
         return h_orderMapper.selectByExample(example);
     }
 
-    //展示所有订单
-    public List<H_Order> listOrder() {
+    //管理员查看所属酒店订单，超级管理员查看所有订单
+    public List<H_Order> hotelOrder(int hotel_id) {
         H_OrderExample example = new H_OrderExample();
-        example.setOrderByClause("o_id DESC"); //最新订单在最前面
-
-        return h_orderMapper.selectByExample(example);
+        if(hotel_id == 0) { //超级管理员
+            example.setOrderByClause("o_id DESC"); //最新订单在最前面
+            return h_orderMapper.selectByExample(example);
+        }else { //酒店普通管理员
+            example.createCriteria().andHotelIdEqualTo(hotel_id);
+            example.setOrderByClause("o_id DESC");
+            return h_orderMapper.selectByExample(example);
+        }
     }
 
     //根据订单号搜索订单

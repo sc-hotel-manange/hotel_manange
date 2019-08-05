@@ -3,6 +3,8 @@ package net.suncaper.hotel_manager.controller;
 import net.suncaper.hotel_manager.domain.H_Order;
 import net.suncaper.hotel_manager.domain.H_Room;
 import net.suncaper.hotel_manager.domain.H_Roomtype;
+import net.suncaper.hotel_manager.domain.Session;
+import net.suncaper.hotel_manager.service.AdminService;
 import net.suncaper.hotel_manager.service.OrderService;
 import net.suncaper.hotel_manager.service.RoomService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
@@ -29,12 +31,18 @@ public class AdminOrderController {
     RoomTypeService roomTypeService;
     @Autowired
     RoomService roomService;
+    @Autowired
+    AdminService adminService;
 
     //展示所有订单列表   返回订单List
-    @GetMapping("/orderList")
-    public ModelAndView orderList() {
+    @RequestMapping("/orderList")
+    public ModelAndView orderList(HttpServletRequest request) {
+        //获取登录管理员的hotel_id
+        Session session = (Session)request.getSession().getAttribute("a_id");
+        int hotel_id = adminService.getAdminInfo(session.getId()).getHotelId();
+
         ModelAndView mav = new ModelAndView("admin/orderList");
-        List<H_Order> h_orders = orderService.listOrder();
+        List<H_Order> h_orders = orderService.hotelOrder(hotel_id);
 
         mav.addObject("h_orders", h_orders);
         return mav;
