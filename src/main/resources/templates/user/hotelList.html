@@ -118,16 +118,17 @@
 <!--        这里是搜索栏哦！！！！！！！ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
         <div class="container margin_60_35">
             <div class="col-lg-12">
+				<form th:action="@{/user/hotelSearch}"  onsubmit="return check()">    <!--这里是输入框哦！！！！！！！！！！！！！！！！！1-->
                 <div class="row no-gutters custom-search-input-2 inner">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="酒店名称">
+                            <input class="form-control" type="text" placeholder="酒店名称" name="hotel_translated_name" id="hotel_translated_name">
                             <i class="icon_search"></i>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="地点">
+                            <input class="form-control" type="text" placeholder="地点" name="hotel_place" id="hotel_address">
                             <i class="icon_pin_alt"></i>
                         </div>
                     </div>
@@ -140,9 +141,10 @@
                         </select>
                     </div>
                     <div class="col-lg-2">
-                        <input type="submit" class="btn_search" value="搜索">
+                        <input type="submit" class="btn_search" value="搜索" id="search_btn">
                     </div>
-                </div>
+                  </div>
+				</form>
                 <!-- /row -->
             </div>
             <!-- /custom-search-input-2 -->
@@ -217,7 +219,13 @@
 
 	
 	<div id="toTop"></div><!-- Back to top button -->
-	
+	<script>        //这里是用于检测搜索框的，如果为空则不允许点击
+	function check() {
+		if($('#hotel_address').val()==""&&$('#hotel_translated_name').val()==""){
+			return false;
+		}
+	}
+	</script>
 	<!-- COMMON SCRIPTS -->
     <script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
     <script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
