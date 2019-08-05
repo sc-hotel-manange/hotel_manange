@@ -123,8 +123,6 @@ public class UserOrderController {
         H_Hotel h_hotel = hotelService.selectHotelInfo(hotel_id);
         //更新该房间状态为预订
         orderService.orderRoom(h_room);
-        //减少该房型库存
-        roomTypeService.reduceStock(h_roomtype.getRtId());
         //计算用户住的天数
         int stay = orderService.calculateStay(o_checkin, o_checkout);
 
@@ -182,8 +180,6 @@ public class UserOrderController {
         orderService.deleteOrder(o_id, session.getId());
         //更新房间状态
         orderService.leaveRoom(h_room);
-        //增加该房型库存
-        roomTypeService.addStock(h_roomtype.getRtId());
 
         return "redirect:/user/orderList";
     }
