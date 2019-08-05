@@ -55,7 +55,11 @@ public class UserHotelController {
             Map<String, String> map = hotelService.selectByaddressName(hotel_address);
             hotellist = hotelService.selectAround(map.get("lng"),map.get("lat"));
         }
-        if(hotel_translated_name!=""){
+         else if(hotel_translated_name!=""){
+            hotellist =  hotelService.selectHotelList();
+            hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
+        }
+         else {
             hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
         }
         System.out.println(hotellist.size());

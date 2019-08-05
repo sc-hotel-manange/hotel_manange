@@ -29,11 +29,20 @@ public class AdminOrderController {
 
     //展示所有订单列表   返回订单List
     @GetMapping("/orderList")
-    public ModelAndView listOrder() {
+    public ModelAndView orderList() {
         ModelAndView mav = new ModelAndView("admin/orderList");
         List<H_Order> h_orders = orderService.listOrder();
 
         mav.addObject("h_orders", h_orders);
+        return mav;
+    }
+
+    //展示订单详情
+    @RequestMapping("/orderInfo")
+    public ModelAndView orderInfo(@RequestParam(value = "o_id") int o_id) {
+        ModelAndView mav = new ModelAndView("admin/orderInfo");
+        mav.addObject("order", orderService.orderInfo(o_id));
+
         return mav;
     }
 
