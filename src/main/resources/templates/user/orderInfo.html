@@ -110,6 +110,7 @@
 						<section id="description">
 							<h2>订单详情</h2>
 
+							<p th:text="${'订单号：'+h_order.oId}"></p>
 							<p th:text="${'酒店名称：'+h_order.hotelTranslatedName}"></p>
 							<p th:text="${'下单时间：'+h_order.oOrdertime}"></p>
 							<p th:text="${'预订房型：'+h_order.rtType}"></p>

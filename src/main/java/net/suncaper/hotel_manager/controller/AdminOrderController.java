@@ -7,6 +7,7 @@ import net.suncaper.hotel_manager.service.OrderService;
 import net.suncaper.hotel_manager.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +34,15 @@ public class AdminOrderController {
         List<H_Order> h_orders = orderService.listOrder();
 
         mav.addObject("h_orders", h_orders);
+        return mav;
+    }
+
+    //根据订单号搜索订单
+    @RequestMapping("/orderSearch")
+    public ModelAndView orderSearch(@RequestParam(value = "content") String content) {
+        ModelAndView mav = new ModelAndView("admin/orderList");
+        mav.addObject("h_orders", orderService.orderSearch(Integer.parseInt(content)));
+
         return mav;
     }
 

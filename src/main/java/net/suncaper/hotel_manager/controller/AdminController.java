@@ -22,7 +22,7 @@ public class AdminController {
     private AdminService adminService;
 
 
-    @RequestMapping("")   //登陆
+    @RequestMapping("")   //登录
     public String home() {
         return "admin/login";
     }
@@ -163,6 +163,15 @@ public class AdminController {
 
         model.addAttribute("checkUpdate", true);
         return "redirect:/admin/userInfo?u_id="+u_id;
+    }
+
+    //根据真实姓名搜索用户
+    @RequestMapping("/userSearch")
+    public ModelAndView userSearch(@RequestParam(value = "content") String content) {
+        ModelAndView mav = new ModelAndView("admin/userList");
+        mav.addObject("users", adminService.searchByName(content));
+
+        return mav;
     }
 
 }

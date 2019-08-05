@@ -52,8 +52,8 @@ public class AdminHotelController {
 
     @RequestMapping("/hotelSearch")
     public String hotelSearch(@PathParam(value = "type") String type,
-                                     @PathParam(value = "content")String content,
-                                     Model model){
+                              @PathParam(value = "content")String content,
+                              Model model){
         List<H_Hotel> h_hotelList ;
         if(type.equals("按名称搜索")){
             h_hotelList = hotelService.selectByTransName(content);

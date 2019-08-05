@@ -165,6 +165,7 @@ public class OrderService {
     public List<H_Order> listOrder(int u_id) {
         H_OrderExample example = new H_OrderExample();
         example.createCriteria().andUIdEqualTo(u_id);
+        example.setOrderByClause("o_id DESC"); //按订单时间降序排列，最新的订单在最前面
 
         return h_orderMapper.selectByExample(example);
     }
@@ -172,6 +173,15 @@ public class OrderService {
     //展示所有订单
     public List<H_Order> listOrder() {
         H_OrderExample example = new H_OrderExample();
+        example.setOrderByClause("o_id DESC"); //最新订单在最前面
+
+        return h_orderMapper.selectByExample(example);
+    }
+
+    //根据订单号搜索订单
+    public List<H_Order> orderSearch(int o_id) {
+        H_OrderExample example = new H_OrderExample();
+        example.createCriteria().andOIdEqualTo(o_id);
 
         return h_orderMapper.selectByExample(example);
     }

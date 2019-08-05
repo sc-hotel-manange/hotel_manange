@@ -24,6 +24,14 @@ public class AdminService {
         return h_userMapper.selectByExample(example);
     }
 
+    //根据用户真实姓名搜索
+    public List<H_User> searchByName(String content) {
+        H_UserExample example = new H_UserExample();
+        example.createCriteria().andUNameLike("%" + content + "%"); //模糊搜索
+
+        return h_userMapper.selectByExample(example);
+    }
+
     //返回某用户详细信息
     public H_User getUserInfo(int u_id) {
         return h_userMapper.selectByPrimaryKey(u_id);
