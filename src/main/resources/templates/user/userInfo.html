@@ -56,7 +56,7 @@
                 <li><span><a href="./orderList.html"th:href="@{/user/orderList}">订单</a></span>
 
                 </li>
-                <li><span><a href="#0">信息</a></span>
+                <li><span><a href="./userInfo.html" th:href="@{/user/userInfo}">信息</a></span>
 
                 </li>
                 <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
@@ -68,33 +68,12 @@
     <!-- /header -->
 
     <main>
+<!--        下面是表单！！！！！！！！！！！！！-->
+        <form action="/user/updateInfo"  method="post">
         <div class="hero_in cart_section">
             <div class="wrapper">
                 <div class="container">
                     <div class="bs-wizard clearfix">
-                        <!--<div class="bs-wizard-step">-->
-                            <!--<div class="text-center bs-wizard-stepnum">Your cart</div>-->
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar"></div>-->
-                            <!--</div>-->
-                            <!--<a href="cart-1.html" class="bs-wizard-dot"></a>-->
-                        <!--</div>-->
-
-                        <!--<div class="bs-wizard-step active">-->
-                            <!--<div class="text-center bs-wizard-stepnum">Payment</div>-->
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar"></div>-->
-                            <!--</div>-->
-                            <!--<a href="#0" class="bs-wizard-dot"></a>-->
-                        <!--</div>-->
-
-                        <!--<div class="bs-wizard-step disabled">-->
-                            <!--<div class="text-center bs-wizard-stepnum">Finish!</div>-->
-                            <!--<div class="progress">-->
-                                <!--<div class="progress-bar"></div>-->
-                            <!--</div>-->
-                            <!--<a href="#0" class="bs-wizard-dot"></a>-->
-                        <!--</div>-->
                         <h1 class="fadeInUp"><span></span>个人信息</h1>
                     </div>
                     <!-- End bs-wizard -->
@@ -104,53 +83,35 @@
         <!--/hero_in-->
 
         <div class="bg_color_1">
-            <div class="container margin_60_35">
-                <div class="row">
+            <div class="container margin_60_35 ">
+                <div class="row margin_left_more">
                     <div class="col-lg-8">
                         <div class="box_cart">
-                            <!--<div class="message">-->
-                                <!--<p>Exisitng Customer? <a href="#0">Click here to login</a></p>-->
-                            <!--</div>-->
                             <div class="form_title">
                                 <h3><strong>1</strong>账号信息</h3>
-                                <!--<p>-->
-                                    <!--Mussum ipsum cacilds, vidis litro abertis.-->
-                                <!--</p>-->
                             </div>
                             <div class="step">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>账号</label>
-                                            <input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
+                                            <input type="text" class="form-control" id="u_account" name="u_account" th:value="${userInfo.uAccount}">
                                         </div>
                                     </div>
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Last name</label>-->
-                                            <!--<input type="text" class="form-control" id="lastname_booking" name="lastname_booking">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>用户名</label>
-                                            <input type="email" id="email_booking" name="email_booking" class="form-control">
+                                            <input type="text" id="u_nickName" name="u_nickName" class="form-control" th:value="${userInfo.uNickname}">
                                         </div>
                                     </div>
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Confirm email</label>-->
-                                            <!--<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>密码</label>
-                                            <input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+                                            <input type="text" id="u_password" name="u_password" class="form-control" th:value="${userInfo.uPassword}">
                                         </div>
                                     </div>
                                 </div>
@@ -160,153 +121,63 @@
 
                             <div class="form_title">
                                 <h3><strong>2</strong>用户信息</h3>
-                                <!--<p>-->
-                                    <!--Mussum ipsum cacilds, vidis litro abertis.-->
-                                <!--</p>-->
                             </div>
                             <div class="step">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>真实姓名</label>
-                                            <input type="text" class="form-control" id="firstname_booking" name="firstname_booking">
+                                            <input type="text" class="form-control" id="u_name" name="u_name" th:value="${userInfo.uName}">
                                         </div>
                                     </div>
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Last name</label>-->
-                                            <!--<input type="text" class="form-control" id="lastname_booking" name="lastname_booking">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>电话</label>
-                                            <input type="email" id="email_booking" name="email_booking" class="form-control">
+                                            <input type="number" id="u_tel" name="u_tel" class="form-control" th:value="${userInfo.uTel}">
                                         </div>
                                     </div>
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Confirm email</label>-->
-                                            <!--<input type="email" id="email_booking_2" name="email_booking_2" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="form-group">
                                             <label>身份证号</label>
-                                            <input type="text" id="telephone_booking" name="telephone_booking" class="form-control">
+                                            <input type="text" id="u_idNumber" name="u_idNumber" class="form-control" th:value="${userInfo.uIdnumber}">
                                         </div>
                                     </div>
                                 </div>
+<!--                                下面是u_id    不显示-->
+                                <input type="text" th:value="${userInfo.uId}" style="display: none">
+
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <br>
+                                            <input type="submit" class="btn_search" value="更新" id="search_btn">
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                                <!--End row -->
-
-                                <!--<hr>-->
-
-                                <!--<h4>Or checkout with Paypal</h4>-->
-                                <!--<p>-->
-                                    <!--Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie, reque fierent dissentiunt mel ea.-->
-                                <!--</p>-->
-                                <!--<p>-->
-                                    <!--<a href="#0"><img src="img/paypal_bt.png" alt="Image"></a>-->
-                                <!--</p>-->
-                            <!--</div>-->
-                            <!--<hr>-->
-                            <!--End step -->
-
-                            <!--<div class="form_title">-->
-                                <!--<h3><strong>3</strong>Billing Address</h3>-->
-                                <!--<p>-->
-                                    <!--Mussum ipsum cacilds, vidis litro abertis.-->
-                                <!--</p>-->
-                            <!--</div>-->
-                            <!--<div class="step">-->
-                                <!--<div class="row">-->
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Country</label>-->
-                                            <!--<div class="custom-select-form">-->
-                                                <!--<select class="wide add_bottom_15" name="country" id="country">-->
-                                                    <!--<option value="" selected>Select your country</option>-->
-                                                    <!--<option value="Europe">Europe</option>-->
-                                                    <!--<option value="United states">United states</option>-->
-                                                    <!--<option value="Asia">Asia</option>-->
-                                                <!--</select>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="row">-->
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Street line 1</label>-->
-                                            <!--<input type="text" id="street_1" name="street_1" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Street line 2</label>-->
-                                            <!--<input type="text" id="street_2" name="street_2" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="row">-->
-                                    <!--<div class="col-md-6 col-sm-12">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>City</label>-->
-                                            <!--<input type="text" id="city_booking" name="city_booking" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-md-3 col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>State</label>-->
-                                            <!--<input type="text" id="state_booking" name="state_booking" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-md-3 col-sm-6">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Postal code</label>-->
-                                            <!--<input type="text" id="postal_code" name="postal_code" class="form-control">-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--&lt;!&ndash;End row &ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<hr>-->
-                            <!--End step -->
-                            <!--<div id="policy">-->
-                                <!--<h5>Cancellation policy</h5>-->
-                                <!--<p class="nomargin">Lorem ipsum dolor sit amet, vix <a href="#0">cu justo blandit deleniti</a>, discere omittantur consectetuer per eu. Percipit repudiare similique ad sed, vix ad decore nullam ornatus.</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /col &ndash;&gt;-->
-
-                    <!--<aside class="col-lg-4" id="sidebar">-->
-                        <!--<div class="box_detail">-->
-                            <!--<div id="total_cart">-->
-                                <!--Total <span class="float-right">69.00$</span>-->
-                            <!--</div>-->
-                            <!--<ul class="cart_details">-->
-                                <!--<li>From <span>02-11-18</span></li>-->
-                                <!--<li>To <span>04-11-18</span></li>-->
-                                <!--<li>Adults <span>2</span></li>-->
-                                <!--<li>Childs <span>1</span></li>-->
-                            <!--</ul>-->
-                            <!--<a href="cart-3.html" class="btn_1 full-width purchase">Purchase</a>-->
-                            <!--<div class="text-center"><small>No money charged in this step</small></div>-->
-                        <!--</div>-->
-                    <!--</aside>-->
                 </div>
                 <!-- /row -->
+
             </div>
             <!-- /container -->
-        </div>
+
+
+
+            </div>
         <!-- /bg_color_1 -->
+            </div>
+            </div>
+
+        </form>
     </main>
+
     <!--/main-->
 
     <footer>            <!--	下面是页脚-->
@@ -343,54 +214,7 @@
     <!--/footer-->
 </div>
 <!-- page -->
-
-<!-- Sign In Popup -->
-<!--<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">-->
-    <!--<div class="small-dialog-header">-->
-        <!--<h3>Sign In</h3>-->
-    <!--</div>-->
-    <!--<form>-->
-        <!--<div class="sign-in-wrapper">-->
-            <!--<a href="#0" class="social_bt facebook">Login with Facebook</a>-->
-            <!--<a href="#0" class="social_bt google">Login with Google</a>-->
-            <!--<div class="divider"><span>Or</span></div>-->
-            <!--<div class="form-group">-->
-                <!--<label>Email</label>-->
-                <!--<input type="email" class="form-control" name="email" id="email">-->
-                <!--<i class="icon_mail_alt"></i>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label>Password</label>-->
-                <!--<input type="password" class="form-control" name="password" id="password" value="">-->
-                <!--<i class="icon_lock_alt"></i>-->
-            <!--</div>-->
-            <!--<div class="clearfix add_bottom_15">-->
-                <!--<div class="checkboxes float-left">-->
-                    <!--<label class="container_check">Remember me-->
-                        <!--<input type="checkbox">-->
-                        <!--<span class="checkmark"></span>-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<div class="float-right mt-1"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>-->
-            <!--</div>-->
-            <!--<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>-->
-            <!--<div class="text-center">-->
-                <!--Don’t have an account? <a href="register.html">Sign up</a>-->
-            <!--</div>-->
-            <!--<div id="forgot_pw">-->
-                <!--<div class="form-group">-->
-                    <!--<label>Please confirm login email below</label>-->
-                    <!--<input type="email" class="form-control" name="email_forgot" id="email_forgot">-->
-                    <!--<i class="icon_mail_alt"></i>-->
-                <!--</div>-->
-                <!--<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>-->
-                <!--<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-    <!--form -->
 </div>
-<!-- /Sign In Popup -->
 
 <div id="toTop"></div><!-- Back to top button -->
 
@@ -401,6 +225,41 @@
 <script src="../../static/assets/validate.js" th:src="@{/assets/validate.js}"></script>
 
 
-
 </body>
 </html>
+<style itemscope>
+    /*修改btn样式*/
+    .btn_search{
+        transition: all 0.3s ease-in-out;
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        font-size: 0.875rem;
+        border: 0;
+        padding: 0 25px;
+        height: 50px;
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+        -webkit-border-radius: 0 3px 3px 0;
+        -moz-border-radius: 0 3px 3px 0;
+        -ms-border-radius: 0 3px 3px 0;
+        border-radius: 0 3px 3px 0;
+        background-color: #00a7d0;
+        margin-right: -1px;
+    }
+    /*下面去除input框为number类型时的箭头*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    input[type="number"]{
+        -moz-appearance: textfield;
+    }
+    /*.margin_left_less{*/
+    /*    margin-left: 40px;*/
+    /*}*/
+    /*.margin_left_more{*/
+    /*    margin-left: 300px !important;*/
+    /*}*/
+</style>
