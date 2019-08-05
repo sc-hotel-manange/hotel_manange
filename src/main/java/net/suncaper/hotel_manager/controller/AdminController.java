@@ -101,12 +101,14 @@ public class AdminController {
     //更新管理员信息
     @RequestMapping("/adminUpdate")
     public ModelAndView adminUpdate(@RequestParam(value = "a_id") int a_id,
+                                    @RequestParam(value = "hotel_id") int hotel_id,
                                     @RequestParam(value = "a_account") String a_account,
                                     @RequestParam(value = "a_password") String a_password,
                                     @RequestParam(value = "a_permission") String a_permission) {
 
         H_Admin h_admin = new H_Admin();
         h_admin.setaId(a_id);
+        h_admin.setHotelId(hotel_id);
         h_admin.setaAccount(a_account);
         h_admin.setaPassword(a_password);
         h_admin.setaPermission(a_permission);
