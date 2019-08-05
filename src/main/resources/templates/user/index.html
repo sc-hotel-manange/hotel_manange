@@ -352,6 +352,13 @@
 
 <!--百度地图服务-->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+<script>        //这里是用于检测搜索框的，如果为空则不允许点击
+function check() {
+	if($('#hotel_address').val()==""&&$('#hotel_translated_name').val()==""){
+		return false;
+	}
+}
+</script>
 <script type="text/javascript">
     // 百度地图API功能
     $(function () {
