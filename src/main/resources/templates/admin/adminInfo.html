@@ -202,15 +202,15 @@
         <!-- <li class="header">HEADER</li> -->
         <!-- Optionally, you can add icons to the links -->
         <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu ">
-            <li><a href="adminInfo.html" th:href="@{/admin/userInfo}">用户信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/admin/adminInfo}">管理员信息</a></li>
+          <ul class="treeview-menu">
+            <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户列表</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员列表</a></li>
           </ul>
         </li>
 
@@ -249,25 +249,24 @@
             </div> -->
             <!-- /.box-header -->
             <div class="box-body">
-              <form role="form">
+              <form role="form" action="/admin/adminUpdate" method="post">
                 <!-- text input -->
                 <div class="form-group">
                   <label>账号</label>
-                  <input type="text" class="form-control" th:placeholder="${adminInfo.aAccount}"  disabled>
+                  <input type="text" class="form-control" th:value="${adminInfo.aAccount}" name="a_account">
                 </div>
                 <div class="form-group" type='password'>
                   <label>密码</label>
-                  <input type="text" class="form-control" th:placeholder="${adminInfo.aPassword}"  disabled>
+                  <input type="text" class="form-control" th:value="${adminInfo.aPassword}" name="a_password">
                 </div>
                 <div class="form-group">
                     <label>权限</label>
-                    <input type="text" class="form-control" th:placeholder="${adminInfo.aPermission}" disabled>
-                  </div>
-                <!-- textarea -->
-                <div class="form-group">
-                  <label>简介</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
+                    <input type="text" class="form-control" th:value="${adminInfo.aPermission}" name="a_permission">
                 </div>
+
+                <input type="text" th:value="${adminInfo.aId}" style="display: none" name="a_id">
+
+                <button type="submit" class="btn btn-block btn-info hotel-info-btn">更改</button>
     <!-- /.content -->
               </form>
   </div>

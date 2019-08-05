@@ -210,14 +210,14 @@
         <!-- Optionally, you can add icons to the links -->
         <li class=""><a href="./starter.html" th:href="@{/admin/starter}"><i class="fa fa-university"></i> <span>首页</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-tag active" ></i> <span>用户列表</span>
+          <a href="#"><i class="fa fa-tag"></i> <span>用户列表</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户信息</a></li>
-            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员信息</a></li>
+            <li><a href="adminInfo.html" th:href="@{/admin/userList}">用户列表</a></li>
+            <li><a href="alterInfo.html" th:href="@{/admin/adminList}">管理员列表</a></li>
           </ul>
         </li>
 
@@ -247,9 +247,7 @@
     <section class="content container-fluid">
 
 <!--      搜索栏        !!!!!!!!!!!!!!!!!!!!-->
-
-<!--      这里需要更改！！！！！！！！！！！！！！改成userSearch-->
-      <form th:action="@{'/admin/hotelInfo'}" method="get" class="sidebar-form whitebkg">
+      <form th:action="@{'/admin/adminSearch'}" method="get" class="sidebar-form whitebkg">
         <div class="input-group">
           <input name="type" th:value="按名称搜索" style="display: none">
           <input type="text" name="content" class="form-control" placeholder="Search...">
@@ -277,17 +275,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="user : ${admin}">
-                    <td th:text="${user.uId}">
+                  <tr th:each="admin : ${adminList}">
+                    <td th:text="${admin.aId}">
                     </td>
-                    <td th:text="${user.uAccount}">
+                    <td th:text="${admin.aAccount}">
                     </td>
-                    <td th:text="${user.uName}">
+                    <td th:text="${admin.aPassword}">
                     </td>
-                    <td th:text="${user.uTel}">
+                    <td th:text="${admin.aPermission}">
                     </td>
                     <td>
-                      <a th:href="@{'/admin/userInfo?u_id='+ ${user.uId}}">
+                      <a th:href="@{'/admin/adminInfo?a_id='+ ${admin.aId}}">
                         <button type="submit" class="btn btn-block btn-info hotel-info-btn">修改</button>
                       </a>
                     </td>
