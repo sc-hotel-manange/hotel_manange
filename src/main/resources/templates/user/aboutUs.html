@@ -61,10 +61,11 @@
                 <li><span><a href="./foodInfo.html" th:href="@{/user/foodInfo}">饮食</a></span>
 
                 </li>
-                <li><span><a href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
+                <li ><span><a href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
 
                 </li>
-                <li><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人信息</a></span>
+                <li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人中心</a></span>
+                <li th:if="${session.u_id} == null" ><span><a href="./login.html" th:href="@{/user/loginPage}">请登录</a></span>
 
                 </li>
                 <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
