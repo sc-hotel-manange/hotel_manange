@@ -45,16 +45,13 @@ public class AdminController {
     @RequestMapping("/login")
     public String login(@PathParam(value = "a_account") String a_account,
                         @PathParam(value = "a_password") String a_password,
-                        HttpServletResponse response,
-                        HttpServletRequest request,
-                        Model model){
+                        HttpServletRequest request){
         Integer a_id = adminService.getIdByAccountAndPwd(a_account,a_password);
 
         if(a_id == -1){
             return "redirect:/admin/";
         }
         else {
-
             Session a = new Session(a_id);
             request.getSession().setAttribute("a_id",new Session(a_id));
             return  "admin/starter";
@@ -94,20 +91,39 @@ public class AdminController {
         return mav;
     }
 
-    @RequestMapping("/adminInfo")  //管理员信息
-    public String adminInfo(HttpServletRequest request, Model model) {
-        Session Admin = (Session)request.getSession().getAttribute("a_id");     //这里使用session
-        model.addAttribute("adminInfo",adminService.getAdminInfo(Admin.getId()));
+    //管理员信息
+    @RequestMapping("/adminInfo")
+    public String adminInfo(@RequestParam(value = "a_id") int a_id, Model model) {
+        model.addAttribute("adminInfo",adminService.getAdminInfo(a_id));
         return "admin/adminInfo";
     }
 
-    @GetMapping("/alterinfo")  //修改管理员信息
-    public String getAlterInfo(HttpServletRequest request,Model model) {
+    //更新管理员信息
+    @RequestMapping("/adminUpdate")
+    public ModelAndView adminUpdate(@RequestParam(value = "a_id") int a_id,
+                                    @RequestParam(value = "a_account") String a_account,
+                                    @RequestParam(value = "a_password") String a_password,
+                                    @RequestParam(value = "a_permission") String a_permission) {
 
-        Session Admin = (Session)request.getSession().getAttribute("a_id");      //这里现在是使用session
-        int a_id = Admin.getId();
-        model.addAttribute("adminInfo",adminService.getAdminInfo(a_id));
-        return "admin/alterinfo";
+        H_Admin h_admin = new H_Admin();
+        h_admin.setaId(a_id);
+        h_admin.setaAccount(a_account);
+        h_admin.setaPassword(a_password);
+        h_admin.setaPermission(a_permission);
+        adminService.updateInfo(h_admin);
+
+        ModelAndView mav = new ModelAndView("redirect:/admin/adminInfo?a_id=" + a_id);
+        mav.addObject("adminInfo", h_admin);
+
+        return mav;
+    }
+
+    @RequestMapping("/adminSearch")
+    public ModelAndView adminSearch(@RequestParam(value = "content") String content) {
+        ModelAndView mav = new ModelAndView("admin/adminList");
+        mav.addObject("adminList", adminService.searchAdmin(content));
+
+        return mav;
     }
 
     @RequestMapping("/InsertAlterInfo")
@@ -143,13 +159,13 @@ public class AdminController {
 
     @RequestMapping("/userUpdate")
     public String userUpdate(@PathParam(value = "u_id") int u_id,
-                              @PathParam(value = "u_nickName") String u_nickName,
-                              @PathParam(value = "u_account") String u_account,
-                              @PathParam(value = "u_name")String u_name,
-                              @PathParam(value = "u_tel") String u_tel,
-                              @PathParam(value = "u_password") String u_password,
-                              @PathParam(value = "u_idNumber") String u_idNumber,
-                            Model model) {
+                             @PathParam(value = "u_nickName") String u_nickName,
+                             @PathParam(value = "u_account") String u_account,
+                             @PathParam(value = "u_name")String u_name,
+                             @PathParam(value = "u_tel") String u_tel,
+                             @PathParam(value = "u_password") String u_password,
+                             @PathParam(value = "u_idNumber") String u_idNumber,
+                             Model model) {
 
         H_User h_user = new H_User();
         h_user.setuId(u_id);
@@ -169,7 +185,7 @@ public class AdminController {
     @RequestMapping("/userSearch")
     public ModelAndView userSearch(@RequestParam(value = "content") String content) {
         ModelAndView mav = new ModelAndView("admin/userList");
-        mav.addObject("users", adminService.searchByName(content));
+        mav.addObject("users", adminService.searchUser(content));
 
         return mav;
     }

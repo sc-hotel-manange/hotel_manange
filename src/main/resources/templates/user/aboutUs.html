@@ -61,10 +61,11 @@
                 <li><span><a href="./foodInfo.html" th:href="@{/user/foodInfo}">饮食</a></span>
 
                 </li>
-                <li><span><a href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
+                <li ><span><a href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
 
                 </li>
-                <li><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人信息</a></span>
+                <li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人中心</a></span>
+                <li th:if="${session.u_id} == null" ><span><a href="./login.html" th:href="@{/user/loginPage}">请登录</a></span>
 
                 </li>
                 <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
@@ -90,12 +91,19 @@
                 <span><em></em></span>
                 <h2>介绍</h2>
             </div>
-            <div>
+            <div align="center">
                 <ul>
                     <li>
-                        汤神酒店辅助管理系统是一个提供给用户和酒店管理者的酒店系统。四个团队成员黄鹏橙，汤神，代勉，姜人楷基于供应商提供的数据和接口完成酒店辅助订购系统的开发。
-                        系统界面简洁优美，操作直观简单，无需专门培训即可正常使用。是广大酒店宾馆，饭店，旅馆，招待所等信息化管理场所理想的宾馆客房管理软件。
-
+                        汤神科技有限公司，旗下产品汤神酒店辅助管理系统，创始团队来自电子科技大学。
+                    </li>
+                    <li>
+                        历经时间积累，逐步形成了一套适合于经济型连锁酒店、中高端酒店使用的全套酒店产品。
+                    </li>
+                    <li>
+                        公司立志于给酒店提供最好用的酒店系统，汤神酒店辅助管理系统面世之后，广受市场欢迎，公司飞速发展。
+                    </li>
+                    <li>
+                        截止当前已经为100多家连锁集团，15000多单体酒店提供服务。
                     </li>
                     <!--<li>-->
                     <!--&lt;!&ndash;<figure>&ndash;&gt;-->
