@@ -73,10 +73,18 @@ public class AdminService {
         h_adminMapper.insert(h_admin);
     }
 
-    //管理员列表
-    public List<H_Admin> getAdminList() {
+    //管理员列表，若是超级管理员则显示全部，普通酒店管理员则只显示自己
+    public List<H_Admin> getAdminList(int a_id) {
+        H_Admin h_admin = getAdminInfo(a_id);
         H_AdminExample example = new H_AdminExample();
-        return h_adminMapper.selectByExample(example);
+
+        //超级管理员
+        if("0".equals(h_admin.getaPermission())){
+            return h_adminMapper.selectByExample(example);
+        }else {
+            example.createCriteria().andAIdEqualTo(a_id);
+            return h_adminMapper.selectByExample(example);
+        }
     }
 
     //获取管理员信息

@@ -82,11 +82,13 @@ public class AdminController {
 //        return "admin/login";
 //    }
 
-    //管理员列表
+    //管理员列表，区别超级管理员和普通酒店管理员
     @RequestMapping("/adminList")
-    public ModelAndView adminList() {
+    public ModelAndView adminList(HttpServletRequest request) {
+        Session session = (Session)request.getSession().getAttribute("a_id");
+
         ModelAndView mav = new ModelAndView("admin/adminList");
-        mav.addObject("adminList", adminService.getAdminList());
+        mav.addObject("adminList", adminService.getAdminList(session.getId()));
 
         return mav;
     }
@@ -126,19 +128,6 @@ public class AdminController {
         mav.addObject("adminList", adminService.searchAdmin(content));
 
         return mav;
-    }
-
-    @RequestMapping("/InsertAlterInfo")
-    public String postAlterInfo(@PathParam(value = "a_password") String a_password,
-                                HttpServletRequest request){
-        Session Admin = (Session)request.getSession().getAttribute("a_id");      //这里现在是使用session
-        int a_id = Admin.getId();
-        H_Admin h_admin =  adminService.getAdminInfo(a_id);
-
-        h_admin.setaPassword(a_password);
-
-        adminService.updateInfo(h_admin);
-        return "redirect:adminInfo";        //修改完信息后重新跳转到个人信息界面
     }
 
     @RequestMapping("/userList")
