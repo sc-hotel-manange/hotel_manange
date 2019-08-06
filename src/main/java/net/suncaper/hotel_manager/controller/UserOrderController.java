@@ -78,13 +78,13 @@ public class UserOrderController {
          List<H_Order> orders = orderService.listOrder(u_id);
 
 
-        if(dates!="") {
+        if(!"".equals(dates)) {
             Date[] dataArray = orderService.parseDates(dates);
             Date dateStart = dataArray[0];
             Date dateEnd = dataArray[1];
             orders = orderService.orderFitData(orders,dateStart,dateEnd);
         }
-        if(hotel_translated_name!=""){
+        if(!"".equals(hotel_translated_name)){
             orders = orderService.orderFitName(orders,hotel_translated_name);
         }
 

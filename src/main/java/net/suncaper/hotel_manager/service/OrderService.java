@@ -115,18 +115,18 @@ public class OrderService {
     //保留订单数组中符合前端传回的订单状态的订单
     public List<H_Order> orderFitStatus(List<H_Order> orders,String o_status){
         String status = "-1";
-        if (o_status=="全部"){status = "-1";}
-        if (o_status=="待支付"){status = "0";}
-        if (o_status=="已确认"){status = "1";}
-        if (o_status=="已成交"){status = "2";}
-        if (o_status=="已取消"){status = "3";}
-        if (status=="-1"){
+        if ("全部".equals(o_status)){status = "-1";}
+        if ("待支付".equals(o_status)){status = "0";}
+        if ("已确认".equals(o_status)){status = "1";}
+        if ("已成交".equals(o_status)){status = "2";}
+        if ("已取消".equals(o_status)){status = "3";}
+        if ("-1".equals(status)){
             return orders;
         }
         else{
             for (int i = 0; i < orders.size(); i++) {
                 String RealStatus = orders.get(i).getoStatus();
-                if (status!=RealStatus) {
+                if (!status.equals(RealStatus)) {
                     orders.remove(i);
                     i--;
                 }
