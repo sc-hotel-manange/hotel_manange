@@ -32,6 +32,25 @@ public class AdminController {
         return "admin/register";
     }
 
+    @RequestMapping("/register")
+    public String register(@RequestParam(value = "a_account") String a_account,
+                           @RequestParam(value = "a_password") String a_password,
+                           @RequestParam(value = "hotel_id") int hotel_id,
+                           @RequestParam(value = "a_permission") String a_permission) {
+        int a_id = adminService.getIdByAccount(a_account);
+        if(a_id == -1) {
+            H_Admin h_admin = new H_Admin();
+            h_admin.setaAccount(a_account);
+            h_admin.setaPassword(a_password);
+            h_admin.setHotelId(hotel_id);
+            h_admin.setaPermission(a_permission);
+            adminService.insertAdmin(h_admin);
+        }else {
+            return "admin/register";
+        }
+        return "redirect:/admin/adminList";
+    }
+
     @RequestMapping("/term")   //条款
     public String term() {
         return "admin/term";
@@ -58,29 +77,7 @@ public class AdminController {
         }
     }
 
-//    @RequestMapping("/register")
-//    public String register(@PathParam(value = "a_name")String a_name,
-//                           @PathParam(value = "a_tel") String a_tel,
-//                           @PathParam(value = "a_nickName") String a_nickName,
-//                           @PathParam(value = "a_account") String a_account,
-//                           @PathParam(value = "a_password") String a_password,
-//                           @PathParam(value = "a_idNumber") String a_idNumber) {
-//        int a_id = adminService.getIdByAccount(a_account);
-//        if(a_id == -1) {
-//            H_Admin h_admin = new H_Admin();
-//            h_admin.setuName(a_name);
-//            h_admin.setuTel(a_tel);
-//            h_admin.setuNickname(a_nickName);
-//            h_admin.setuAccount(a_account);
-//            h_admin.setuPassword(a_password);
-//            h_admin.setuIdnumber(a_idNumber);
-//
-//            adminService.insertAdmin(h_admin);
-//        }else {
-//            return "admin/register";
-//        }
-//        return "admin/login";
-//    }
+
 
     //管理员列表，区别超级管理员和普通酒店管理员
     @RequestMapping("/adminList")
@@ -89,6 +86,7 @@ public class AdminController {
 
         ModelAndView mav = new ModelAndView("admin/adminList");
         mav.addObject("adminList", adminService.getAdminList(session.getId()));
+        mav.addObject("a_permission", Integer.parseInt(adminService.getAdminInfo(session.getId()).getaPermission()));
 
         return mav;
     }
@@ -96,7 +94,8 @@ public class AdminController {
     //管理员信息
     @RequestMapping("/adminInfo")
     public String adminInfo(@RequestParam(value = "a_id") int a_id, Model model) {
-        model.addAttribute("adminInfo",adminService.getAdminInfo(a_id));
+        model.addAttribute("adminInfo", adminService.getAdminInfo(a_id));
+        model.addAttribute("a_permission", Integer.parseInt(adminService.getAdminInfo(a_id).getaPermission()));
         return "admin/adminInfo";
     }
 

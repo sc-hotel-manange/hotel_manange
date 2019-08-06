@@ -59,7 +59,7 @@ public class AdminService {
     }
 
     public int getIdByAccount(String a_account){
-         H_AdminExample example = new  H_AdminExample();
+        H_AdminExample example = new  H_AdminExample();
         example.createCriteria().andAAccountEqualTo(a_account);
 
         List<H_Admin> h_admins = h_adminMapper.selectByExample(example);
@@ -79,7 +79,7 @@ public class AdminService {
         H_AdminExample example = new H_AdminExample();
 
         //超级管理员
-        if("0".equals(h_admin.getaPermission())){
+        if("1".equals(h_admin.getaPermission())){
             return h_adminMapper.selectByExample(example);
         }else {
             example.createCriteria().andAIdEqualTo(a_id);

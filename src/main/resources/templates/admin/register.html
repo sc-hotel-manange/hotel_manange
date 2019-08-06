@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>注册-酒店</title>
+  <title>管理员-酒店</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -22,31 +22,19 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="register.html"><b>注册</b></a>
+    <a href="register.html"><b>增加管理员</b></a>
   </div>
 
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
 
-    <form action="register" method="post">
+    <form action="/admin/register" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="姓名" id="u_name" name="u_name">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="number" class="form-control" placeholder="电话" id="u_tel" name="u_tel">
-        <span class="fa fa-phone form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="用户名" id="u_nickName" name="u_nickName">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="账号" id="u_account" name="u_account">
+        <input type="text" class="form-control" placeholder="账号" id="a_account" name="a_account">
         <span class="fa fa-child form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码" id="u_password" name="u_password">
+        <input type="password" class="form-control" placeholder="密码" id="a_password" name="a_password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -54,17 +42,14 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="text"  class="form-control" placeholder="身份证号" id="u_idNumber" name="u_idNumber">
+        <input type="text"  class="form-control" placeholder="酒店ID" id="hotel_id" name="hotel_id">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text"  class="form-control" placeholder="权限: 1是超级管理员，0是普通管理员" id="a_permission" name="a_permission">
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> 我同意 <a href="./term.html" th:href="@{/admin/term}">条款</a>
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat sign_in9">注册</button>
@@ -72,7 +57,6 @@
         <!-- /.col -->
       </div>
     </form>
-    <a  href="./login.html"  th:href="@{/admin/}" class="text-center">我已经有账号了</a>
   </div>
   <!-- /.form-box -->
 </div>
