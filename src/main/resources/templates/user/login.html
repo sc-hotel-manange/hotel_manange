@@ -41,6 +41,9 @@
 					<label>用户名</label>
 					<input type="text" class="form-control" name="u_account" id="u_account">
 					<i class=" ti-user"></i>
+					<div class="error_account">          <!--style="display: none;"-->
+						账号错误!
+					</div>
 				</div>
 				<div class="form-group">
 					<label>密码</label>
@@ -74,7 +77,24 @@
 </html>
 
 <style itemscope>
+	.error_account{
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		/*background: white;*/
+		border-radius: 3px;
+		/*border: 1px solid #d2d8dd;*/
+		color: red;
+		/*height: 42px;*/
+		width: 100%;
+		overflow: hidden; /*防止内容超出容器或者产生自动换行*/
+		/*line-height: 42px; !*设置line-height与父级元素的height相等*!*/
+		margin-top: 5px;
+		padding-left: 10px;
+		font-weight: bold;
+	}
 	label{
 		color: white;
+	}
+	.form-group{
+		margin-bottom: 0.5rem !important;
 	}
 </style>
