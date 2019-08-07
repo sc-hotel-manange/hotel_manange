@@ -61,10 +61,11 @@
                 </li>
                 <li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人中心</a></span>
                 <li th:if="${session.u_id} == null" ><span><a href="./login.html" th:href="@{/user/loginPage}">请登录</a></span>
+                </li>
 
-                </li>
-                <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
-                </li>
+                <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span></li>
+
+                <li th:if="${session.u_id} != null" ><span><a href="./index.html" th:href="@{/user/logout}">退出</a></span></li>
             </ul>
         </nav>
 

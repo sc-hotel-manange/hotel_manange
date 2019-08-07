@@ -57,6 +57,8 @@
 				</li>
 				<li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
 				</li>
+
+				<li th:if="${session.u_id} != null" ><span><a href="./index.html" th:href="@{/user/logout}">退出</a></span></li>
 			</ul>
 		</nav>
 
@@ -207,9 +209,10 @@
 
 						<form action="/user/order" method="post">        <!-- 在这里发送订单哦！！！！！！！！-->
 							<div class="form-group">
-								<input class="form-control" type="text" name="dates" placeholder="时间" autocomplete="off">
+								<input class="form-control" type="text" name="dates" placeholder="时间" autocomplete="off" required="required">
 								<i class="icon_calendar"></i>
 							</div>
+
 
 							<div class="form-group clearfix">
 								<div class="custom-select-form">
@@ -224,10 +227,10 @@
 								</div>
 							</div>
 <!--							下面这个input框用来提交hotel_id   ！！！！！！！！！！-->
-                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${hotelInfo.hotelId}">
+                            <input type="text" id="hotel_id" name="hotel_id" style="display: none" th:value="${hotelInfo.hotelId}" >
 <!--							下面这个input框用来提交电话 !!!!!!!!!!!!!!!!-->
                             <div class="form-group ">
-                                <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话">
+                                <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话" required="required">
                             </div>
 <!--							提交按钮   ！！！！！！！！！！！！！！！！！！-->
 							<div class="form-group col-md-12 add_top_20">

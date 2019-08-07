@@ -56,6 +56,8 @@
 				</li>
 				<li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
 				</li>
+
+				<li th:if="${session.u_id} != null" ><span><a href="./index.html" th:href="@{/user/logout}">退出</a></span></li>
 			</ul>
 		</nav>
 
