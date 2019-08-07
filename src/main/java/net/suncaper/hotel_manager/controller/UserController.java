@@ -105,6 +105,7 @@ public class UserController {
 
             userService.insertUser(h_user);
         }else {
+            model.addAttribute("no",true);
             return "user/register";
         }
         return "user/login";
