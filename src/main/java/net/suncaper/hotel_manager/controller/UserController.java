@@ -4,6 +4,7 @@ import net.suncaper.hotel_manager.domain.H_User;
 import net.suncaper.hotel_manager.domain.Session;
 import net.suncaper.hotel_manager.service.HotelService;
 import net.suncaper.hotel_manager.service.UserService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -147,7 +148,7 @@ public class UserController {
     @RequestMapping("/sendEmail")
     public ModelAndView sendEmail(@RequestParam(value = "email") String email) {
         ModelAndView mav = new ModelAndView("user/verify");
-        String code = "1234";   //测试用
+        String code = RandomStringUtils.randomAlphanumeric(4);
 
         userService.sendMail(email, code);
         mav.addObject("code", code);
