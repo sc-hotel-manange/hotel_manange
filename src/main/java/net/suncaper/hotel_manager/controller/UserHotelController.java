@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,17 +51,17 @@ public class UserHotelController {
     public String hotelSearch(@PathParam(value = "hotel_translated_name") String hotel_translated_name,
                               @PathParam(value = "hotel_address") String  hotel_address,
                               Model model){
-        List<H_Hotel> hotellist = null;
-        if (hotel_address!=""){
+        List<H_Hotel> hotellist = new ArrayList<>();
+        if (!"".equals(hotel_address)){
             Map<String, String> map = hotelService.selectByaddressName(hotel_address);
             hotellist = hotelService.selectAround(map.get("lng"),map.get("lat"));
         }
-         else if(hotel_translated_name!=""){
+        if(!"".equals(hotel_translated_name)){
             hotellist =  hotelService.selectHotelList();
             hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
         }
          else {
-            hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
+             hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
         }
         System.out.println(hotellist.size());
         model.addAttribute("hotelList",hotellist);

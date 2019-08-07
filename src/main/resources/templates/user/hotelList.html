@@ -28,11 +28,6 @@
 		
 	<header class="header menu_fixed">
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
-		<ul id="top_menu">
-			<li><a href="" class="cart-menu-btn" title="购物车"><strong>4</strong></a></li>
-			<li><a href="./login.html" th:href="@{/user/loginPage}"  class="login" title="登陆">登陆</a></li>
-			<li><a href="" class="wishlist_bt_top" title="喜欢">喜欢</a></li>
-		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -78,36 +73,6 @@
 			</div>
 		</section>
 		<!--/hero_in-->
-		
-		<div class="filters_listing sticky_horizontal">
-			<div class="container">
-				<ul class="clearfix">
-					<li>
-						<div class="switch-field">
-							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
-							<label for="all">全部</label>
-							<input type="radio" id="popular" name="listing_filter" value="popular" data-filter=".popular">
-							<label for="popular">热门</label>
-							<input type="radio" id="latest" name="listing_filter" value="latest" data-filter=".latest">
-							<label for="latest">高档</label>
-						</div>
-					</li>
-					<li>
-						<div class="layout_view">
-							<a href="" class="active"><i class="icon-th"></i></a>
-							<a href=""><i class="icon-th-list"></i></a>
-						</div>
-					</li>
-
-<!--					这里是地图哦-->
-					<li>
-						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="查看地图">查看地图</a>
-					</li>
-				</ul>
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /filters -->
 
 		<div class="collapse" id="collapseMap">
 			<div id="map" class="map"></div>

@@ -63,6 +63,7 @@ public class UserController {
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 
         if(u_id == -1){
+            model.addAttribute("no",false);
             return "redirect:/user/login";
         }
         else {
@@ -74,13 +75,22 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("u_id");
+
+        return "redirect:/user/index";
+    }
+
     @RequestMapping("/register")
     public String register(@PathParam(value = "u_name")String u_name,
                            @PathParam(value = "u_tel") String u_tel,
                            @PathParam(value = "u_nickName") String u_nickName,
                            @PathParam(value = "u_account") String u_account,
                            @PathParam(value = "u_password") String u_password,
-                           @PathParam(value = "u_idNumber") String u_idNumber) {
+                           @PathParam(value = "u_idNumber") String u_idNumber,
+                           @PathParam(value = "u_email") String u_email,
+                           Model model) {
         int u_id = userService.getIdByAccount(u_account);
         if(u_id == -1) {
             H_User h_user = new H_User();
@@ -90,6 +100,7 @@ public class UserController {
             h_user.setuAccount(u_account);
             h_user.setuPassword(u_password);
             h_user.setuIdnumber(u_idNumber);
+            h_user.setuEmail(u_email);
 
             userService.insertUser(h_user);
         }else {

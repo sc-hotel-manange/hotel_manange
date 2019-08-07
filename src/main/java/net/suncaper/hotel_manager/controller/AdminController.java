@@ -64,20 +64,27 @@ public class AdminController {
     @RequestMapping("/login")
     public String login(@PathParam(value = "a_account") String a_account,
                         @PathParam(value = "a_password") String a_password,
-                        HttpServletRequest request){
+                        HttpServletRequest request,
+                        Model model){
         Integer a_id = adminService.getIdByAccountAndPwd(a_account,a_password);
 
         if(a_id == -1){
+            model.addAttribute("no",false);
             return "redirect:/admin/";
         }
         else {
             Session a = new Session(a_id);
             request.getSession().setAttribute("a_id",new Session(a_id));
-            return  "admin/starter";
+            return  "redirect:/admin/hotelList";
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("a_id");
 
+        return "redirect:/admin/";
+    }
 
     //管理员列表，区别超级管理员和普通酒店管理员
     @RequestMapping("/adminList")
