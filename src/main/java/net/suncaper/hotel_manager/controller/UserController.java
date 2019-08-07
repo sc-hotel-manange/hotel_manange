@@ -63,6 +63,7 @@ public class UserController {
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 
         if(u_id == -1){
+            model.addAttribute("no",false);
             return "redirect:/user/login";
         }
         else {
@@ -80,7 +81,8 @@ public class UserController {
                            @PathParam(value = "u_nickName") String u_nickName,
                            @PathParam(value = "u_account") String u_account,
                            @PathParam(value = "u_password") String u_password,
-                           @PathParam(value = "u_idNumber") String u_idNumber) {
+                           @PathParam(value = "u_idNumber") String u_idNumber,
+                           Model model) {
         int u_id = userService.getIdByAccount(u_account);
         if(u_id == -1) {
             H_User h_user = new H_User();

@@ -64,10 +64,12 @@ public class AdminController {
     @RequestMapping("/login")
     public String login(@PathParam(value = "a_account") String a_account,
                         @PathParam(value = "a_password") String a_password,
-                        HttpServletRequest request){
+                        HttpServletRequest request,
+                        Model model){
         Integer a_id = adminService.getIdByAccountAndPwd(a_account,a_password);
 
         if(a_id == -1){
+            model.addAttribute("no",false);
             return "redirect:/admin/";
         }
         else {
