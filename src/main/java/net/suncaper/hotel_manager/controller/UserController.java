@@ -89,6 +89,7 @@ public class UserController {
                            @PathParam(value = "u_account") String u_account,
                            @PathParam(value = "u_password") String u_password,
                            @PathParam(value = "u_idNumber") String u_idNumber,
+                           @PathParam(value = "u_email") String u_email,
                            Model model) {
         int u_id = userService.getIdByAccount(u_account);
         if(u_id == -1) {
@@ -99,6 +100,7 @@ public class UserController {
             h_user.setuAccount(u_account);
             h_user.setuPassword(u_password);
             h_user.setuIdnumber(u_idNumber);
+            h_user.setuEmail(u_email);
 
             userService.insertUser(h_user);
         }else {
