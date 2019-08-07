@@ -60,16 +60,18 @@ public class UserController {
                         HttpServletResponse response,
                         HttpServletRequest request,
                         Model model){
+        System.out.println(u_account);
+        System.out.println(u_password);
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
 
         if(u_id == -1){
-            model.addAttribute("no",false);
-            return "redirect:/user/login";
+            model.addAttribute("no",true);        //用于账号或密码错误时显示反馈
+            return "user/login";
         }
         else {
 
             Session u = new Session(u_id);
-           request.getSession().setAttribute("u_id",new Session(u_id));         // 这里设置cookie
+           request.getSession().setAttribute("u_id",new Session(u_id));         // 这里设置session
 
             return  "redirect:/user/index";
         }
