@@ -54,7 +54,7 @@ public class AdminController {
         else {
             Session a = new Session(a_id);
             request.getSession().setAttribute("a_id",new Session(a_id));
-            return  "admin/starter";
+            return  "redirect:/admin/hotelList";
         }
     }
 
