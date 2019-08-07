@@ -211,24 +211,10 @@
 								<i class="icon_calendar"></i>
 							</div>
 
-							<div class="panel-dropdown">
-								<a href="#">人员 <span class="qtyTotal"></span></a>
-								<div class="panel-dropdown-content right">
-									<div class="qtyButtons">
-										<label>成人</label>
-										<input type="text" name="qtyInput" value="1">
-									</div>
-									<div class="qtyButtons">
-										<label>儿童</label>
-										<input type="text" name="qtyInput" value="0">
-									</div>
-								</div>
-							</div>
-
 							<div class="form-group clearfix">
 								<div class="custom-select-form">
-									<select class="wide" name="rt_type">
-										<option>房间类型</option>
+									<select class="wide" name="rt_type" required="required">
+										<option  value="" selected="selected" disabled="disabled">房间类型</option>
 										<option>大床房</option>
 										<option>标准间</option>
 										<option>三人间</option>
