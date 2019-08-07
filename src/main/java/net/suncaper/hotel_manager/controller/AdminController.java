@@ -79,7 +79,12 @@ public class AdminController {
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("a_id");
 
+        return "redirect:/admin/";
+    }
 
     //管理员列表，区别超级管理员和普通酒店管理员
     @RequestMapping("/adminList")

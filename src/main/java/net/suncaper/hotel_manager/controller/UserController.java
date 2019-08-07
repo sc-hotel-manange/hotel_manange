@@ -75,6 +75,13 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute("u_id");
+
+        return "redirect:/user/index";
+    }
+
     @RequestMapping("/register")
     public String register(@PathParam(value = "u_name")String u_name,
                            @PathParam(value = "u_tel") String u_tel,
