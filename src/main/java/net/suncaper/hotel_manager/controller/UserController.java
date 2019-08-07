@@ -92,7 +92,7 @@ public class UserController {
                            @PathParam(value = "u_idNumber") String u_idNumber,
                            @PathParam(value = "u_email") String u_email,
                            Model model) {
-        int u_id = userService.getIdByAccount(u_account);
+        int u_id = userService.getIdByAccountOrEmail(u_account, u_email);
         if(u_id == -1) {
             H_User h_user = new H_User();
             h_user.setuName(u_name);
@@ -141,5 +141,38 @@ public class UserController {
         h_user.setuIdnumber(u_idNumber);
         userService.updateInfo(h_user);
         return "redirect:/user/userInfo";        //修改完信息后重新跳转到个人信息界面
+    }
+
+    //发送重置密码的邮件
+    @RequestMapping("/sendEmail")
+    public ModelAndView sendEmail(@RequestParam(value = "email") String email) {
+        ModelAndView mav = new ModelAndView("user/verify");
+        String code = "1234";   //测试用
+
+        userService.sendMail(email, code);
+        mav.addObject("code", code);
+
+        return mav;
+    }
+
+    //判断用户输入验证码是否正确
+    @RequestMapping("/verify")
+    public ModelAndView verify(@RequestParam(value = "code") String code,
+                               @RequestParam(value = "content") String content) {
+        ModelAndView mav = new ModelAndView();
+        if(userService.verify(code, content)){
+            mav.setViewName("user/resetPassword");
+            return mav;
+        }else {
+            mav.addObject("failed", false);
+            return mav;
+        }
+    }
+
+    @RequestMapping("resetPassword")
+    public ModelAndView resetPassword(@RequestParam(value = "password") String password,
+                                      @RequestParam(value = "email") String email) {
+        userService.resetPassword(password, email);
+        return new ModelAndView("user/login");
     }
 }
