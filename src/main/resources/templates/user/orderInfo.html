@@ -107,10 +107,10 @@
 
 							<p th:text="${'订单号：'+h_order.oId}"></p>
 							<p th:text="${'酒店名称：'+h_order.hotelTranslatedName}"></p>
-							<p th:text="${'下单时间：'+h_order.oOrdertime}"></p>
+							<p th:text="${'下单时间：'+#dates.format(h_order.getoOrdertime(), 'yyyy-MM-dd')}"></p>
 							<p th:text="${'预订房型：'+h_order.rtType}"></p>
-							<p th:text="${'入住时间：'+h_order.oCheckin}"></p>
-							<p th:text="${'退房时间：'+h_order.oCheckout}"></p>
+							<p th:text="${'入住时间：'+#dates.format(h_order.getoCheckin(), 'yyyy-MM-dd')}"></p>
+							<p th:text="${'退房时间：'+#dates.format(h_order.getoCheckout(), 'yyyy-MM-dd')}"></p>
 							<p th:text="${'联系人电话：'+h_order.oTel}"></p>
 							<p th:text="${'房间号：'+h_order.rNumber}"></p>
 
@@ -134,8 +134,20 @@
 						</section>
 						<!-- /section -->
 
-					</div>
+<!--						下面是取消订单按钮-->
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="form-group">
+									<br>
+									<a th:href="@{'/user/cancelOrder?o_id='+${h_order.oId}}">
+									<input type="submit" class="btn_cancel" value="取消订单" id="cancel_btn">
+									</a>
+								</div>
+							</div>
+						</div>
 
+
+					</div>
 		<!-- /bg_color_1 -->
 			</div>
 			</div>
@@ -294,5 +306,23 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-
+	.btn_cancel{
+		transition: all 0.3s ease-in-out;
+		color: #fff;
+		font-weight: 600;
+		font-size: 14px;
+		font-size: 0.875rem;
+		border: 0;
+		padding: 0 25px;
+		height: 50px;
+		cursor: pointer;
+		outline: none;
+		width: 100%;
+		-webkit-border-radius: 0 3px 3px 0;
+		-moz-border-radius: 0 3px 3px 0;
+		-ms-border-radius: 0 3px 3px 0;
+		border-radius: 0 3px 3px 0;
+		background-color: #00a7d0;
+		margin-right: -1px;
+	}
 </style>
