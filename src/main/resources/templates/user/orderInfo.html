@@ -29,11 +29,6 @@
 		
 	<header class="header menu_fixed">
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Preload -->
-		<ul id="top_menu">
-			<li><a href="" class="cart-menu-btn" title="购物车"><strong>4</strong></a></li>
-			<li><a href="./login.html" th:href="@{/user/loginPage}"  class="login" title="登陆">登陆</a></li>
-			<li><a href="" class="wishlist_bt_top" title="喜欢">喜欢</a></li>
-		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -112,10 +107,10 @@
 
 							<p th:text="${'订单号：'+h_order.oId}"></p>
 							<p th:text="${'酒店名称：'+h_order.hotelTranslatedName}"></p>
-							<p th:text="${'下单时间：'+h_order.oOrdertime}"></p>
+							<p th:text="${'下单时间：'+#dates.format(h_order.getoOrdertime(), 'yyyy-MM-dd')}"></p>
 							<p th:text="${'预订房型：'+h_order.rtType}"></p>
-							<p th:text="${'入住时间：'+h_order.oCheckin}"></p>
-							<p th:text="${'退房时间：'+h_order.oCheckout}"></p>
+							<p th:text="${'入住时间：'+#dates.format(h_order.getoCheckin(), 'yyyy-MM-dd')}"></p>
+							<p th:text="${'退房时间：'+#dates.format(h_order.getoCheckout(), 'yyyy-MM-dd')}"></p>
 							<p th:text="${'联系人电话：'+h_order.oTel}"></p>
 							<p th:text="${'房间号：'+h_order.rNumber}"></p>
 
@@ -139,8 +134,20 @@
 						</section>
 						<!-- /section -->
 
-					</div>
+<!--						下面是取消订单按钮-->
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="form-group">
+									<br>
+									<a th:href="@{'/user/cancelOrder?o_id='+${h_order.oId}}">
+									<input type="submit" class="btn_cancel" value="取消订单" id="cancel_btn">
+									</a>
+								</div>
+							</div>
+						</div>
 
+
+					</div>
 		<!-- /bg_color_1 -->
 			</div>
 			</div>
@@ -299,5 +306,23 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-
+	.btn_cancel{
+		transition: all 0.3s ease-in-out;
+		color: #fff;
+		font-weight: 600;
+		font-size: 14px;
+		font-size: 0.875rem;
+		border: 0;
+		padding: 0 25px;
+		height: 50px;
+		cursor: pointer;
+		outline: none;
+		width: 100%;
+		-webkit-border-radius: 0 3px 3px 0;
+		-moz-border-radius: 0 3px 3px 0;
+		-ms-border-radius: 0 3px 3px 0;
+		border-radius: 0 3px 3px 0;
+		background-color: #00a7d0;
+		margin-right: -1px;
+	}
 </style>

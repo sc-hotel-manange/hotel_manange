@@ -21,6 +21,7 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="../../static/css/custom.css" rel="stylesheet" th:href="@{/css/custom.css}">
 
+
 </head>
 
 <body>
@@ -29,12 +30,6 @@
 		
 	<header class="header menu_fixed">
 		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
-
-		<ul id="top_menu">
-			<li><a href="" class="cart-menu-btn" title="购物车"><strong></strong></a></li>  <!--这个是购物车-->
-			<li><a th:href="@{/user/loginPage}"  class="login" title="登陆">登陆</a></li>
-			<li><a href="" class="wishlist_bt_top" title="喜欢">喜欢</a></li>
-		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
 			<div class="hamburger hamburger--spin" id="hamburger">
@@ -57,7 +52,7 @@
 				<li ><span><a href=href="./orderList.html" th:href="@{/user/orderList}">订单</a></span>
 
 				</li>
-				<li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人中心</a></span>
+				<li th:if="${session.u_id} != null" ><span><a href="./userInfo.html" th:href="@{/user/userInfo}">个人信息</a></span>
 				<li th:if="${session.u_id} == null" ><span><a href="./login.html" th:href="@{/user/loginPage}">请登录</a></span>
 				</li>
 				<li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
@@ -183,29 +178,15 @@
             <section>
                 <div class="main_title_3">
                     <span><em></em></span>
-                    <h2>热门食物</h2>
-                    <p style="letter-spacing: 5px;color:black;"> 唯有美食与爱不可辜负</p>
+                    <h2>距您最近</h2>
+                    <p style="letter-spacing: 5px;color:black;"> 距离您最近 依次排序</p>
                 </div>
-                <div class="row" th:each="re:${recommend}">
 
-                    <!--					下面可以用thymeleaf-->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a th:href="@{'/user/hotelInfo?hotel_id='+${re.hotelId}}" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>8.5</strong></div>
-                                <img src="../../static/img/restaurant_1.jpg" th:src="@{/img/restaurant_1.jpg}"
-                                     class="img-fluid" alt="">
-                                <div class="info">
-                                    <h3 th:text="${re.getHotelTranslatedName()}"></h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
+                <div class="row" id="nearest" >
 
-                    <!-- /grid_item -->
                 </div>
                 <!-- /row -->
-                <!--				<a href=""><strong>View all (157) <i class="arrow_carrot-right"></i></strong></a>-->
+
             </section>
             <!-- /section -->
         </div>
@@ -344,14 +325,13 @@
 
 <div id="toTop"></div><!-- Back to top button  返回到top的按钮 -->
 
-<!-- COMMON SCRIPTS -->
+
 <script src="../../static/js/jquery-2.2.4.min.js" th:src="@{/js/jquery-2.2.4.min.js}"></script>
+<!-- COMMON SCRIPTS -->
+
 <script src="../../static/js/common_scripts.js" th:src="@{/js/common_scripts.js}"></script>
 <script src="../../static/js/main.js" th:src="@{/js/main.js}"></script>
 <script src="../../static/assets/validate.js" th:src="@{/assets/validate.js}"></script>
-
-<!--百度地图服务-->
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 <script>        //这里是用于检测搜索框的，如果为空则不允许点击
 function check() {
 	if($('#hotel_address').val()==""&&$('#hotel_translated_name').val()==""){
@@ -359,44 +339,46 @@ function check() {
 	}
 }
 </script>
-<script type="text/javascript">
-    // 百度地图API功能
-    $(function () {
-        var geolocation = new BMap.Geolocation();
-        geolocation.getCurrentPosition(function (r) {
-            if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-                var mk = new BMap.Marker(r.point);
-                alert('您的位置：'+r.point.lng+','+r.point.lat);
-                var latitude = r.point.lat;
-                var longitude = r.point.lng;
-                var url = "/user/recommend";
-                var formData = {"longitude": longitude, "latitude": latitude};
 
-                $.post(url, formData, function (data) {
-                    console.log(data);
-                    console.log(longitude);
-                    console.log(latitude);
-                });
-
-            } else {
-                alert('failed' + this.getStatus());
-            }
-        }, {enableHighAccuracy: true})
-        //关于状态码
-        //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
-        //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
-        //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
-        //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
-        //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
-        //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
-        //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
-        //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
-        //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
-    });
-
-</script>
 
 <!-- DATEPICKER  -->
+
+
+	<!--百度地图服务-->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+	<script type="text/javascript">
+		// 百度地图API功能
+		$(function () {
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function (r) {
+				if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+					var mk = new BMap.Marker(r.point);
+					// alert('您的位置：'+r.point.lng+','+r.point.lat);
+					var latitude = r.point.lat;
+					var longitude = r.point.lng;
+					var url = "/user/recommend";
+					var formData = {"longitude": longitude, "latitude": latitude};
+
+					var nearst = document.getElementById('nearest');
+					$.post(url, formData, function (data) {
+						// console.log(data);
+						console.log('长度：'+data.length);
+						for (var i = 0;i<data.length;i++){
+							$('#nearest').append('<div class="col-xl-3 col-lg-6 col-md-6"><a href="" class="grid_item"><figure><div class="score"><strong>'+data[i].ratingAverage+'</strong></div>'+'<img src="'+data[i].photo2+'"class="img-fluid" alt=""><div class="info"><h3>'+
+									data[i].hotelTranslatedName+'</h3></div></figure></a></div>');
+							// $("#nearest").trigger("create");
+						}
+					});
+
+				} else {
+					alert('failed' + this.getStatus());
+				}
+			}, {enableHighAccuracy: true})
+		});
+
+	</script>
+
+
 
 <script>
     $(function () {
@@ -422,6 +404,10 @@ function check() {
 </body>
 </html>
 <style>
+
+	#nearest{
+		/*height: 300px;*/
+	}
     .overview_text {
         display: -webkit-box;
         -webkit-box-orient: vertical;
