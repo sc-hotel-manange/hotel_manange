@@ -12,8 +12,20 @@ spring:
     username: root
     password:
 
-
     driver-class-name: com.mysql.jdbc.Driver
+
+#邮箱配置
+  mail:
+    host: smtp.qq.com
+    username: 1026960839@qq.com  #发送方的邮箱
+    password: nidftsxfmzhcbfib  #对于qq邮箱而言 密码指的就是发送方的授权码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 
 logging:

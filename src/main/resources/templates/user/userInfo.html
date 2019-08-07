@@ -56,6 +56,8 @@
                 </li>
                 <li><span><a href="./aboutUs.html" th:href="@{/user/aboutUs}">关于我们</a></span>
                 </li>
+
+                <li th:if="${session.u_id} != null" ><span><a href="./index.html" th:href="@{/user/logout}">退出</a></span></li>
             </ul>
         </nav>
 
@@ -107,6 +109,14 @@
                                         <div class="form-group">
                                             <label>密码</label>
                                             <input type="text" id="u_password" name="u_password" class="form-control" th:value="${userInfo.uPassword}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <label>邮箱</label>
+                                            <input type="email" id="u_email" name="u_email" class="form-control" th:value="${userInfo.uEmail}">
                                         </div>
                                     </div>
                                 </div>

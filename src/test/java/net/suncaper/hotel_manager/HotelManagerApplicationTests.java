@@ -2,7 +2,10 @@ package net.suncaper.hotel_manager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -12,24 +15,18 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HotelManagerApplicationTests {
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Test
     public void contextLoads() {
-        String dates = "08-01-19 > 08-02-19";
-        String[] splitDate = dates.split(" > ");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("1026960839@qq.com");
+        message.setTo("1026960839@qq.com");
+        message.setSubject("测试邮件");
+        message.setText("测试邮件内容");
 
-        String checkin = splitDate[0];
-        String checkout = splitDate[1];
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yy");
-        try {
-            Date o_checkin = sdf.parse(checkin);
-            Date o_checkout = sdf.parse(checkout);
-            System.out.println("这是由未格式化的date转化过来的日期: " + o_checkin + ", " + o_checkout);
-            System.out.println("这是正常的date格式: " + new Date());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        mailSender.send(message);
     }
 
 }

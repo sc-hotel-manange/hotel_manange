@@ -13,6 +13,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/hotel?useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=false"
                         userId="root"
                         password="">
+
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
