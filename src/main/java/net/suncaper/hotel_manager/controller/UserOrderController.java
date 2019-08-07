@@ -178,8 +178,7 @@ public class UserOrderController {
         //取消订单，置订单状态为3
         orderService.cancelOrder(o_id, session.getId());
         //更新房间状态
-        orderService.leaveRoom(h_r
-                oom);
+        orderService.leaveRoom(h_room);
 
         return "redirect:/user/orderList";
     }
