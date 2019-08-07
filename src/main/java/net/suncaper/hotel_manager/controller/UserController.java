@@ -57,7 +57,6 @@ public class UserController {
     @RequestMapping("/login")
     public String login(@PathParam(value = "u_account") String u_account,
                         @PathParam(value = "u_password") String u_password,
-                        HttpServletResponse response,
                         HttpServletRequest request,
                         Model model){
         int u_id = userService.getIdByAccountAndPwd(u_account,u_password);
