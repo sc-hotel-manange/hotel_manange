@@ -130,7 +130,35 @@
 							<small th:text="${hotellist.city}"></small>
 						</figure>
 						<div class="wrapper">
-							<div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div>
+							<div class="cat_star" th:switch="${hotellist.starRating}">
+								<div th:case="'5'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'4.5'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'4'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'3.5'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'3'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'2.5'">
+									<i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'2'">
+									<i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'1.5'">
+									<i class="icon_star"></i><i class="icon_star"></i>
+								</div>
+								<div th:case="'1'">
+								<i class="icon_star"></i>
+								</div>
+							</div>
 							<h3><a href=""  th:text="${hotellist.hotelTranslatedName}" style="white-space: nowrap"></a></h3>
 							<p th:text="${hotellist.overview}"></p>
 							<span class="price">房间数<strong th:text="${hotellist.numberrooms}"></strong> </span>
