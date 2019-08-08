@@ -140,5 +140,34 @@ public class HotelService {
         }
         return hotellist;
     }
+
+    //根据酒店星级从酒店列表中筛选
+    public List<H_Hotel> hotelFitStar(List<H_Hotel> hotelList, String star_rating) {
+        String star = "0";
+        switch (star_rating) {
+            case "五星级":
+                star = "5";
+                break;
+            case "四星级":
+                star = "4";
+                break;
+            case "三星级":
+                star = "3";
+                break;
+            case "二星级":
+                star = "2";
+                break;
+            case "一星级":
+                star = "1";
+                break;
+        }
+        for(int i=0; i<hotelList.size(); i++) {
+            if(!star.equals(hotelList.get(i).getStarRating())) {
+                hotelList.remove(i);
+                i--;
+            }
+        }
+        return hotelList;
+    }
 }
 

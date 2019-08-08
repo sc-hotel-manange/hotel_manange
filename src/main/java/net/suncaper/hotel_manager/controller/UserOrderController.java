@@ -96,12 +96,12 @@ public class UserOrderController {
     //下订单
     @PostMapping("/order")
     public ModelAndView insertOrder(@RequestParam(value = "rt_type") String rt_type,
-                                   @RequestParam(value = "hotel_id") int hotel_id,
-                                   @RequestParam(value = "dates") String dates,
-                                   @RequestParam(value = "o_tel") String o_tel,
-                                   HttpServletRequest request) throws ParseException {
+                                    @RequestParam(value = "hotel_id") int hotel_id,
+                                    @RequestParam(value = "dates") String dates,
+                                    @RequestParam(value = "o_tel") String o_tel,
+                                    HttpServletRequest request) throws ParseException {
 
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("user/invoice");
         Session session = (Session)request.getSession().getAttribute("u_id");
 
         Date[] normalDates = orderService.parseDates(dates);
@@ -114,8 +114,7 @@ public class UserOrderController {
         H_Room h_room = orderService.checkOrder(rooms, o_checkin, o_checkout);
         //若没有找到房间，返回到酒店列表页
         if(h_room == null) {
-            mav.addObject("failed", false); //返回错误信息
-            return mav;
+            return new ModelAndView("redirect:/user/hotelList");
         }
 
         //若找到符合条件的房间
@@ -143,7 +142,6 @@ public class UserOrderController {
         h_order.setPhoto(h_hotel.getPhoto1());
         orderService.insertOrder(h_order);
 
-        mav.setViewName("user/invoice");
         mav.addObject("h_order", h_order);  //订单信息
         mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
         mav.addObject("h_hotel", hotelService.selectHotelInfo(hotel_id));   //酒店信息
