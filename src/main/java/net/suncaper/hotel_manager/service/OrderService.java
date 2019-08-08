@@ -51,16 +51,28 @@ public class OrderService {
             //筛选出有相同酒店和房间的订单
             List<H_Order> orders = selectOrder(room.getHotelId(), room.getrNumber());
             //假如没有相同酒店和房间的订单
+            System.out.println(orders.size());
+
+            boolean flag = true; //标识
+
             if(orders == null) return room;
 
             for(H_Order order : orders) {
                 Date otherCheckin = order.getoCheckin();
+                System.out.println(otherCheckin);
                 Date otherCheckout = order.getoCheckout();
-                if(o_checkin.after(otherCheckout) || o_checkout.before(otherCheckin))
-                    return room;
+                System.out.println(otherCheckout);
+                if((o_checkin.before(otherCheckout)&&o_checkin.after(otherCheckin)) ||
+                        (o_checkout.after(otherCheckin)&&o_checkout.before(otherCheckout)) ||
+                        o_checkin.equals(otherCheckin) || o_checkout.equals(otherCheckout)) {
+                    flag = false;
+                    break;
+                }
             }
-        }
 
+            if(flag)
+                return room;
+        }
         return null;
     }
 
