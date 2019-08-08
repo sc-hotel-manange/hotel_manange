@@ -127,7 +127,7 @@
 							<span class="price"> <strong th:text="${topratehotels.city}"></strong> </span>
 						</div>
 						<ul>
-							<li><i class="icon_clock_alt"></i> 1h 30min</li>
+<!--							<li><i class="icon_clock_alt"></i> </li>-->
 							<li><div class="score">星级<span th:text="${topratehotels.starRating}"></span><strong th:text="${topratehotels.ratingAverage}"></strong></div></li>
 						</ul>
 					</div>
@@ -366,7 +366,7 @@ function check() {
 						// console.log(data);
 						console.log('长度：'+data.length);
 						for (var i = 0;i<data.length;i++){
-							$('#nearest').append('<div class="col-xl-3 col-lg-6 col-md-6"><a href="" class="grid_item"><figure><div class="score"><strong>'+data[i].ratingAverage+'</strong></div>'+'<img src="'+data[i].photo2+'"class="img-fluid" alt=""><div class="info"><h3>'+
+							$('#nearest').append('<div class="col-xl-3 col-lg-6 col-md-6"><a href="/user/hotelInfo?hotel_id='+data[i].hotelId+'" class="grid_item"><figure><div class="score"><strong>'+data[i].ratingAverage+'</strong></div>'+'<img src="'+data[i].photo2+'"class="img-fluid" alt=""><div class="info"><h3>'+
 									data[i].hotelTranslatedName+'</h3></div></figure></a></div>');
 							// $("#nearest").trigger("create");
 						}

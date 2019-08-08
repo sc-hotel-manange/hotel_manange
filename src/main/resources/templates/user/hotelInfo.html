@@ -216,13 +216,13 @@
 
 							<div class="form-group clearfix">
 								<div class="custom-select-form">
-									<select class="wide" name="rt_type" required="required">
+									<select class="wide" name="rt_type" required="required" id="roomtype" onchange="price()">
 										<option  value="" selected="selected" disabled="disabled">房间类型</option>
-										<option>大床房</option>
-										<option>标准间</option>
-										<option>三人间</option>
-										<option>大套房</option>
-										<option>总统套房</option>
+										<option value="0">大床房</option>
+										<option value="1">标准间</option>
+										<option value="2">三人间</option>
+										<option value="3">大套房</option>
+										<option value="4">总统套房</option>
 									</select>
 								</div>
 							</div>
@@ -232,6 +232,8 @@
                             <div class="form-group ">
                                 <input class="form-control" type="text" id="o_tel" name="o_tel" placeholder="电话" required="required">
                             </div>
+							<div id="showprice">
+							</div>
 <!--							提交按钮   ！！！！！！！！！！！！！！！！！！-->
 							<div class="form-group col-md-12 add_top_20">
 								<input type="submit" value="预订" class="btn_1" id="submit-review">
@@ -294,6 +296,32 @@
 	<script src="js/infobox.js"></script>
 	-->
 	<!-- DATEPICKER  -->
+	<style>
+		#showprice{
+			margin-top: 20px;
+			padding-left: 20px;
+			margin-bottom: 20px;
+		}
+	</style>
+	<script>
+		function price(){
+			var  window = document.getElementById("showprice");
+			var objS = document.getElementById("roomtype");
+			var value = objS.options[objS.selectedIndex].value;
+			if (value=='0'){
+				window.innerHTML='价格：￥200/每天';
+			}
+			else if (value=='1'){
+				window.innerHTML='价格：￥250/每天';
+			}
+			else if (value=='2'){
+				window.innerHTML='价格：￥300/每天';
+			}
+			else if (value=='3'){
+				window.innerHTML='价格：￥350/每天';			}
+		}
+
+	</script>
 	<script>
 	$(function() {
 	  $('input[name="dates"]').daterangepicker({
