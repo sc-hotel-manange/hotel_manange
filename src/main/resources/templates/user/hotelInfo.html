@@ -218,11 +218,11 @@
 								<div class="custom-select-form">
 									<select class="wide" name="rt_type" required="required" id="roomtype" onchange="price()">
 										<option  value="" selected="selected" disabled="disabled">房间类型</option>
-										<option value="0">大床房</option>
-										<option value="1">标准间</option>
-										<option value="2">三人间</option>
-										<option value="3">大套房</option>
-										<option value="4">总统套房</option>
+										<option value="大床房">大床房</option>
+										<option value="标准间">标准间</option>
+										<option value="三人间">三人间</option>
+										<option value="大套房">大套房</option>
+										<option value="总统套房">总统套房</option>
 									</select>
 								</div>
 							</div>
@@ -308,16 +308,16 @@
 			var  window = document.getElementById("showprice");
 			var objS = document.getElementById("roomtype");
 			var value = objS.options[objS.selectedIndex].value;
-			if (value=='0'){
+			if (value=='大床房'){
 				window.innerHTML='价格：￥200/每天';
 			}
-			else if (value=='1'){
+			else if (value=='标准间'){
 				window.innerHTML='价格：￥250/每天';
 			}
-			else if (value=='2'){
+			else if (value=='大套房'){
 				window.innerHTML='价格：￥300/每天';
 			}
-			else if (value=='3'){
+			else if (value=='总统套房'){
 				window.innerHTML='价格：￥350/每天';			}
 		}
 

@@ -121,13 +121,13 @@
                      <hr>
 
                     <strong><i class="fa fa-book margin-r-5"></i> 入房时间</strong>
-                    <p class="text-muted" th:text="${order.oCheckin}">
+                    <p class="text-muted" th:text="${#dates.format(order.oCheckin,'yyyy-MM-dd')}">
 
                     </p>
                     <hr>
 
                     <strong><i class="fa fa-map-marker margin-r-5"></i> 退房时间</strong>
-                    <p class="text-muted" th:text="${order.oCheckout}"></p>
+                    <p class="text-muted" th:text="${#dates.format(order.oCheckout,'yyyy-MM-dd')}"></p>
                     <hr>
 
                     <strong><i class="glyphicon glyphicon-phone-alt margin-r-5"></i> 电话</strong>
@@ -135,7 +135,7 @@
                      <hr>
 
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> 下订单时间</strong>
-                    <p th:text="${order.oOrdertime}"></p>
+                    <p th:text="${#dates.format(order.oOrdertime,'yyyy-MM-dd')}"></p>
                      <hr>
 
                     <strong><i class="fa  fa-balance-scale margin-r-5"></i> 价格</strong>

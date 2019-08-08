@@ -101,6 +101,12 @@ public class UserOrderController {
                                    @RequestParam(value = "o_tel") String o_tel,
                                    HttpServletRequest request) throws ParseException {
 
+        System.out.println("rt_type:"+rt_type);
+        System.out.println("hotelid:"+hotel_id);
+        System.out.println("dates:"+dates);
+        System.out.println("o_tel:"+o_tel);
+
+
         ModelAndView mav = new ModelAndView();
         Session session = (Session)request.getSession().getAttribute("u_id");
 
@@ -115,6 +121,7 @@ public class UserOrderController {
         //若没有找到房间，返回到酒店列表页
         if(h_room == null) {
             mav.addObject("failed", false); //返回错误信息
+            System.out.println("没找到订单！！！");
             return mav;
         }
 

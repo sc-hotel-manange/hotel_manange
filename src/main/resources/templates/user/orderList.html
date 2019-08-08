@@ -89,7 +89,7 @@
 					<div class="custom-search-input-2 inner-2">
 						<form th:action="@{/user/orderSearch}">
 						<div class="form-group">
-							<input class="form-control" type="text" name="dates" placeholder="订单起止日期" style="color: black">
+							<input class="form-control" type="text" name="dates" placeholder="订单起止日期" style="color: black" autocomplete="off">
 							<i class="icon_calendar"></i>
 						</div>
 						<div class="form-group">
@@ -113,16 +113,20 @@
 
 				<div class="col-lg-9" id="list_sidebar" >
 					<div class="isotope-wrapper" th:each="h_order : ${h_orders}">
-						<a href="" th:href="@{'/user/orderInfo?o_id='+${h_order.oId}}">
+
 						<div class="box_list isotope-item latest">
 							<div class="row no-gutters">
-								<div class="col-lg-5">
-									<div style="width:100%; height:100%">
 
-										<img style="width: 100%;height: 100%" th:src="${h_order.photo}" alt="Photo">
 
+									<div class="col-lg-5">
+										<a th:href="@{'/user/orderInfo?o_id='+${h_order.oId}}"  >
+										<div style="width:100%; height:100%">
+											<img style="width: 100%;height: 100%" th:src="${h_order.photo}" alt="Photo">
+										</div>
+								</a>
 									</div>
-								</div>
+
+
 								<div class="col-lg-7">
 									<div class="wrapper">
 										<p>订单号：</p>
@@ -135,18 +139,29 @@
 										<p style="color: black;" th:text="${#dates.format(h_order.getoOrdertime(), 'yyyy-MM-dd')}"></p>
 										<br/>
 										<p>订单状态：</p>
-										<div th:switch="${h_order.oStatus}">
+										<div th:switch="'￥'+${h_order.oStatus}">
 										<p th:case= "0" style="color: #00a7d0;">未支付</p>
 										<p th:case= "1" style="color: #00a65a">已支付</p>
 										<p th:case= "2" style="color: yellow;">已完成</p>
 										<p th:case="3" style="color: red">已取消</p>
 										</div>
-										<div style="float:right" class="score"><strong th:text="'$'+${h_order.oPrice}+'.00'"></strong></div>
+										<p style="color: black;">订单价格：</p>
+										<p style="color: black;" th:text="${h_order.oPrice}"></p>
+
+<!--										下面是继续支付按钮哦！！！！！！！！！！-->
+										<div th:if="${h_order.oStatus=='0'}" id="continuePay" name="continuePay" >
+											<form th:action="@{'/user/order?hotel_id='+${h_order.oId}}" method="post">
+												<input type="text">
+												<input type="text">
+
+												<input type="submit" class="btn_cancel" value="继续支付" style="border:none;outline:medium;background:#0054a6;color: white; " >
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						</a>
+
 						<!-- /box_list -->
 					</div>
 					<!-- /isotope-wrapper -->
@@ -253,6 +268,10 @@
 
 <!-- Range Slider -->
 <script>
+	// function continuePay(){
+	// 	var id = $(this).attr('class');
+	// 	window.location.href="/user/order?o_id="+id;
+	// };
 	$("#range").ionRangeSlider({
 		hide_min_max: true,
 		keyboard: true,
@@ -301,6 +320,18 @@
 
 
 <style itemscope>
+	#continuePay{
+		background-color: #0054a6;
+		color: #fff;
+		line-height: 1;
+		-webkit-border-radius: 5px 5px 5px 5px;
+		-moz-border-radius: 5px 5px 5px 5px;
+		-ms-border-radius: 5px 5px 5px 5px;
+		border-radius: 5px 5px 5px 5px;
+		padding: 10px;
+		display: inline-block;
+		margin-top: 20px;
+	}
 	p{
 		color: black;
 		margin-bottom: 0 ;

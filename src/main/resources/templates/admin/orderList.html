@@ -145,11 +145,11 @@
                   <tr th:each="order : ${h_orders}">
                     <td th:text="${order.oId}">
                     </td>
-                    <td th:text="${order.oOrdertime}">
+                    <td th:text="${#dates.format(order.oOrdertime,'yyyy-MM-dd')}">
                     </td>
                     <td th:text="${order.uId}">
                     </td>
-                      <td th:text="${order.oCheckin}">
+                      <td th:text="${#dates.format(order.oCheckin,'yyyy-MM-dd')}">
                       </td>
                     <td>
                       <a th:href="@{'/admin/orderInfo?o_id='+ ${order.oId}}">
