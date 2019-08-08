@@ -24,6 +24,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    public static String code;
+
     @RequestMapping("")
     public String index(){
         return "redirect:/user/index";
@@ -148,7 +150,7 @@ public class UserController {
     @RequestMapping("/sendEmail")
     public ModelAndView sendEmail(@RequestParam(value = "email") String email) {
         ModelAndView mav = new ModelAndView("user/verify");
-        String code = RandomStringUtils.randomAlphanumeric(4);
+        code = RandomStringUtils.randomAlphanumeric(4);
 
         userService.sendMail(email, code);
         mav.addObject("code", code);
@@ -159,22 +161,26 @@ public class UserController {
 
     //判断用户输入验证码是否正确
     @RequestMapping("/verify")
-    public ModelAndView verify(@RequestParam(value = "code") String code,
-                               @RequestParam(value = "content") String content,
+    public ModelAndView verify(@RequestParam(value = "content") String content,
                                @RequestParam(value = "email") String email) {
         ModelAndView mav = new ModelAndView();
         if(userService.verify(code, content)){
-            mav.setViewName("user/resetPassword");
+            mav.setViewName("user/resetPassword");   //跳转到resetPassword界面
             mav.addObject("email", email);
             return mav;
         }else {
+            mav.setViewName("user/verify");     //跳转到verify界面
             mav.addObject("failed", false);
             mav.addObject("email", email);
             return mav;
         }
     }
+    @RequestMapping("forgetPassword")       //点击忘记密码跳转！！！！！！！！！
+    public ModelAndView resetPassword( ) {
 
-    @RequestMapping("resetPassword")
+        return new ModelAndView("user/forgetPassword");
+    }
+    @RequestMapping("resetPassword")                //这个页面验证完成后重置了
     public ModelAndView resetPassword(@RequestParam(value = "password") String password,
                                       @RequestParam(value = "email") String email) {
         userService.resetPassword(password, email);
