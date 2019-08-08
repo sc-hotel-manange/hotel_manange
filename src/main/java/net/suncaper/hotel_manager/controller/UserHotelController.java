@@ -50,23 +50,27 @@ public class UserHotelController {
     @RequestMapping("/hotelSearch")
     public String hotelSearch(@PathParam(value = "hotel_translated_name") String hotel_translated_name,
                               @PathParam(value = "hotel_address") String  hotel_address,
+                              @PathParam(value = "star_rating") String star_rating,
                               Model model){
-        List<H_Hotel> hotellist = new ArrayList<>();
+        List<H_Hotel> hotelList = hotelService.selectHotelList();   //所有酒店
         if (!"".equals(hotel_address)){
             Map<String, String> map = hotelService.selectByaddressName(hotel_address);
-            hotellist = hotelService.selectAround(map.get("lng"),map.get("lat"));
+            hotelList = hotelService.selectAround(map.get("lng"),map.get("lat"));
         }
         if(!"".equals(hotel_translated_name)){
-            hotellist =  hotelService.selectHotelList();
-            hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
+//            hotelList =  hotelService.selectHotelList();
+            hotelList = hotelService.hotelFitName(hotelList,hotel_translated_name);
         }
-         else {
-             hotellist = hotelService.hotelFitName(hotellist,hotel_translated_name);
+        if(!"全部星级".equals(star_rating)) {
+            hotelList = hotelService.hotelFitStar(hotelList, star_rating);
         }
-        System.out.println(hotellist.size());
-        model.addAttribute("hotelList",hotellist);
+//         else {
+//             hotelList = hotelService.hotelFitName(hotelList,hotel_translated_name);
+//        }
+        System.out.println(hotelList.size());
+        model.addAttribute("hotelList",hotelList);
         model.addAttribute("id",0);
-        return "user/hotellist";
+        return "user/hotelList";
     }
 
     @RequestMapping(value = "recommend")
