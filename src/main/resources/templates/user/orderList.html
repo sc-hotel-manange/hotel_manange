@@ -145,17 +145,14 @@
 										<p th:case= "2" style="color: yellow;">已完成</p>
 										<p th:case="3" style="color: red">已取消</p>
 										</div>
+										<br>
 										<p style="color: black;">订单价格：</p>
 										<p style="color: black;" th:text="'￥'+${h_order.oPrice}"></p>
 
 <!--										下面是继续支付按钮哦！！！！！！！！！！-->
 										<div th:if="${h_order.oStatus=='0'}" id="continuePay" name="continuePay" >
-											<form th:action="@{/user/order}" method="post">
-												<input type="text" th:value="${h_order.rtType}" name="rt_type">
-												<input type="text" th:value="${h_order.hotelId}" name="hotel_id">
-												<input type="text" th:value="${h_order.oTel}" name="o_tel">
-												<input type="text" th:value="${h_order.oCheckin}" name="o_checkIn">
-												<input type="text" th:value="${h_order.oCheckout}" name="o_checkOut">
+											<form th:action="@{/user/pay}" method="post">
+												<input type="text" th:value="${h_order.oId}" name="o_id" style="display: none">
 												<input type="submit" class="btn_cancel" value="继续支付" style="border:none;outline:medium;background:#0054a6;color: white; " >
 											</form>
 										</div>

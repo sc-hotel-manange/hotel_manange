@@ -131,6 +131,7 @@ public class UserController {
                                 @PathParam(value = "u_tel") String u_tel,
                                 @PathParam(value = "u_password") String u_password,
                                 @PathParam(value = "u_idNumber") String u_idNumber,
+                                @PathParam(value = "u_email") String u_email,
                                 HttpServletRequest request){
         Session session = (Session)request.getSession().getAttribute("u_id");
         int u_id = session.getId();
@@ -142,6 +143,7 @@ public class UserController {
         h_user.setuNickname(u_nickName);
         h_user.setuPassword(u_password);
         h_user.setuIdnumber(u_idNumber);
+        h_user.setuEmail(u_email);
         userService.updateInfo(h_user);
         return "redirect:/user/userInfo";        //修改完信息后重新跳转到个人信息界面
     }

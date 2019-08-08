@@ -167,6 +167,20 @@ public class UserOrderController {
         return mav;
     }
 
+    @RequestMapping("/pay")
+    public ModelAndView pay(@RequestParam(value = "o_id") int o_id, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("user/invoice");
+        Session session = (Session)request.getSession().getAttribute("u_id");
+
+        H_Order h_order = orderService.selectOrder(o_id);
+
+        mav.addObject("h_order", h_order);  //订单信息
+        mav.addObject("h_user", userService.getUserInfo(session.getId()));  //用户信息
+        mav.addObject("h_hotel", hotelService.selectHotelInfo(h_order.getHotelId()));   //酒店信息
+
+        return mav;
+    }
+
 
     //用户取消订单
     @RequestMapping("/cancelOrder")
