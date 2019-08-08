@@ -152,6 +152,7 @@ public class UserController {
 
         userService.sendMail(email, code);
         mav.addObject("code", code);
+        mav.addObject("email", email);
 
         return mav;
     }
@@ -159,13 +160,16 @@ public class UserController {
     //判断用户输入验证码是否正确
     @RequestMapping("/verify")
     public ModelAndView verify(@RequestParam(value = "code") String code,
-                               @RequestParam(value = "content") String content) {
+                               @RequestParam(value = "content") String content,
+                               @RequestParam(value = "email") String email) {
         ModelAndView mav = new ModelAndView();
         if(userService.verify(code, content)){
             mav.setViewName("user/resetPassword");
+            mav.addObject("email", email);
             return mav;
         }else {
             mav.addObject("failed", false);
+            mav.addObject("email", email);
             return mav;
         }
     }
