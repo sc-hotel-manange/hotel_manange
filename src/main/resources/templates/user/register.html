@@ -42,6 +42,9 @@
 					<label>*账号</label>
 					<input class="form-control" type="text" name="u_account" required="required">
 					<i class="ti-user"></i>
+					<div class="error_account"  th:if="${no}">          <!--style="display: none;"   -->
+						账号已被注册！
+					</div>
 				</div>
 				<div class="form-group">
 					<label>*密码</label>
@@ -68,6 +71,11 @@
 					<input class="form-control" type="text" name="u_tel" required="required">
 					<i class=" icon-mobile-1"></i>
 				</div>
+				<div class="form-group">
+					<label>*邮箱</label>
+					<input class="form-control" type="email" name="u_email" required="required">
+					<i class=" icon-mail-alt"></i>
+				</div>
 
 				<div id="pass-info" class="clearfix"></div>
 				<button type="submit" class="btn_1 rounded full-width add_top_30">注册!</button>
@@ -92,7 +100,24 @@
 </html>
 
 <style itemscope>
+	.error_account{
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		/*background: white;*/
+		border-radius: 3px;
+		/*border: 1px solid #d2d8dd;*/
+		color: red;
+		/*height: 42px;*/
+		width: 100%;
+		overflow: hidden; /*防止内容超出容器或者产生自动换行*/
+		/*line-height: 42px; !*设置line-height与父级元素的height相等*!*/
+		margin-top: 1rem;
+		padding-left: 10px;
+		font-weight: bold;
+	}
 	label{
 		color: white;
+	}
+	.form-group{
+		margin-bottom: 1rem !important;
 	}
 </style>
