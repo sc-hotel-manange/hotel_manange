@@ -101,6 +101,7 @@ public class UserOrderController {
                                     @RequestParam(value = "o_tel") String o_tel,
                                     HttpServletRequest request) throws ParseException {
 
+
         ModelAndView mav = new ModelAndView("user/invoice");
         Session session = (Session)request.getSession().getAttribute("u_id");
 
