@@ -149,10 +149,17 @@ public class UserController {
     //发送重置密码的邮件
     @RequestMapping("/sendEmail")
     public ModelAndView sendEmail(@RequestParam(value = "email") String email) {
-        ModelAndView mav = new ModelAndView("user/verify");
+        ModelAndView mav = new ModelAndView();
+        //验证该邮箱是否存在
+        H_User h_user = userService.getUserInfo(email);
+        if(h_user == null) {
+            mav.addObject("failed", false);
+            return mav;
+        }
         code = RandomStringUtils.randomAlphanumeric(4);
 
         userService.sendMail(email, code);
+        mav.setViewName("user/verify");
         mav.addObject("code", code);
         mav.addObject("email", email);
 
