@@ -147,7 +147,7 @@
 										</div>
 										<br>
 										<p style="color: black;">订单价格：</p>
-										<p style="color: black;" th:text="'￥'+${h_order.oPrice}"></p>
+										<p style="color: black;" th:text="'￥'+${h_order.oPrice}+'.00'"></p>
 
 <!--										下面是继续支付按钮哦！！！！！！！！！！-->
 										<div th:if="${h_order.oStatus=='0'}" id="continuePay" name="continuePay" >

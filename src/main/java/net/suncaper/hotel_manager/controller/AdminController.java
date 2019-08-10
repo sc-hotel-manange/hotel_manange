@@ -162,6 +162,7 @@ public class AdminController {
                              @PathParam(value = "u_tel") String u_tel,
                              @PathParam(value = "u_password") String u_password,
                              @PathParam(value = "u_idNumber") String u_idNumber,
+                             @PathParam(value = "u_email") String u_email,
                              Model model) {
 
         H_User h_user = new H_User();
@@ -172,6 +173,7 @@ public class AdminController {
         h_user.setuNickname(u_nickName);
         h_user.setuPassword(u_password);
         h_user.setuIdnumber(u_idNumber);
+        h_user.setuEmail(u_email);
         adminService.updateInfo(h_user);
 
         model.addAttribute("checkUpdate", true);
